@@ -1,0 +1,16 @@
+#include"IntClass.h"
+CSA(char * sourcefile,i32 L,i32 D);
+bool Existential(char * Pattern);
+void Counting(char * Pattern,int &num);
+void Enumerative(char * Pattern,i32 &num,i32 *&pos);
+i32 GetCSAMemory();
+i32 GetTotalSupportStructerMemCost();
+i32 GetGammaSize();
+void Decompress(i32 i,i32 len,char *p);
+i32 GetPhi0();
+i32 GetSAL();
+~CSA(void);
+void CreateSupportStructer();
+i32 lookup(i32 i);
+i32 Getalphabetsize();
+i32 GetN();

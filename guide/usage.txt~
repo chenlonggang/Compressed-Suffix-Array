@@ -1,0 +1,42 @@
+=======================================================
+In the scr folder,you can find makefile and my_csa,you can run my_csa directly,or use make to rebuild the project.
+
+
+*****directly****
+if you have the my_csa file or rebuid the project,you can try ./my_csa,if not work,please provide the complete path.
+
+At far,my_csa supports the flowing commamds:
+
+    ----build sourcefile: this command will build a csa index for the sourcefile,it's you fault if the sourcefile doesn't exists.
+              the csa will be there until del command is provided.
+					  
+    ----count pattern: A interger which means how many times the pattern occurs in the sourcefile.of cource we don't scan the file,
+	          we do this job with the help of a csa ,corresponding the source file.
+
+    ----locate pattern: Batches of positions  will be fetched,at these position in the sourcefile,you will find the pattern.
+	          And you can check the positions just like using *more*
+    
+    ----del: This command will kill the active csa,you may use it before using *build anotherfile*,this is good to performance,
+	         otherwise,the memory may be leaked.
+    
+    ----load indexfile: The indexfile paramater represents the csa index file,this command will load the file and build a csa serectly,
+	         if the indexfile is not writed by the *write* command,it's your fault again.
+    
+    ----write indexfile: Wtite the csa to the indexfile.then,you can use *load* command to reuse it.
+
+    ----quit: say goodbye
+
+    ----help command: the details for the command is ready for you.
+
+****************
+
+****rebuild****
+If you want to rebuild the project,you can use make,at most time,everything will be ok,if if something is embarrassing,you can:
+ # make clean
+ # cd ds_ssort
+ # make clean
+ # make
+ # cd ..
+ # make
+
+then you can use my_csa directly.

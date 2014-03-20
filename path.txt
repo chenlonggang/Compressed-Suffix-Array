@@ -1,0 +1,16 @@
+/home/chen/code/csa/data/paper1
+/home/chen/code/csa/data/news
+/home/chen/code/csa/data/book1
+/home/chen/code/csa/data/world192.txt
+/home/chen/code/csa/data/bible.txt
+/home/chen/code/csa/data/E.coli
+/home/chen/code/csa/data/dna.50MB
+/home/chen/code/csa/data/proteins.50MB
+/home/chen/code/csa/data/xml.50MB
+/home/chen/code/csa/data/sources.50MB
+/home/chen/code/csa/data/english.50MB
+/home/chen/code/csa/data/dna.100MB
+/home/chen/code/csa/data/proteins.100MB
+/home/chen/code/csa/data/xml.100MB
+/home/chen/code/csa/data/sources.100MB
+/home/chen/code/csa/data/english.100MB
