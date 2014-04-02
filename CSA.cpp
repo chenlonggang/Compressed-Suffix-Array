@@ -11,19 +11,19 @@ using namespace std;
 i32 CSA::Save(const char * indexfile)
 {
 	savekit s(indexfile);
-	
+
 	s.writeu64(198809102510);
 	s.writei32(n);
 	s.writei32(alphabetsize);
-	
+
 	s.writei32(SL);
 	s.writei32(L);
 	s.writei32(D);
 	s.writei32(RD);
-	
+
 	//sal
 	SAL->write(s);
-	
+
 	//ranl
 	RankL->write(s);
 
@@ -36,7 +36,7 @@ i32 CSA::Save(const char * indexfile)
 	//incode
 	s.writei32(alphabetsize);
 	s.writei32array(incode,alphabetsize);
-	
+
 	//phi0
 	Phi0->write(s);
 	s.close();
@@ -54,7 +54,7 @@ i32 CSA::Load(const char * indexfile)
 	}
 	s.loadi32(this->n);
 	s.loadi32(this->alphabetsize);
-	
+
 	s.loadi32(SL);
 	s.loadi32(L);
 	s.loadi32(D);
@@ -65,7 +65,7 @@ i32 CSA::Load(const char * indexfile)
 
 	RankL=new InArray();
 	RankL->load(s);
-	
+
 	//code
 	i32 len=0;
 	s.loadi32(len);
@@ -94,7 +94,7 @@ CSA::CSA(const char * sourcefile,i32 L,i32 D,i32 phitype)
 		this->code =new i32[256];
 		for(i32 i=0;i<256;i++)
 			code[i]=0;
-	
+
 		this->alphabetsize =0;
 		uchar *T=NULL;
 		T=Getfile(sourcefile);
@@ -104,7 +104,7 @@ CSA::CSA(const char * sourcefile,i32 L,i32 D,i32 phitype)
 		ds_ssort(T,SA,n);
 		parmaters p={alphabetsize,n,SL,L,start,lastchar,SA,T,code,phitype};
 		CreateSupportStructer(&p);
-		
+
 		if(SA!=NULL)
 			delete [] SA;
 		if(T!=NULL)
@@ -129,7 +129,7 @@ CSA::~CSA(void)
 	delete [] incode;
 }
 
-bool CSA::Existential(const char *Pattern) 
+bool CSA::Existential(const char *Pattern)
 {
 	i32 L=0;
 	i32 R=0;
@@ -140,7 +140,7 @@ bool CSA::Existential(const char *Pattern)
 	else
 		return false;
 }
-void CSA::Counting(const char *Pattern,int &num) 
+void CSA::Counting(const char *Pattern,int &num)
 {
 	i32 L=0;
 	i32 R=0;
@@ -153,7 +153,7 @@ void CSA::statics(uchar * T)
 {
 	for(i32 i=0;i<n;i++)
 		code[T[i]]++;
-	
+
 	for(i32 i=0;i<256;i++)
 		if(code[i]!=0)
 			this->alphabetsize ++;
@@ -164,7 +164,7 @@ void CSA::statics(uchar * T)
 	i32 pre=0;
 	for(i32 i=0;i<256;i++)
 		if(code[i]!=0)
-		{   
+		{
 			start[k]=pre+code[i];
 			pre=start[k];
 			k++;
@@ -185,9 +185,9 @@ void CSA::statics(uchar * T)
 }
 
 
-uchar* CSA::Getfile(const char * filename) 
+uchar* CSA::Getfile(const char * filename)
 {
-	
+
 	FILE *fp=fopen(filename,"r+");
 	if(fp==NULL)
 	{
@@ -215,7 +215,7 @@ double CSA::Size()
 }
 
 
-void CSA::CreateSupportStructer(parmaters *csa) 
+void CSA::CreateSupportStructer(parmaters *csa)
 {
 	i32 i=0;
 	i32 j=0;
@@ -227,7 +227,7 @@ void CSA::CreateSupportStructer(parmaters *csa)
 	{
 		SAL->SetValue (j,csa->SA[i]);
 	}
-	
+
 	for(i=0;i<n;i++)
 	{
 		if(csa->SA[i]%step2==0)
@@ -237,8 +237,8 @@ void CSA::CreateSupportStructer(parmaters *csa)
 //	parmaters p={alphabetsize,n,SL,L,start,lastchar,SA,T,code,phitype};
 	Phi0=new Phi(csa);
 //	cout<<"Phi0 is done "<<endl;
-	
-	
+
+
 }
 
 /*第284,285行应该留着，但是结果又不对
@@ -296,7 +296,7 @@ void CSA::Search2(const char *Pattern, i32 &L, i32 &R)
 
 
 }
-void CSA::Search(const char *Pattern, i32 &L, i32 &R) 
+void CSA::Search(const char *Pattern, i32 &L, i32 &R)
 {
 	//cout<<"Search 1"<<endl;
 	i32 templeft;
@@ -319,7 +319,7 @@ void CSA::Search(const char *Pattern, i32 &L, i32 &R)
 		R=0;
 		return ;
 	}
-	
+
 	Left=start[coding];
 	Right=start[coding+1]-1;//start数组的大小为alphabetsize+1，实际有用的为alphabetsize个，最后一个是为了防止coding+1越界的，
 	                                     //所以start[alphabetsize]，即start数组的最后一个职位n。相见Phi0类的构造函数。
@@ -393,8 +393,8 @@ void CSA::Search(const char *Pattern, i32 &L, i32 &R)
 		L=Left,R=Right;
 }
 //phi0的实现和字典的rank操作的实现可以改进。
-i32 CSA::lookup(i32 i) 
-{   
+i32 CSA::lookup(i32 i)
+{
 	/*
 	i32 step1=0;
 	i32 step2=0;
@@ -443,7 +443,7 @@ i32 CSA::lookup(i32 i)
 	return (n+SAL->GetValue (i)-step)%n;
 }
 /*
-void CSA::SelfTesting() 
+void CSA::SelfTesting()
 {
 	cout<<"CSA is Selftesting..."<<endl;
 	i32 k=0;
@@ -501,7 +501,7 @@ void CSA::Decompress(i32 i, i32 len,unsigned char *p)
 	i32 k=0;
 	i=this->Inverse (i);
 	for(i32 j=0;j<len;j++)
-	{	
+	{
 		k=this->Phi_list (i);
 		p[j]=this->Character (k);
 		//i=Phi0->GetValue (i);
@@ -554,7 +554,7 @@ void CSA::Locating(const char *Pattern, i32 &num, i32 *&pos)
 //	else
 //		Enumerative1(L,R,pos);
 
-	
+
 }
 
 void CSA::Enumerative2(i32 L,i32  R, i32 *&pos)
@@ -618,7 +618,7 @@ void CSA::Enumerative2(i32 L,i32  R, i32 *&pos)
 	delete [] pred;
 	delete [] distance;
 }
-void CSA::Enumerative1(i32 L,i32 R,i32 *&pos) 
+void CSA::Enumerative1(i32 L,i32 R,i32 *&pos)
 {
 
 
