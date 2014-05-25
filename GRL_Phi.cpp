@@ -285,12 +285,11 @@ void GRL_Phi::SamplingAndCoding(parmaters *csa)
 	j=0;
 
 	gap=0;
-	i32 index1=0;//samplesµÄÏÂ±ê
-	i32 index2=0;//offsectsµÄÏÂ±ê
-	i32 index3=0;//superoffsectµÄÏÂ±ê
-	i32 len1=0;//±íÊŸµœÄ¿Ç°ÎªÖ¹£¬µÄ±àÂë³€¶È
-	i32 len2=0;//±íÊŸÄ¿Ç°±àÂëÎªÖ¹ËùÊôµÄ£Ó£ÂµÄ±àÂëÎªÖ¹£®
-	//a±íÊŸ³¬¿ìµÄ²œ³€£¬b±íÊŸÐ¡¿éµÄ²œ³€
+	i32 index1=0;
+	i32 index2=0;
+	i32 index3=0;
+	i32 len1=0;
+	i32 len2=0;
 	u64 value=0;
 	for(i32 i=0;i<n;i++)
 	{
@@ -372,12 +371,14 @@ i32 GRL_Phi::GetMemorySize()
 {
 	return samples->GetMemorySize ()+this->offsects ->GetMemorySize ()+this->lenofsequence *4+this->lenofsuperoffset *4;
 }
+
 i32 GRL_Phi::GetOneBit(i32 i) 
 {
 	i32 anchor=i/32;
 	i32 position=i%32;
 	return (sequence [anchor]&1<<(31-position))>>(31-position);
 }
+
 void GRL_Phi::InitionalTables() 
 {
 	i32 D=this->tablewidth;
@@ -446,7 +447,6 @@ i32  GRL_Phi::Decodegamma(i32 & position, i32 &x)
 	return 2*a+1;
 }
 
-
 i32 GRL_Phi::ZerosRun(i32 &position) 
 {
 	
@@ -465,6 +465,7 @@ i32 GRL_Phi::ZerosRun(i32 &position)
 	position=position+y;
 	return w;
 }
+
 u64 GRL_Phi::GetBits (i32 position,i32 num)
 {
 	
@@ -477,6 +478,7 @@ u64 GRL_Phi::GetBits (i32 position,i32 num)
    
 
 }
+
 i32 GRL_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 {
 	i32 ans=0;
@@ -547,13 +549,13 @@ i32 GRL_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 		}
 	}
 
-//	cout<<m<<" "<<l<<"  "<<x<<"  "<<position<<endl;
-
 	i32 p=0;
 	i32 num=0;
 	i32 bits=0;
+	bool loop =false;
 	while(x<=pr && m<r)
 	{ 
+		loop =true;
 		p=this->GetBits(position,16);
 		num=this->decodevaluenum[p];
 		if(num==0)
@@ -585,34 +587,40 @@ i32 GRL_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 			x=mod(x+this->decoderesult[p]);
 		}
 	}
-	if(num!=0)
+
+
+
+	if(loop)
 	{
-		x=mod(x-this->decoderesult[p]);
-		position=position-this->decodebitsnum[p];
-		m=m-num;
-	}
-	else
-	{
-		if(d<this->b*2)
+		if(num!=0)
 		{
-			if(d%2==0)
+			x=mod(x-this->decoderesult[p]);
+			position=position-this->decodebitsnum[p];
+			m=m-num;
+		}
+		else
+		{
+			if(d<this->b*2)
 			{
-				m=m-d/2;
-				x=mod(x-d/2);
+				if(d%2==0)
+				{
+					m=m-d/2;
+					x=mod(x-d/2);
+				}
+				else
+				{
+					m=m-1;
+					x=mod(x-(d+3)/2);
+				}
 			}
 			else
 			{
 				m=m-1;
-				x=mod(x-(d+3)/2);
+				x=mod(x-(d+1-this->b));
 			}
-		}
-		else
-		{
-			m=m-1;
-			x=mod(x-(d+1-this->b));
-		}
 
-		position=position-bits;
+			position=position-bits;
+		}
 	}
 	/*
 	while(1)
@@ -700,6 +708,8 @@ i32 GRL_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 		else
 			lb=m+1;
 	}
+	if(b==0)
+		return 0;
 	x=this->samples->GetValue(b-1);
 	if(r>b*L-1)
 		r=b*L-1;
@@ -745,8 +755,10 @@ i32 GRL_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 	i32 p=0;
 	i32 num=0;
 	i32 bits=0;
+	bool loop=false;
 	while(x<pl && m<r)
 	{
+		loop =true;
 		p=this->GetBits(position,16);
 		num=this->decodevaluenum[p];
 		if(num!=0)
@@ -780,34 +792,39 @@ i32 GRL_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 
 		}
 	}
-	if(num!=0)
+
+	if(loop)
 	{
-		x=mod(x-this->decoderesult[p]);
-		position=position-this->decodebitsnum[p];
-		m=m-num;
-	}
-	else
-	{
-		if(d<this->b*2)
+		if(num!=0)
 		{
-			if(d%2==0)
+			x=mod(x-this->decoderesult[p]);
+			position=position-this->decodebitsnum[p];
+			m=m-num;
+		}
+		else
+		{
+			if(d<this->b*2)
 			{
-				m=m-d/2;
-				x=mod(x-d/2);
+				if(d%2==0)
+				{
+					m=m-d/2;
+					x=mod(x-d/2);
+				}
+				else
+				{
+					m=m-1;
+					x=mod(x-(d+3)/2);
+				}
 			}
 			else
 			{
 				m=m-1;
-				x=mod(x-(d+3)/2);
+				mod(x-(d+1-this->b));
 			}
+			position=position-bits;
 		}
-		else
-		{
-			m=m-1;
-			mod(x-(d+1-this->b));
-		}
-		position=position-bits;
 	}
+	
 	num=1;
 	while(1)
 	{
