@@ -296,37 +296,19 @@ void GAM_Phi::InitionalTables()
 
 int  GAM_Phi::Decodegamma(i32 & position, i32 &x)
 {
-/*
-	i32 zeronums=0;
-	i32 bit=0;
-	while((sequence[position/16]&(1<<(15-position%16)))==0)
-	{
-		zeronums++;
-		position++;
-	}
-	for(i32 i=0;i<zeronums+1;i++)
-	{
-		//x=x+((sequence[position/16]&(1<<(15-position%16)))<<(15-position%1    6))*(1<<i);
-		bit=(sequence[position/16]&(1<<(15-position%16)))>>(15-position%16);
-	 	x=x*2+bit; 
-		position++;
-	}
-*/
-	i32 a=this->ZerosRun (position);//ÔÚÊý0µÄ¹ý³ÌÖÐ£¬positionµÄÖµ»á×Ô¶¯žüÐÂ
-	x=this->GetBits (position,a+1);//žÃ¹ý³ÌÖÐ£¬²»žüÐÂposition
+	i32 a=this->ZerosRun (position);
+	x=this->GetBits (position,a+1);
 	position=position+a+1;
 	return 2*a+1;
 }
 
 
-//·µ»ØGAM_Phi±àÂëÐòÁÐÖÐ£¬ŽÓpositionÎ»ÖÃ¿ªÊŒ³öÏÖµÄÁ¬ÐøµÄ0µÄžöÊý£¬
-//ÔÚŽÎ¹ý³ÌÖÐ£¬positionžüÐÂ¡£
 i32 GAM_Phi::ZerosRun(i32 &position) 
 {
 	
 	
 	i32 y=0;
-	i32 D=this->tablewidth ;//DÄ¬ÈÏÊÇ16.
+	i32 D=this->tablewidth ;
 	i32 x=this->GetBits(position,D);
 	i32 w=y=this->zerostable [x];
 	while(y==D)
@@ -339,67 +321,11 @@ i32 GAM_Phi::ZerosRun(i32 &position)
 	position=position+y;
 	return w;
 	
-/*
-	i16 D=this->tablewidth;
-	u16 h=GetBits(position,D);
-	u16 l=GetBits(position+D,D);
-	i32 num=zerostable[h];
-	if(num==D)
-	{
-		num=D+zerostable[l];
-		position=position+num;
-	
-	}
-	else
-		position=position+num;
-	return num;
-*/
 
 }
 u64 GAM_Phi::GetBits (i32 position,i32 num)
-{
-/*
-	
-    //ÓÃÊ±103	
-	i32 p=position;
-	i32 s=0;
-	u64 x=0;
-	u64 y=0;
-	while(num>0)
-	{
-		i32 len=min(num,16-p%16);
-	    s=(16-(p+len)%16)%16;
-		x=(sequence[p/16]>>s)&((1<<len)-1);
-		p=p+len;
-		num=num-len;
-		x=x<<num;
-		y=y+x;
-	}
-	return y;
-*/	
-	/*
-	ÓÃÊ±82
-	i32 anchor=position>>4;
-	i32 bytes=((position+num-1)>>4)-anchor+1;
-	u64 value=0;
-	for(i32 i=0;i<bytes;i++)
-	{
-		value=(value<<16)+sequence[anchor+i];
-	}
-	i32 overloop=(16-((position+num)&15))&15;
-	value=value>>overloop;
-	return value&((1<<num)-1);
-	*/
-	//ÓÃÊ±60
-	/*
-	u32 anchor=position>>4;
-	u64 temp1=sequence[anchor];
-	u64 temp2=sequence[anchor+1];
-	u64 temp3=sequence[anchor+2];
-	temp1=(temp1<<32)+(temp2<<16)+temp3;
-	i32 overloop=((anchor+3)<<4)-position-num;
-	return (temp1>>overloop)&((1<<num)-1);
-*/
+{	
+
 	
 	u32 anchor=position>>5;
 	u64 temp1=sequence[anchor];
@@ -410,7 +336,8 @@ u64 GAM_Phi::GetBits (i32 position,i32 num)
    
 
 }
-//ÔÚÇøŒä[L,R]ÄÚ£¬×îºóÒ»žöphiÖµÐ¡ÓÚprµÄË÷Òý
+
+//在Phi数组[l,r]范围内，从有往左，找第一个phi值<=pr的索引
 i32 GAM_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 {
 	i32 ans=0;
@@ -437,9 +364,7 @@ i32 GAM_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 		}
 		else
 			rb=m-1;
-	
 	}
-	
 	x=this->samples->GetValue(b);
 	ans=l-1;
 	if(r>(b+1)*L-1)
@@ -453,57 +378,6 @@ i32 GAM_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 		x=(x+d)%n;
 		m++;
 	}
-	//cout<<m<<" "<<l<<"  "<<x<<"  "<<position<<endl;
-
-
-// dosn't work
-/*
-	u32 p=0;
-	i32 num=0;
-	while(x<=pr && m<=r)
-	{
-		p=this->GetBits(position,16);
-		num=this->decodevaluenum[p];
-		if(num==0)
-		{
-			//ans=m;
-			m++;
-			this->Decodegamma(position,d);
-			x=(x+d)%n;
-		}
-		else
-		{
-			//ans=m;
-			m=m+num;
-			position=position+this->decodebitsnum[p];
-			x=(x+this->decoderesult[p])%n;
-		}
-	}
-	if(x>pr)
-	{
-	    if(num==0)
-			ans=m-1;
-		else
-		{
-			x=x-this->decoderesult[p];
-			m=m-num;
-			position=position-this->decodebitsnum[p];
-			while(1)
-			{
-				if(x>pr)
-					break;
-				ans=m;
-				m++;
-				if(m>r)
-					break;
-				this->Decodegamma(position,d);
-				x=(x+d)%n;
-			}
-		}
-	}
-*/
-
-
 
 
 //work , the lowest one
@@ -523,69 +397,14 @@ i32 GAM_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 
 */
 
-
-	
-//work
-/*
-	i32 p=0;
-	i32 num=0;
-	while(1)
-	{
-		if(x>pr)
-			break;
-		ans=m;
-		p=GetBits(position,16);
-		num=decodevaluenum[p];
-		if(num==0)
-			m++;
-		else
-			m=m+num;
-		if(m>r)
-			break;
-		if(num==0)
-		{
-			Decodegamma(position,d);
-			x=x+d;
-		}
-		else
-		{
-			position=position+decodebitsnum[p];
-			x=x+decoderesult[p];
-		}
-	}
-
-	if(num!=0)
-	{
-		if(m>r)
-			m=m-num;
-		else
-		{
-			m=m-num;
-			position=position-decodebitsnum[p];
-			x=x-decoderesult[p];
-		}
-		while(1)
-		{
-			if(x>pr)
-				break;
-			ans=m;
-			m++;
-			if(m>r)
-				break;
-			Decodegamma(position,d);
-			x=(x+d)%n;
-		}
-	}
-*/
-
-
-	
-//works a little better
+	//works a little better
 	i32 p=0;
 	i32 num=0;
 	i32 bits=0;
+	bool loop=false;
 	while(x<=pr && m<r)
 	{ 
+		loop=true;
 		p=this->GetBits(position,16);
 		num=this->decodevaluenum[p];
 		if(num==0)
@@ -600,26 +419,24 @@ i32 GAM_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 			position=position+this->decodebitsnum[p];
 			x=mod(x+this->decoderesult[p]);
 		}
-		         //cout<<num<<"  "<<pl-x<<"  "<<endl;
+
 	}
-	if(num==16&&m<=r)
-		return m+pr-x;
-	if(num!=0)
+
+	if(loop)
 	{
-		x=mod(x-this->decoderesult[p]);
-		position=position-this->decodebitsnum[p];
-		m=m-num;
+		if(num!=0)
+		{
+			x=mod(x-this->decoderesult[p]);
+			position=position-this->decodebitsnum[p];
+			m=m-num;
+		}
+		else
+		{
+			m=m-1;
+			x=mod(x-d);
+			position=position-bits;
+		}
 	}
-	else
-	{
-		m=m-1;
-		x=mod(x-d);
-		position=position-bits;
-	}
-
-	//cout<<m<<" "<<l<<"  "<<x<<"  "<<position<<endl;
-
-
 	while(1)
 	{
 		if(x>pr)
@@ -632,12 +449,10 @@ i32 GAM_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 		x=x+d;
 	}
 
-
-	//cout<<"old right: "<<ans<<endl;
-	// cout<<m<<" "<<l<<"  "<<x<<"  "<<position<<" "<<ans<<" "<<pr<<endl;
 	return ans;
 }
-//ÔÚÇøŒä[L,R]ÄÚ£¬µÚÒ»žöphiÖµŽóÓÚplµÄË÷ÒýÖµ¡£
+
+//在Phi数组中的[l,r]范围内，由左到右，找第一个Phi值>=pl的索引。
 i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 {
 	i32 ans=0;
@@ -649,7 +464,6 @@ i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 	i32 m=0;
 	i32 x=0;
 
-	
 	while(lb<=rb)
 	{
 		m=(lb+rb)>>1;
@@ -667,6 +481,8 @@ i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 		else
 			lb=m+1;
 	}
+	if(b==0)
+		return 0;
 	x=this->samples->GetValue(b-1);
 	if(r>b*L-1)
 		r=b*L-1;
@@ -674,42 +490,6 @@ i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 	m=(b-1)*L;
 	i32 position=this->superoffset[m/SL]+this->offsects->GetValue(m/L);
 	i32 d=0;
-	/*
-		i32 num=0;
-		i32 overloop=l-m;
-		u32 p=0;
-		while(i<overloop)
-		{
-			p=this->GetBits (position,16);
-			num=this->decodevaluenum[p];
-			if(num==0)        
-			{
-				this->Decodegamma(position,d);
-				x=(x+d)%n;
-				i++;
-				m++;
-			}
-			else
-			{
-				if(i+num>overloop)
-					break;
-				i=i+num;
-				m=m+num;
-				position=position+this->decodebitsnum [p];
-				x=x+this->decoderesult [p];
-			}
-		}
-		for(;i<overloop;i++)
-		{
-			this->Decodegamma (position,d);
-			x=(x+d)%n;
-			m++;
-		}
-	*/
-
-
-
-
 	while(m<l)
 	{
 		this->Decodegamma(position,d);
@@ -735,76 +515,17 @@ i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 
 */
 
-//work!
-/*
-	i32 p=0;
-	i32 num=0;
-	while(1)
-	{
-		if(x>=pl)
-		{
-			ans=m;
-			break;
-		}
-		p=GetBits(position,16);
-		num=decodevaluenum[p];
-		if(num==0)
-			m++;
-		else
-			m=m+num;
-		if(m>r)
-			break;
-		if(num==0)
-		{
-			Decodegamma(position,d);
-			x=x+d;
-		}
-		else
-		{
-			position=position+decodebitsnum[p];
-			x=x+decoderesult[p];
-		}
-	}
-	if(num!=0)
-	{
-		
-		if(m>r)
-			m=m-num;
-		else
-		{
-			m=m-num;
-			position=position-decodebitsnum[p];
-			x=x-decoderesult[p];
-		}
-		while(1)
-		{   
-			if(x>=pl)
-			{   
-				ans=m;
-				break;
-			}
-			m++;
-			if(m>r)
-				break;
-			Decodegamma(position,d);
-			x=(x+d)%n;
-		}
-	}
-*/
-
-	
 	i32 p=0;
 	i32 num=0;
 	int bits=0;
+	bool loop=false;
 	while(x<pl && m<r)
 	{
+		loop=true;
 		p=this->GetBits(position,16);
 		num=this->decodevaluenum[p];
 		if(num!=0)
 		{
-			//m++;
-			//this->Decodegamma(position,d);
-			//x=x+d;
 			m=m+num;
 			position=position+this->decodebitsnum[p];
 			x=(x+this->decoderesult[p])%n;
@@ -812,38 +533,28 @@ i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 		}
 		else
 		{
-			//m=m+num;
-			//position=position+this->decodebitsnum[p];
-			//x=(x+this->decoderesult[p])%n;
 			m++;
 			bits=this->Decodegamma(position,d);
 			x=x+d;
 
 		}
-		//cout<<num<<"  "<<pl-x<<"  "<<endl;
 	}
-	
-	if(num==16&&m<=r)
-		return m+pl-x;
-	if(num!=0)
+	if(loop)
 	{
-		x=mod(x-this->decoderesult[p]);
-		position=position-this->decodebitsnum[p];
-		m=m-num;
-	}
-	else
-	{
-		m=m-1;
-		x=mod(x-d);
-		position=position-bits;
+		if(num!=0)
+		{
+			x=mod(x-this->decoderesult[p]);
+			position=position-this->decodebitsnum[p];
+			m=m-num;
+		}
+		else
+		{
+			m=m-1;
+			x=mod(x-d);
+			position=position-bits;
+		}
 	}
 
-//	if(num!=0)
-//	{
-//		x=mod(x-this->decoderesult[p]);
-//		position=position-this->decodebitsnum[p];
-//		m=m-num;
-//	}
 	while(1)
 	{
 		if(x>=pl)
@@ -857,13 +568,10 @@ i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 		Decodegamma(position,d);
 		x=x+d;
 	}
-		
 	
-
-
-	//cout<<"old left :  "<<ans<<endl;
 	return ans;
 }
+
 i32 GAM_Phi::mod(i32 x)
 {
 	if(x<0)
@@ -871,6 +579,7 @@ i32 GAM_Phi::mod(i32 x)
 	else
 		return x%n;
 }
+
 i32 GAM_Phi::write(savekit & s)
 {
 	s.writei32(n);
@@ -895,6 +604,7 @@ i32 GAM_Phi::write(savekit & s)
 
 	return 1;
 }
+
 i32 GAM_Phi::load(loadkit &s)
 {
 	s.loadi32(this->n);
@@ -928,6 +638,7 @@ i32 GAM_Phi::load(loadkit &s)
 	s.loadu32array(sequence,lenofsequence);
 	return 1;
 }
+
 i32 * GAM_Phi::GetPhiArray()
 {
 	index=0;
