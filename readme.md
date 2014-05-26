@@ -4,7 +4,7 @@
 	 CSA is a Succinct Data Structure(SDS), SDS can represent an object as whole object
 	 in logic,in space close to information-theoretic lower bound of the object while 
 	 supporting operations of the original object efficiently.
-	 CSA both is implicit expression about SA(suffix array),has the ability of fast pattern maching,
+	 CSA is implicit expression about SA(suffix array),has the ability of fast pattern maching,
 	 and nedds little space.you can build a CSA-index for a document,and the you 
 	 have mainly there operations in your hands:
 	 counting: count how many a pattern occurs in the document.
