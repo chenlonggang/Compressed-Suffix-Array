@@ -4,15 +4,15 @@
 	 CSA is a Succinct Data Structure(SDS), SDS can represent an object as implicitly,
 	 and in space close to information-theoretic lower bound of the object while 
 	 supporting operations of the original object efficiently.
-	 CSA is implicit expression about SA(suffix array),has the ability of fast pattern maching,
+	 CSA is implicit expression about SA(suffix array),has the ability of fast pattern matching,
 	 and nedds little space.you can build a CSA-index for a document,and the you 
 	 have mainly there operations in your hands:
 	 counting: count how many a pattern occurs in the document.
-	 locating: locate all the position where the pattern occurs.
+	 locating: locate all the positions where the pattern occurs.
 	 decompress: decompress a piece of the document.
 ## How to use it?
 ###just for fun
-	 step 1:download it or clone it
+	 step 1:download or clone it
 	 step 2:make
 	 step 3:run my_csa
 ###build your own program
