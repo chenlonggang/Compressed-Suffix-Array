@@ -1,6 +1,6 @@
 CC=g++
-CFLAGS= -g -O9 -Wall
-my_csa:main.o csa.a 
+CFLAGS=  -O3 -Wall
+my_csa:ds_ssortr main.o csa.a 
 	g++ main.o csa.a -o my_csa 
 
 csa.a:savekit.o loadkit.o InArray.o Phi.o ABS_Phi.o GAM_Phi.o GRL_Phi.o CSA.o  ds_ssort/ds.o ds_ssort/globals.o ds_ssort/helped.o ds_ssort/shallow.o ds_ssort/ds.o ds_ssort/globals.o ds_ssort/helped.o ds_ssort/shallow.o ds_ssort/deep2.o ds_ssort/blind2.o
