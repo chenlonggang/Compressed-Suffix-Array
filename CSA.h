@@ -30,7 +30,6 @@ public:
 	i32 Getalphabetsize();
 	i32 GetN();
 private:
-	/*在构造中调用，与Save对应，将保存的CSA加载到内从*/
 	CSA(const CSA &);
 	CSA& operator=(const CSA & right);
 	

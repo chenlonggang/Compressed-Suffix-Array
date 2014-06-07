@@ -42,6 +42,7 @@ i32 CSA::Save(const char * indexfile)
 	s.close();
 	return 0;
 }
+
 i32 CSA::Load(const char * indexfile)
 {
 	loadkit s(indexfile);
@@ -85,6 +86,7 @@ i32 CSA::Load(const char * indexfile)
 	s.close();
 	return 0;
 }
+
 CSA::CSA(const char * sourcefile,i32 L,i32 D,i32 phitype)
 {
 		this->SL=L*18;
@@ -111,14 +113,17 @@ CSA::CSA(const char * sourcefile,i32 L,i32 D,i32 phitype)
 			delete [] T;
 		cout<<"CSA  is done"<<endl;
 }
+
 i32 CSA::GetN()
 {
 	return n;
 }
+
 i32 CSA::Getalphabetsize()
 {
 	return this->alphabetsize;
 }
+
 CSA::~CSA(void)
 {
 	delete SAL;
@@ -128,6 +133,7 @@ CSA::~CSA(void)
 	delete [] code;
 	delete [] incode;
 }
+
 
 bool CSA::Existential(const char *Pattern)
 {
@@ -140,12 +146,14 @@ bool CSA::Existential(const char *Pattern)
 	else
 		return false;
 }
+
 void CSA::Counting(const char *Pattern,int &num)
 {
 	i32 L=0;
 	i32 R=0;
 
 	Search2(Pattern,L,R);
+	cout<<L<<" "<<R<<endl;
 	num=R-L+1;
 }
 
@@ -233,20 +241,11 @@ void CSA::CreateSupportStructer(parmaters *csa)
 		if(csa->SA[i]%step2==0)
 			RankL->SetValue (csa->SA[i]/step2,i);
 	}
-//	cout<<"SA sampling is done"<<endl;
-//	parmaters p={alphabetsize,n,SL,L,start,lastchar,SA,T,code,phitype};
 	Phi0=new Phi(csa);
-//	cout<<"Phi0 is done "<<endl;
-
-
 }
 
-/*第284,285行应该留着，但是结果又不对
-  */
-/**/
 void CSA::Search2(const char *Pattern, i32 &L, i32 &R)
 {
-	//cout<<"Search 2"<<endl;
 	i32 len=strlen(Pattern);
 	if(len==0)
 	{
@@ -266,7 +265,7 @@ void CSA::Search2(const char *Pattern, i32 &L, i32 &R)
 	i32 Right=start[coding+1]-1;
 	i32 l0=0;
 	i32 r0=0;
-	//cout<<Left<<"  "<<Right<<endl;
+
 	for(i32 i=len-2;i>=0;i--)
 	{
 		c=Pattern[i];
@@ -278,8 +277,8 @@ void CSA::Search2(const char *Pattern, i32 &L, i32 &R)
 			break;
 		}
 		l0=start[coding];
-
 		r0=start[coding+1]-1;
+		
 		Right=Phi0->RightBoundary(Right,l0,r0);
 		Left=Phi0->LeftBoundary(Left,l0,r0);
 		if(Left>Right)
@@ -288,7 +287,6 @@ void CSA::Search2(const char *Pattern, i32 &L, i32 &R)
 			Right=0;
 			break;
 		}
-		//cout<<Left<<"  "<<Right<<endl;
 	}
 	L=Left;
 	R=Right;
@@ -298,7 +296,6 @@ void CSA::Search2(const char *Pattern, i32 &L, i32 &R)
 }
 void CSA::Search(const char *Pattern, i32 &L, i32 &R)
 {
-	//cout<<"Search 1"<<endl;
 	i32 templeft;
 	i32 tempright;
 	i32 jj;
@@ -392,46 +389,9 @@ void CSA::Search(const char *Pattern, i32 &L, i32 &R)
 	else
 		L=Left,R=Right;
 }
-//phi0的实现和字典的rank操作的实现可以改进。
+
 i32 CSA::lookup(i32 i)
 {
-	/*
-	i32 step1=0;
-	i32 step2=0;
-	i32 r1=0;
-	i32 r2=0;
-	while(D0->GetOneBit (i)==0)
-	{
-		step1++;
-		i=Phi0->GetValue (i);
-	}
-	r1=D0->Rank (i)-1;
-	i=r1;
-	while(Dm->GetOneBit (i)==0)
-	{
-		step2++;
-		i=Phim->GetValue (i);
-	}
-	r2=Dm->Rank (i)-1;
-	if(step1!=0 && step2==0 && SAL->GetValue (r2)==0)
-		return n-step1;
-	else if(step2!=0 &&SAL->GetValue (r2)==0)
-		return n-(n-1-i32((n-1)/(1<<level1))*(1<<level1)+(step2-1)*(1<<level1)+step1+1);
-	else
-
-		return (SAL->GetValue (r2))*(1<<level2)-step2*(1<<level1)-step1;
-		*/
-	/*
-	i32 r1=0;
-	i32 step1=0;
-	while(D0->GetOneBit(i)==0)
-	{
-		step1++;
-		i=Phi0->GetValue (i);
-	}
-	r1=D0->Rank (i)-1;
-	return ((SAL->GetValue (r1))*D-step1)%n;
-	*/
 	i32 D=this->D;
 	i32 step=0;
 	while(i%D!=0)
@@ -461,28 +421,10 @@ void CSA::SelfTesting()
 		cout<<"CSA is right"<<endl;
 }
 */
+
+//得到位置i的排名
 i32 CSA::Inverse(i32 i)
 {
-	//i32 L2=(1<<level2);
-	//i32 L1=(1<<level1);
-	//i32 m=i/L2;
-	//i32 k=i/L1;
-
-	//p=Dm->Select (p+1);
-//	i32 num=k-m*(L2/L1);
-	//for(i32 j=0;j<num;j++)
-	//	p=Phim->GetValue (p);
-
-	/*
-	i32 L1=D;
-	i32 m=i/L1;
-	i32 p=RankL->GetValue (m);
-	p=D0->Select (p+1);
-	i32 num=i%D;
-	for(i32 j=0;j<num;j++)
-		p=Phi0->GetValue (p);
-	return p;
-	*/
 	i32 RD=this->RD ;
 	i32 anchor=i/RD;
 	i32 p=anchor*RD;
@@ -504,7 +446,6 @@ void CSA::Decompress(i32 i, i32 len,unsigned char *p)
 	{
 		k=this->Phi_list (i);
 		p[j]=this->Character (k);
-		//i=Phi0->GetValue (i);
 		i=phi[i];
 	}
 }
@@ -524,11 +465,11 @@ i32 CSA::Phi_list(i32 i)
 	}
 	return r-1;
 }
+
 i32 CSA::Character(i32 i)
 {
 	return incode[i];
 }
-
 
 i32 CSA::blog(i32 x)
 {
@@ -540,6 +481,7 @@ i32 CSA::blog(i32 x)
 	}
 	return ans;
 }
+
 void CSA::Locating(const char *Pattern, i32 &num, i32 *&pos)
 {
 	i32 L=0;
@@ -550,9 +492,9 @@ void CSA::Locating(const char *Pattern, i32 &num, i32 *&pos)
 		return ;
 	pos=new i32[num];
 //	if(num>50)
-		Enumerative2(L,R,pos);
+//		Enumerative2(L,R,pos);
 //	else
-//		Enumerative1(L,R,pos);
+		Enumerative1(L,R,pos);
 
 
 }
@@ -614,7 +556,6 @@ void CSA::Enumerative2(i32 L,i32  R, i32 *&pos)
 			}
 		}
 	}
-	//cout<<"fuck"<<fu<<endl;
 	delete [] pred;
 	delete [] distance;
 }

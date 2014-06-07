@@ -54,3 +54,8 @@
 		return 0;
 	}
 	```
+##ChangeLog  
+2014.6.7:  
+We can borrow hybrid-ideas in My Czip project,mix pure-gamma and rl-gamma,It be helpful for compression-ratio.
+
+

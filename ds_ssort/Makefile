@@ -6,7 +6,7 @@ CC=gcc
 #CFLAGS = -g -W -Wall -Winline -O9 
 
 #these are for maximum speed
-CFLAGS=-g -O9 -fomit-frame-pointer -W -Wall -Winline \
+CFLAGS= -O3 -fomit-frame-pointer -W -Wall -Winline \
        -DDEBUG=0 -DNDEBUG=1  
 
 
