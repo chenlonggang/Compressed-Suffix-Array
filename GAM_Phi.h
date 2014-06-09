@@ -1,3 +1,17 @@
+/*============================================
+# Filename: GAM_Phi.h
+# Ver 1.0 2014-06-09
+# Copyright (C) 2014 ChenLonggang (chenlonggang.love@163.com)
+#
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 or later of the License.
+#
+# Description: 
+  The Phi array increses chunk by chunk,so we compress the array by 
+  saving the gap between Phi[i+1] and Phi[i],and use gamma coding to 
+  store the gap.
+=============================================*/
 #ifndef _GAM_PHI
 #define _GAM_PHI
 #include"ABS_Phi.h"

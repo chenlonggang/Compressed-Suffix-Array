@@ -1,3 +1,17 @@
+/*============================================
+# Filename: CSA.h
+# Ver 1.0 2014-06-09
+# Copyright (C) 2014 ChenLonggang (chenlonggang.love@163.com)
+#
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 or later of the License.
+#
+# Description: 
+  compressed suffix array,a self-index structure.
+  CSA(filename) will build a csa-index for a document nameed filename.
+                it's useful for text data,but not for multi-media data.
+=============================================*/
 #pragma once
 #include"savekit.h"
 #include"loadkit.h"

@@ -1,3 +1,18 @@
+/*============================================
+# Filename: GRL_Phi.h
+# Ver 1.0 2014-06-09
+# Copyright (C) 2014 ChenLonggang (chenlonggang.love@163.com)
+#
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 or later of the License.
+#
+# Description: 
+  first use run-length coding for consecutive gap 1,and map 
+  the runs value to odd/even,and map other gap to even/odd,
+  and use the gamma coding to code the new values,it's good for
+  highly-repetive data,like xml and html and programe sources data
+=============================================*/
 #ifndef _GRL_PHI
 #define _GRL_PHI
 #include"ABS_Phi.h"
