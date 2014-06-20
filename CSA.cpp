@@ -108,7 +108,7 @@ CSA::CSA(const char * sourcefile,integer L,integer D,integer phitype)
 		uchar *T=NULL;
 		T=Getfile(sourcefile);
 		statics(T);
-		integer *SA=new integer[n];
+		uinteger *SA=new uinteger[n];
 
 		ds_ssort(T,SA,n);
 		parmaters p={alphabetsize,n,SL,L,start,lastchar,SA,T,code,phitype};

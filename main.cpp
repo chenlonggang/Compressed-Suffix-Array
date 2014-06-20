@@ -12,7 +12,7 @@ void helpsave();
 void helpcount();
 void helplocate();
 void splitcommand(string command,string result[]);
-void showpos( int * pos,int num);
+void showpos( long int * pos,long int num);
 int main(int argc, char* argv[])
 {
 /*
@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 		}
 		else if(result[0]=="count")
 		{
-			int  num=0;
+			long int  num=0;
 			if(csa!=NULL)
 			{
 				csa->Counting(result[1].data(),num);
@@ -75,8 +75,8 @@ int main(int argc, char* argv[])
 		}
 		else if(result[0]=="locate")
 		{
-			int * pos;
-			int num=0;
+			long int * pos;
+			long int num=0;
 			if(csa!=NULL)
 			{
 				csa->Locating(result[1].data(),num,pos);
@@ -130,7 +130,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-void showpos(int * pos,int num)
+void showpos(long int * pos,long int num)
 {
 	cout<<"occs:"<<num<<endl;
 	for(long int i=0;i<num;i++)
