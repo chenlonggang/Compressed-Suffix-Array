@@ -16,7 +16,6 @@ Phi::Phi()
 	type=0;
 	phi=NULL;
 }
-
 Phi::Phi(parmaters *csa)
 {
 	this->type=csa->phitype;
