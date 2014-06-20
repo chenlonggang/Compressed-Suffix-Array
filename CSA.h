@@ -26,6 +26,7 @@ using namespace std;
 class CSA
 {
 public:
+	
 	CSA(){};
 	CSA(const char * sourcefile,integer L=128,integer D=32,integer phitype=0);
 	bool Existential(const char * Pattern);

@@ -20,9 +20,11 @@ InArray::~InArray(void)
 {
 	delete [] data;
 }
+
 InArray::InArray()
 {
 }
+
 InArray::InArray(integer len, integer size) 
 {
 	if(len<0||size<=0)

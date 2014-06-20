@@ -19,6 +19,7 @@ using namespace std;
 class loadkit
 {
 	public:
+		
 		loadkit(const char * file);
 		~loadkit();
 		integer loadi64(i64 & value);

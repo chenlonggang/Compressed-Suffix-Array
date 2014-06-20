@@ -19,6 +19,7 @@ using namespace std;
 GAM_Phi::GAM_Phi()
 {
 }
+
 GAM_Phi::GAM_Phi(parmaters *csa)
 {
 	this->tablewidth=16;

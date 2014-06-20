@@ -22,7 +22,6 @@ loadkit::~loadkit()
 	if(r!=NULL)
 		fclose(r);
 }
-
 loadkit::loadkit(const char * file)
 {
 	this->r=fopen(file,"rb");

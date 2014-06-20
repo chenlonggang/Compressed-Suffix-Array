@@ -18,6 +18,7 @@ the Free Software Foundation; either version 2 or later of the License.
 class InArray
 {
 public:
+	
 	InArray();
 	InArray(integer data_num,integer data_width);
 	~InArray(void);

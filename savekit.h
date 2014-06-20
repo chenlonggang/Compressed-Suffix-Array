@@ -20,6 +20,7 @@ using namespace std;
 class savekit
 {
 	public:
+		
 		savekit(const char * file);
 		~savekit();
 

@@ -24,7 +24,6 @@ GRL_Phi::GRL_Phi(parmaters * csa)
 	this->SamplingAndCoding (csa);
 	//Test();
 	delete [] phivalue;
-
 }
 
 GRL_Phi::~GRL_Phi(void)

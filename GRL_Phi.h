@@ -22,6 +22,7 @@ the Free Software Foundation; either version 2 or later of the License.
 class GRL_Phi:public ABS_Phi
 {
 	public:
+		
 		GRL_Phi(parmaters * csa);
 		GRL_Phi();
 		~GRL_Phi();

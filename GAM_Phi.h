@@ -21,6 +21,7 @@ the Free Software Foundation; either version 2 or later of the License.
 class GAM_Phi:public ABS_Phi
 {
 	public:
+		
 		GAM_Phi(parmaters * csa);
 		GAM_Phi();
 		~GAM_Phi();

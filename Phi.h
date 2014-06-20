@@ -22,6 +22,7 @@ the Free Software Foundation; either version 2 or later of the License.
 class Phi
 {
 	public:
+		
 		Phi(parmaters *csa);
 		Phi();
 		~Phi();
