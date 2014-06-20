@@ -71,7 +71,7 @@ integer savekit::writeu16(u16 value)
 	return 1;
 }
 
- integer savekit::writei64array(i64 * value,integer len)
+integer savekit::writei64array(i64 * value,integer len)
 {
 	fwrite(value,sizeof(i64),len,w);
 	return 1;
