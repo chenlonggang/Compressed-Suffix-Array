@@ -28,35 +28,35 @@ Phi::Phi(parmaters *csa)
 	}
 }
 
-i32 Phi::GetValue(i32 i)
+integer Phi::GetValue(integer i)
 {
 	return phi->GetValue(i);
 }
 
-i32 Phi::RightBoundary(i32 r,i32 L,i32 R)
+integer Phi::RightBoundary(integer r,integer L,integer R)
 {
 	return phi->RightBoundary(r,L,R);
 }
 
-i32 Phi::LeftBoundary(i32 l,i32 L,i32 R)
+integer Phi::LeftBoundary(integer l,integer L,integer R)
 {
 	return phi->LeftBoundary(l,L,R);
 }
 
-i32 Phi::Size()
+integer Phi::Size()
 {
 	return phi->GetMemorySize();
 }
 
-i32 Phi::write(savekit &s)
+integer Phi::write(savekit &s)
 {
-	s.writei32(type);
+	s.writeinteger(type);
 	return phi->write(s);
 }
 
-i32 Phi::load(loadkit &s)
+integer Phi::load(loadkit &s)
 {
-	s.loadi32(type);
+	s.loadinteger(type);
 	switch(this->type)
 	{
 		case 0: phi=new GAM_Phi();break;
@@ -73,7 +73,7 @@ Phi::~Phi()
 	phi=NULL;
 }
 
-i32 * Phi::GetPhiArray()
+integer * Phi::GetPhiArray()
 {
 	return phi->GetPhiArray();
 }

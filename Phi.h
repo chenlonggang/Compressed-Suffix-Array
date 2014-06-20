@@ -25,15 +25,15 @@ class Phi
 		Phi(parmaters *csa);
 		Phi();//返回一个Phi的空壳
 		~Phi();
-		i32 *GetPhiArray();
-		i32 GetValue(i32 i);
-		i32 RightBoundary(i32 r,i32 L,i32 R);
-		i32 LeftBoundary(i32 l,i32 L,i32 R);
-		i32 Size();
-		i32 write(savekit & s);
-		i32 load(loadkit &s);
+		integer *GetPhiArray();
+		integer GetValue(integer i);
+		integer RightBoundary(integer r,integer L,integer R);
+		integer LeftBoundary(integer l,integer L,integer R);
+		integer Size();
+		integer write(savekit & s);
+		integer load(loadkit &s);
 	private:
 		ABS_Phi *phi;
-		int type;
+		integer type;
 
 };

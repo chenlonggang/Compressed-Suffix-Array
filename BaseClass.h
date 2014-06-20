@@ -18,6 +18,8 @@ the Free Software Foundation; either version 2 or later of the License.
 #define u32 unsigned int 
 #define su32 static unsigned int
 #define i32 int
+#define integer  int
+#define uinteger unsigned  int
 #define si32 static int 
 #define u16 unsigned short
 #define su16 static unsigned short

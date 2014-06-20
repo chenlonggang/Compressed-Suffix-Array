@@ -19,19 +19,19 @@ class InArray
 {
 public:
 	InArray();
-	InArray(i32 data_num,i32 data_width);
+	InArray(integer data_num,integer data_width);
 	~InArray(void);
-	i32 GetValue(i32 index);
-	void SetValue(i32 index,i32 value);
-	i32 GetNum();
-	i32 GetDataWidth();
-	i32 GetMemorySize();
-    i32 GetValue2(i32 index);
-	i32 write(savekit & s);
-	i32 load(loadkit & s);
+	integer GetValue(integer index);
+	void SetValue(integer index,integer value);
+	integer GetNum();
+	integer GetDataWidth();
+	integer GetMemorySize();
+    integer GetValue2(integer index);
+	integer write(savekit & s);
+	integer load(loadkit & s);
 private:
 	u32 * data;
-    i32 datanum;
+    integer datanum;
 	i64 datawidth;
 	u32 mask;
 };

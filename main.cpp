@@ -12,7 +12,7 @@ void helpsave();
 void helpcount();
 void helplocate();
 void splitcommand(string command,string result[]);
-void showpos(int * pos,int num);
+void showpos( int * pos,int num);
 int main(int argc, char* argv[])
 {
 /*
@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 		}
 		else if(result[0]=="count")
 		{
-			int num=0;
+			int  num=0;
 			if(csa!=NULL)
 			{
 				csa->Counting(result[1].data(),num);
@@ -133,7 +133,7 @@ int main(int argc, char* argv[])
 void showpos(int * pos,int num)
 {
 	cout<<"occs:"<<num<<endl;
-	for(int i=0;i<num;i++)
+	for(long int i=0;i<num;i++)
 	{
 		cout<<pos[i]<<endl;
 		if((i+1)%20==0)
