@@ -24,13 +24,13 @@ class ABS_Phi
 {
 	public:
 		virtual ~ABS_Phi(){};
-		virtual i32 * GetPhiArray()=0;
-		virtual i32 GetValue(i32 i)=0;
-		virtual i32 RightBoundary(i32 r,i32 L,i32 R)=0;
-		virtual i32 LeftBoundary(i32 l,i32 L,i32 R)=0;
-		virtual i32 GetMemorySize()=0;
-		virtual i32 write(savekit & s)=0;
-		virtual i32 load(loadkit &s)=0;
+		virtual integer * GetPhiArray()=0;
+		virtual integer GetValue(integer i)=0;
+		virtual integer RightBoundary(integer r,integer L,integer R)=0;
+		virtual integer LeftBoundary(integer l,integer L,integer R)=0;
+		virtual integer GetMemorySize()=0;
+		virtual integer write(savekit & s)=0;
+		virtual integer load(loadkit &s)=0;
 
 		
 };

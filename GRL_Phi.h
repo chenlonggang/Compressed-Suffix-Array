@@ -26,40 +26,40 @@ class GRL_Phi:public ABS_Phi
 		GRL_Phi();
 		~GRL_Phi();
 
-		i32 * GetPhiArray();
-		i32 GetValue(i32 i);
-		i32 RightBoundary(i32 r,i32 L,i32 R);
-		i32 LeftBoundary(i32 l,i32 L,i32 R);
-		i32 GetMemorySize();
-		i32 write(savekit & s);
-		i32 load(loadkit & s);
+		integer * GetPhiArray();
+		integer GetValue(integer i);
+		integer RightBoundary(integer r,integer L,integer R);
+		integer LeftBoundary(integer l,integer L,integer R);
+		integer GetMemorySize();
+		integer write(savekit & s);
+		integer load(loadkit & s);
 	private:
-		i32 mod(i32);
-		i32 GetOneBit(i32 i);
-		i32 a;
-		i32 b;
-		i32 alpsize;
-		i32 tablewidth;
+		integer mod(integer);
+		integer GetOneBit(integer i);
+		integer a;
+		integer b;
+		integer alpsize;
+		integer tablewidth;
 		u16 *zerostable;
 		u16 *decodevaluenum;
 		u16 *decodebitsnum;
 		u16 *decoderesult;
-		i32  * superoffset;
+		integer  * superoffset;
 		InArray* samples;
 		InArray * offsects;
 		u32 * sequence;
-		i32 index;
-		i32 lenofsequence;
-		i32 lenofsuperoffset;
-		i32 n;
-		i32 * phivalue;
-		i32 blogsize(i32 x);
+		integer index;
+		integer lenofsequence;
+		integer lenofsuperoffset;
+		integer n;
+		integer * phivalue;
+		integer blogsize(integer x);
 		void SamplingAndCoding(parmaters * csa);//"接头处"用gap+n编码
 		void Test();
-		void Append(i32 x);
-		int Decodegamma(i32& position,i32 & x);
+		void Append(integer x);
+		integer Decodegamma(integer& position,integer & x);
 		void InitionalTables();
-		i32 ZerosRun(i32 &position );//从position开始，获取0连续出现的次数.
-		u64 GetBits(i32 position ,i32 x);//从position开始，读取x位数据
+		integer ZerosRun(integer &position );//从position开始，获取0连续出现的次数.
+		u64 GetBits(integer position ,integer x);//从position开始，读取x位数据
 };
 #endif

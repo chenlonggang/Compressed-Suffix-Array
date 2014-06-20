@@ -24,7 +24,7 @@ InArray::InArray()
 {
 }
 //构造函数,表示有len个“整数”需要存储，每个整数的位宽为size。
-InArray::InArray(i32 len, i32 size) 
+InArray::InArray(integer len, integer size) 
 {
 	if(len<0||size<=0)
 		cout<<"InArray构造参数输入错误"<<endl;
@@ -44,7 +44,7 @@ InArray::InArray(i32 len, i32 size)
 }
 
 //数组中下标为index的位置设置值为value
-void InArray::SetValue (i32 index, i32 v)
+void InArray::SetValue (integer index, integer v)
 {
 
 	if(index>datanum-1|| index<0)
@@ -64,7 +64,7 @@ void InArray::SetValue (i32 index, i32 v)
 		u64 temp1=data[anchor];
 		u32 temp2=data[anchor+1];
 		temp1=(temp1<<32)+temp2;
-		i32 overloop=((anchor+2)<<5)-(index+1)*datawidth;
+		integer overloop=((anchor+2)<<5)-(index+1)*datawidth;
 		value=(value<<overloop);
 		temp1=temp1+value;
 		data[anchor+1]=(temp1&(0xffffffff));
@@ -75,22 +75,22 @@ void InArray::SetValue (i32 index, i32 v)
 
 }
 
-i32 InArray::GetNum ()
+integer InArray::GetNum ()
 {
 	return datanum;
 }
-i32 InArray::GetMemorySize() 
+integer InArray::GetMemorySize() 
 {
 	return (datanum*datawidth)/8;
 }
 
 		
-i32 InArray::GetDataWidth() 
+integer InArray::GetDataWidth() 
 {
 	return datawidth;
 }
 
-i32 InArray::GetValue(i32 index)
+integer InArray::GetValue(integer index)
 {
 
 
@@ -104,15 +104,15 @@ i32 InArray::GetValue(i32 index)
 	u64 temp1=data[anchor];
 	u32 temp2=data[anchor+1];
 	temp1=(temp1<<32)+temp2;
-	i32 overloop=((anchor+2)<<5)-(index+1)*datawidth;
+	integer overloop=((anchor+2)<<5)-(index+1)*datawidth;
 	return (temp1>>overloop)&mask;
 
 
 
 }
-i32 InArray::write(savekit & s)
+integer InArray::write(savekit & s)
 {
-	s.writei32(datanum);
+	s.writeinteger(datanum);
 	s.writei64(datawidth);
 	i64 len=(datanum*datawidth);
 	if(len%32==0)
@@ -120,16 +120,16 @@ i32 InArray::write(savekit & s)
 	else
 		len=len/32+1;
 
-	s.writei32(len);
+	s.writeinteger(len);
 	s.writeu32array(data,len);
 	return 1;
 }
-i32 InArray::load(loadkit & s)
+integer InArray::load(loadkit & s)
 {
-	s.loadi32(datanum);
+	s.loadinteger(datanum);
 	s.loadi64(datawidth);
-	i32 len=0;
-	s.loadi32(len);
+	integer len=0;
+	s.loadinteger(len);
 	data=new u32[len];
 	s.loadu32array(data,len);
 	mask=((1<<datawidth)-1);

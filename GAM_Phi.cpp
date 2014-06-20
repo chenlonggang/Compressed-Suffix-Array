@@ -54,14 +54,14 @@ GAM_Phi::~GAM_Phi(void)
 	delete [] decodebitsnum;
 	delete [] decoderesult;
 }
-void  GAM_Phi::Append (i32 x)
+void  GAM_Phi::Append (integer x)
 {
 	u64 y=x;
-	i32 zeronums=blogsize(y)-1;
+	integer zeronums=blogsize(y)-1;
 	index=index+zeronums;
-	i32 valuewidth=zeronums+1;
-	i32 anchor=(index>>5);
-	i32 overloop=((anchor+2)<<5)-index-valuewidth;
+	integer valuewidth=zeronums+1;
+	integer anchor=(index>>5);
+	integer overloop=((anchor+2)<<5)-index-valuewidth;
 	y=(y<<overloop);
 	sequence[anchor]=(sequence[anchor]|(y>>32));
 	sequence[anchor+1]=(sequence[anchor+1]|(y&0xffffffff));
@@ -70,8 +70,8 @@ void  GAM_Phi::Append (i32 x)
 }
 void GAM_Phi::Test ()
 {
-	i32 i=0;
-	i32 k=0;
+	integer i=0;
+	integer k=0;
 	for(i=0;i<n;i++)
 	{
 		if(phivalue[i]!=GetValue(i))
@@ -83,10 +83,10 @@ void GAM_Phi::Test ()
 		cout<<"Phi is Sorry"<<endl;
 	
 }
-i32 GAM_Phi::blogsize(i32 x) 
+integer GAM_Phi::blogsize(integer x) 
 {
 	
-	i32 len=0;
+	integer len=0;
 	while(x>0)
 	{
 		x=x>>1;
@@ -96,17 +96,17 @@ i32 GAM_Phi::blogsize(i32 x)
 }
 
 
-i32 GAM_Phi::GetValue(i32 index)
+integer GAM_Phi::GetValue(integer index)
 {
 
-	i32 base=samples->GetValue (index/b);
-	i32 overloop=index%b;
-	i32 x=0;
-	i32 d=0;
-	i32 position=superoffset[index/a]+offsects->GetValue (index/b);
-	i32 i=0;
-	i32 p=0;
-	i32 num=0;
+	integer base=samples->GetValue (index/b);
+	integer overloop=index%b;
+	integer x=0;
+	integer d=0;
+	integer position=superoffset[index/a]+offsects->GetValue (index/b);
+	integer i=0;
+	integer p=0;
+	integer num=0;
 
 	while(i<overloop)
 	{
@@ -142,19 +142,19 @@ i32 GAM_Phi::GetValue(i32 index)
 }
 void GAM_Phi::SamplingAndCoding(parmaters *csa)
 {
-	i32 i,j;
+	integer i,j;
 
 	
-	phivalue=new i32[n];
-	i32 *temp=new i32[csa->alphabetsize +1];
-	for(i32 i=0;i<csa->alphabetsize +1;i++)
+	phivalue=new integer[n];
+	integer *temp=new integer[csa->alphabetsize +1];
+	for(integer i=0;i<csa->alphabetsize +1;i++)
 		temp[i]=csa->start [i];
-	i32 index=temp[csa->code[csa->lastchar]];
+	integer index=temp[csa->code[csa->lastchar]];
 	temp [csa->code [csa->lastchar ]]++;
-	i32 h=0;
+	integer h=0;
 	unsigned char c=0;
-	i32 pos=0;
-	for(i32 i=0;i<n;i++)
+	integer pos=0;
+	for(integer i=0;i<n;i++)
 	{
 		 pos=csa->SA [i];
 		if(pos==0)
@@ -173,13 +173,13 @@ void GAM_Phi::SamplingAndCoding(parmaters *csa)
 
 	delete [] temp;
 
-	i32 pre=0;
-	i32 totallen=0;
-	i32 maxlen=0;
-	i32 len=0;
-	i32 x=n/a;
+	integer pre=0;
+	integer totallen=0;
+	integer maxlen=0;
+	integer len=0;
+	integer x=n/a;
 	 
-	i32 gap=0;
+	integer gap=0;
 	for( i=0;i<x+1;i++)
 	{
 		for( j=i*a;j<(i+1)*a&&j<n;j++)
@@ -210,20 +210,20 @@ void GAM_Phi::SamplingAndCoding(parmaters *csa)
 	samples=new InArray(n/b+1,blogsize(n));  
 
 	this->lenofsuperoffset=n/a+1;
-	superoffset=new i32[lenofsuperoffset];
+	superoffset=new integer[lenofsuperoffset];
 
 	i=0;
 	j=0;
 	
 	gap=0;
-	i32 index1=0;
-	i32 index2=0;
-	i32 index3=0;
-	i32 len1=0;
-	i32 len2=0;
+	integer index1=0;
+	integer index2=0;
+	integer index3=0;
+	integer len1=0;
+	integer len2=0;
 	u64 value=0;
 
-	for(i32 i=0;i<n;i++)
+	for(integer i=0;i<n;i++)
 	{
 		if(i%a==0)
 		{
@@ -251,22 +251,22 @@ void GAM_Phi::SamplingAndCoding(parmaters *csa)
 		Append(gap);
 	}
 }
-i32 GAM_Phi::GetMemorySize()
+integer GAM_Phi::GetMemorySize()
 {
 	return samples->GetMemorySize ()+this->offsects ->GetMemorySize ()+this->lenofsequence *4+this->lenofsuperoffset *4;
 }
-i32 GAM_Phi::GetOneBit(i32 i) 
+integer GAM_Phi::GetOneBit(integer i) 
 {
-	i32 anchor=i/32;
-	i32 position=i%32;
+	integer anchor=i/32;
+	integer position=i%32;
 	return (sequence [anchor]&1<<(31-position))>>(31-position);
 }
 void GAM_Phi::InitionalTables() 
 {
-	i32 D=this->tablewidth;
+	integer D=this->tablewidth;
 	u16 * R=this->zerostable ;
-	for(i32 i=0;i<D;i++)
-		for(i32 j=(1<<i);j<(2<<i);j++)
+	for(integer i=0;i<D;i++)
+		for(integer j=(1<<i);j<(2<<i);j++)
 			R[j]=D-1-i;
 	R[0]=D;
 	u16 * Rn=this->decodevaluenum;
@@ -276,11 +276,11 @@ void GAM_Phi::InitionalTables()
 	u32 B[3]={0xffffffff,0xffffffff,0xffffffff};
 	u32 *temp=this->sequence;
 	this->sequence=B;
-	i32 b=0;
-	i32 num=0;
-	i32 x=0;
-	i32 d=0;
-	i32 preb=0;
+	integer b=0;
+	integer num=0;
+	integer x=0;
+	integer d=0;
+	integer preb=0;
 
 	for(u32 i=0;i<tablesize;i++)
 	{
@@ -305,23 +305,23 @@ void GAM_Phi::InitionalTables()
 	this->sequence=temp;
 }
 
-int  GAM_Phi::Decodegamma(i32 & position, i32 &x)
+integer  GAM_Phi::Decodegamma(integer & position, integer &x)
 {
-	i32 a=this->ZerosRun (position);
+	integer a=this->ZerosRun (position);
 	x=this->GetBits (position,a+1);
 	position=position+a+1;
 	return 2*a+1;
 }
 
 
-i32 GAM_Phi::ZerosRun(i32 &position) 
+integer GAM_Phi::ZerosRun(integer &position) 
 {
 	
 	
-	i32 y=0;
-	i32 D=this->tablewidth ;
-	i32 x=this->GetBits(position,D);
-	i32 w=y=this->zerostable [x];
+	integer y=0;
+	integer D=this->tablewidth ;
+	integer x=this->GetBits(position,D);
+	integer w=y=this->zerostable [x];
 	while(y==D)
 	{
 		position=position+D;
@@ -334,7 +334,7 @@ i32 GAM_Phi::ZerosRun(i32 &position)
 	
 
 }
-u64 GAM_Phi::GetBits (i32 position,i32 num)
+u64 GAM_Phi::GetBits (integer position,integer num)
 {	
 
 	
@@ -342,23 +342,23 @@ u64 GAM_Phi::GetBits (i32 position,i32 num)
 	u64 temp1=sequence[anchor];
 	u32 temp2=sequence[anchor+1];
 	temp1=(temp1<<32)+temp2;
-	i32 overloop=((anchor+2)<<5)-position-num;
+	integer overloop=((anchor+2)<<5)-position-num;
 	return (temp1>>overloop)&((1<<num)-1);
    
 
 }
 
 //在Phi数组[l,r]范围内，从有往左，找第一个phi值<=pr的索引
-i32 GAM_Phi::RightBoundary(i32 pr,i32 l,i32 r)
+integer GAM_Phi::RightBoundary(integer pr,integer l,integer r)
 {
-	i32 ans=0;
-	i32 SL=this->a;
-	i32 L=this->b;
-	i32 lb=(l+L-1)/L;
-	i32 rb=r/L;
-	i32 b=lb-1;
-	i32 m=0;
-	i32 x=0;
+	integer ans=0;
+	integer SL=this->a;
+	integer L=this->b;
+	integer lb=(l+L-1)/L;
+	integer rb=r/L;
+	integer b=lb-1;
+	integer m=0;
+	integer x=0;
 	while(lb<=rb)
 	{
 		m=(lb+rb)>>1;
@@ -381,8 +381,8 @@ i32 GAM_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 	if(r>(b+1)*L-1)
 		r=(b+1)*L-1;
 	m=b*L;
-	i32 d=0;
-	i32 position=this->superoffset[m/SL]+this->offsects->GetValue(m/L);
+	integer d=0;
+	integer position=this->superoffset[m/SL]+this->offsects->GetValue(m/L);
 	while(m<l)
 	{
 		this->Decodegamma(position,d);
@@ -409,9 +409,9 @@ i32 GAM_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 */
 
 	//works a little better
-	i32 p=0;
-	i32 num=0;
-	i32 bits=0;
+	integer p=0;
+	integer num=0;
+	integer bits=0;
 	bool loop=false;
 	while(x<=pr && m<r)
 	{ 
@@ -464,16 +464,16 @@ i32 GAM_Phi::RightBoundary(i32 pr,i32 l,i32 r)
 }
 
 //在Phi数组中的[l,r]范围内，由左到右，找第一个Phi值>=pl的索引。
-i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
+integer GAM_Phi::LeftBoundary(integer pl,integer l,integer r)
 {
-	i32 ans=0;
-	i32 SL=this->a;
-	i32 L=this->b;
-	i32 lb=(l+L-1)/L;
-	i32 rb=r/L;
-    i32 b=rb+1;
-	i32 m=0;
-	i32 x=0;
+	integer ans=0;
+	integer SL=this->a;
+	integer L=this->b;
+	integer lb=(l+L-1)/L;
+	integer rb=r/L;
+    integer b=rb+1;
+	integer m=0;
+	integer x=0;
 
 	while(lb<=rb)
 	{
@@ -499,8 +499,8 @@ i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 		r=b*L-1;
 	ans=r+1;
 	m=(b-1)*L;
-	i32 position=this->superoffset[m/SL]+this->offsects->GetValue(m/L);
-	i32 d=0;
+	integer position=this->superoffset[m/SL]+this->offsects->GetValue(m/L);
+	integer d=0;
 	while(m<l)
 	{
 		this->Decodegamma(position,d);
@@ -526,8 +526,8 @@ i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 
 */
 
-	i32 p=0;
-	i32 num=0;
+	integer p=0;
+	integer num=0;
 	int bits=0;
 	bool loop=false;
 	while(x<pl && m<r)
@@ -583,7 +583,7 @@ i32 GAM_Phi::LeftBoundary(i32 pl,i32 l,i32 r)
 	return ans;
 }
 
-i32 GAM_Phi::mod(i32 x)
+integer GAM_Phi::mod(integer x)
 {
 	if(x<0)
 		return x+n;
@@ -591,17 +591,17 @@ i32 GAM_Phi::mod(i32 x)
 		return x%n;
 }
 
-i32 GAM_Phi::write(savekit & s)
+integer GAM_Phi::write(savekit & s)
 {
-	s.writei32(n);
-	s.writei32(a);
-	s.writei32(b);
-	s.writei32(alpsize);
-	s.writei32(tablewidth);
+	s.writeinteger(n);
+	s.writeinteger(a);
+	s.writeinteger(b);
+	s.writeinteger(alpsize);
+	s.writeinteger(tablewidth);
 
 	//superoffset
-	s.writei32(lenofsuperoffset);
-	s.writei32array(superoffset,lenofsuperoffset);
+	s.writeinteger(lenofsuperoffset);
+	s.writeintegerarray(superoffset,lenofsuperoffset);
 
 	//offset
 	offsects->write(s);
@@ -610,19 +610,19 @@ i32 GAM_Phi::write(savekit & s)
 	samples->write(s);
 
 	//sequences
-	s.writei32(lenofsequence);
+	s.writeinteger(lenofsequence);
 	s.writeu32array(sequence,lenofsequence);
 
 	return 1;
 }
 
-i32 GAM_Phi::load(loadkit &s)
+integer GAM_Phi::load(loadkit &s)
 {
-	s.loadi32(this->n);
-	s.loadi32(this->a);
-	s.loadi32(this->b);
-	s.loadi32(alpsize);
-	s.loadi32(tablewidth);
+	s.loadinteger(this->n);
+	s.loadinteger(this->a);
+	s.loadinteger(this->b);
+	s.loadinteger(alpsize);
+	s.loadinteger(tablewidth);
 
 	this->zerostable=new u16[1<<tablewidth];
 	this->decodevaluenum=new u16[1<<tablewidth];
@@ -631,9 +631,9 @@ i32 GAM_Phi::load(loadkit &s)
 	this->InitionalTables();
 
 	
-	s.loadi32(lenofsuperoffset);
-	superoffset=new i32[lenofsuperoffset];
-	s.loadi32array(superoffset,lenofsuperoffset);
+	s.loadinteger(lenofsuperoffset);
+	superoffset=new integer[lenofsuperoffset];
+	s.loadintegerarray(superoffset,lenofsuperoffset);
 
 
 	offsects=new InArray();
@@ -644,23 +644,23 @@ i32 GAM_Phi::load(loadkit &s)
 
 	//cout<<"OK"<<endl;
 
-	s.loadi32(lenofsequence);
+	s.loadinteger(lenofsequence);
 	sequence=new u32[lenofsequence];
 	s.loadu32array(sequence,lenofsequence);
 	return 1;
 }
 
-i32 * GAM_Phi::GetPhiArray()
+integer * GAM_Phi::GetPhiArray()
 {
 	index=0;
-	i32 * phi=new i32[n];
-	i32 times=n/b+1;
-	i32 pre=0;
-	i32 d=0;
-	for(i32 i=0;i<times;i++)
+	integer * phi=new integer[n];
+	integer times=n/b+1;
+	integer pre=0;
+	integer d=0;
+	for(integer i=0;i<times;i++)
 	{
 		pre=phi[i*b]=samples->GetValue(i);
-		for(i32 j=i*b+1;j<(i+1)*b && j<n;j++)
+		for(integer j=i*b+1;j<(i+1)*b && j<n;j++)
 		{
 			this->Decodegamma(index,d);
 			pre=phi[j]=(pre+d)%n;

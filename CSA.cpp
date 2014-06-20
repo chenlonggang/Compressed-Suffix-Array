@@ -19,18 +19,18 @@ using namespace std;
 #define SearchKind 2
 
 
-i32 CSA::Save(const char * indexfile)
+integer CSA::Save(const char * indexfile)
 {
 	savekit s(indexfile);
 
 	s.writeu64(198809102510);
-	s.writei32(n);
-	s.writei32(alphabetsize);
+	s.writeinteger(n);
+	s.writeinteger(alphabetsize);
 
-	s.writei32(SL);
-	s.writei32(L);
-	s.writei32(D);
-	s.writei32(RD);
+	s.writeinteger(SL);
+	s.writeinteger(L);
+	s.writeinteger(D);
+	s.writeinteger(RD);
 
 	//sal
 	SAL->write(s);
@@ -39,14 +39,14 @@ i32 CSA::Save(const char * indexfile)
 	RankL->write(s);
 
 	//code
-	s.writei32(256);
-	s.writei32array(code,256);
+	s.writeinteger(256);
+	s.writeintegerarray(code,256);
 	//start
-	s.writei32(alphabetsize+1);
-	s.writei32array(start,alphabetsize+1);
+	s.writeinteger(alphabetsize+1);
+	s.writeintegerarray(start,alphabetsize+1);
 	//incode
-	s.writei32(alphabetsize);
-	s.writei32array(incode,alphabetsize);
+	s.writeinteger(alphabetsize);
+	s.writeintegerarray(incode,alphabetsize);
 
 	//phi0
 	Phi0->write(s);
@@ -54,7 +54,7 @@ i32 CSA::Save(const char * indexfile)
 	return 0;
 }
 
-i32 CSA::Load(const char * indexfile)
+integer CSA::Load(const char * indexfile)
 {
 	loadkit s(indexfile);
 	u64 magicnum;
@@ -64,13 +64,13 @@ i32 CSA::Load(const char * indexfile)
 		cerr<<"Not a CSA file"<<endl;
 		exit(0);
 	}
-	s.loadi32(this->n);
-	s.loadi32(this->alphabetsize);
+	s.loadinteger(this->n);
+	s.loadinteger(this->alphabetsize);
 
-	s.loadi32(SL);
-	s.loadi32(L);
-	s.loadi32(D);
-	s.loadi32(RD);
+	s.loadinteger(SL);
+	s.loadinteger(L);
+	s.loadinteger(D);
+	s.loadinteger(RD);
 
 	SAL=new InArray();
 	SAL->load(s);
@@ -79,18 +79,18 @@ i32 CSA::Load(const char * indexfile)
 	RankL->load(s);
 
 	//code
-	i32 len=0;
-	s.loadi32(len);
-	this->code=new i32[len];
-	s.loadi32array(this->code,len);
+	integer len=0;
+	s.loadinteger(len);
+	this->code=new integer[len];
+	s.loadintegerarray(this->code,len);
 	//start
-	s.loadi32(len);
-	this->start=new i32[len];
-	s.loadi32array(this->start,len);
+	s.loadinteger(len);
+	this->start=new integer[len];
+	s.loadintegerarray(this->start,len);
 	//incode
-	s.loadi32(len);
-	this->incode=new i32[len];
-	s.loadi32array(this->incode,len);
+	s.loadinteger(len);
+	this->incode=new integer[len];
+	s.loadintegerarray(this->incode,len);
 
 	Phi0=new Phi();
 	Phi0->load(s);
@@ -98,21 +98,21 @@ i32 CSA::Load(const char * indexfile)
 	return 0;
 }
 
-CSA::CSA(const char * sourcefile,i32 L,i32 D,i32 phitype)
+CSA::CSA(const char * sourcefile,integer L,integer D,integer phitype)
 {
 		this->SL=L*18;
 		this->L =L;
 		this->D =D;
 		this->RD=D*16;
-		this->code =new i32[256];
-		for(i32 i=0;i<256;i++)
+		this->code =new integer[256];
+		for(integer i=0;i<256;i++)
 			code[i]=0;
 
 		this->alphabetsize =0;
 		uchar *T=NULL;
 		T=Getfile(sourcefile);
 		statics(T);
-		i32 *SA=new i32[n];
+		integer *SA=new integer[n];
 
 		ds_ssort(T,SA,n);
 		parmaters p={alphabetsize,n,SL,L,start,lastchar,SA,T,code,phitype};
@@ -125,12 +125,12 @@ CSA::CSA(const char * sourcefile,i32 L,i32 D,i32 phitype)
 		cout<<"CSA  is done"<<endl;
 }
 
-i32 CSA::GetN()
+integer CSA::GetN()
 {
 	return n;
 }
 
-i32 CSA::Getalphabetsize()
+integer CSA::Getalphabetsize()
 {
 	return this->alphabetsize;
 }
@@ -148,8 +148,8 @@ CSA::~CSA(void)
 
 bool CSA::Existential(const char *Pattern)
 {
-	i32 L=0;
-	i32 R=0;
+	integer L=0;
+	integer R=0;
 	Search2(Pattern,L,R);
 
 	if(R>=L)
@@ -158,10 +158,10 @@ bool CSA::Existential(const char *Pattern)
 		return false;
 }
 
-void CSA::Counting(const char *Pattern,int &num)
+void CSA::Counting(const char *Pattern,integer &num)
 {
-	i32 L=0;
-	i32 R=0;
+	integer L=0;
+	integer R=0;
 
 	Search2(Pattern,L,R);
 	cout<<L<<" "<<R<<endl;
@@ -170,27 +170,27 @@ void CSA::Counting(const char *Pattern,int &num)
 
 void CSA::statics(uchar * T)
 {
-	for(i32 i=0;i<n;i++)
+	for(integer i=0;i<n;i++)
 		code[T[i]]++;
 
-	for(i32 i=0;i<256;i++)
+	for(integer i=0;i<256;i++)
 		if(code[i]!=0)
 			this->alphabetsize ++;
-	this->start =new i32[this->alphabetsize +1];
+	this->start =new integer[this->alphabetsize +1];
 	this->start [this->alphabetsize ]=n;
 	this->start [0]=0;
-	i32 k=1;
-	i32 pre=0;
-	for(i32 i=0;i<256;i++)
+	integer k=1;
+	integer pre=0;
+	for(integer i=0;i<256;i++)
 		if(code[i]!=0)
 		{
 			start[k]=pre+code[i];
 			pre=start[k];
 			k++;
 		}
-	this->incode =new i32[this->alphabetsize];
+	this->incode =new integer[this->alphabetsize];
 	k=0;
-	for(i32 i=0;i<256;i++)
+	for(integer i=0;i<256;i++)
 		if(code[i]!=0)
 		{
 			code[i]=k;
@@ -215,12 +215,12 @@ uchar* CSA::Getfile(const char * filename)
 	}
 	fseek(fp , 0, SEEK_END);       //置读写指针为文件末尾
     this->n = ftell(fp);           //返回读写指针偏移量
-	int overshot=init_ds_ssort(500,2000);
+	integer overshot=init_ds_ssort(500,2000);
 	uchar * T=new uchar[n+overshot];
 	fseek(fp , 0, SEEK_SET);
 
-	i32 e=0;
-	i32 num=0;
+	integer e=0;
+	integer num=0;
 	while((e=fread(T+num,sizeof(uchar),n-num,fp))!=0)
 		num=num+e;
 	if(num!=n)
@@ -236,10 +236,10 @@ double CSA::Size()
 
 void CSA::CreateSupportStructer(parmaters *csa)
 {
-	i32 i=0;
-	i32 j=0;
-	i32 step1=D;
-	i32 step2=RD;
+	integer i=0;
+	integer j=0;
+	integer step1=D;
+	integer step2=RD;
 	SAL=new InArray(n/step1+1,blog(n));
 	RankL=new InArray(n/step2+1,blog(n));
 	for(i=0,j=0;i<n;i=i+step1,j++)
@@ -255,9 +255,9 @@ void CSA::CreateSupportStructer(parmaters *csa)
 	Phi0=new Phi(csa);
 }
 
-void CSA::Search2(const char *Pattern, i32 &L, i32 &R)
+void CSA::Search2(const char *Pattern, integer &L, integer &R)
 {
-	i32 len=strlen(Pattern);
+	integer len=strlen(Pattern);
 	if(len==0)
 	{
 		L=1;
@@ -265,19 +265,19 @@ void CSA::Search2(const char *Pattern, i32 &L, i32 &R)
 		return;
 	}
 	unsigned char c=Pattern[len-1];
-	i32 coding=code[c];
+	integer coding=code[c];
 	if(coding>alphabetsize-1||coding<0)
 	{
 		L=1;
 		R=0;
 		return ;
 	}
-	i32 Left=start[coding];
-	i32 Right=start[coding+1]-1;
-	i32 l0=0;
-	i32 r0=0;
+	integer Left=start[coding];
+	integer Right=start[coding+1]-1;
+	integer l0=0;
+	integer r0=0;
 
-	for(i32 i=len-2;i>=0;i--)
+	for(integer i=len-2;i>=0;i--)
 	{
 		c=Pattern[i];
 		coding=code[c];
@@ -305,22 +305,22 @@ void CSA::Search2(const char *Pattern, i32 &L, i32 &R)
 
 
 }
-void CSA::Search(const char *Pattern, i32 &L, i32 &R)
+void CSA::Search(const char *Pattern, integer &L, integer &R)
 {
-	i32 templeft;
-	i32 tempright;
-	i32 jj;
-	i32 mleft;
-	i32 mright;
-	i32 middle;
-	i32 Right;
-	i32 left;
-	i32 right;
-	i32 Left;
-	i32 i;
-	i32 len=strlen(Pattern);
+	integer templeft;
+	integer tempright;
+	integer jj;
+	integer mleft;
+	integer mright;
+	integer middle;
+	integer Right;
+	integer left;
+	integer right;
+	integer Left;
+	integer i;
+	integer len=strlen(Pattern);
 	unsigned char c=Pattern[len-1];
-	i32 coding=code[c];
+	integer coding=code[c];
 	if(coding>alphabetsize-1)
 	{
 		L=1;
@@ -401,10 +401,10 @@ void CSA::Search(const char *Pattern, i32 &L, i32 &R)
 		L=Left,R=Right;
 }
 
-i32 CSA::lookup(i32 i)
+integer CSA::lookup(integer i)
 {
-	i32 D=this->D;
-	i32 step=0;
+	integer D=this->D;
+	integer step=0;
 	while(i%D!=0)
 	{
 		i=Phi0->GetValue(i);
@@ -417,9 +417,9 @@ i32 CSA::lookup(i32 i)
 void CSA::SelfTesting()
 {
 	cout<<"CSA is Selftesting..."<<endl;
-	i32 k=0;
-	i32 value=0;
-	for(i32 i=0;i<n;i++)
+	integer k=0;
+	integer value=0;
+	for(integer i=0;i<n;i++)
 	{
 		value=lookup(i);
 		if(SA[i]!=value)
@@ -434,12 +434,12 @@ void CSA::SelfTesting()
 */
 
 //得到位置i的排名
-i32 CSA::Inverse(i32 i)
+integer CSA::Inverse(integer i)
 {
-	i32 RD=this->RD ;
-	i32 anchor=i/RD;
-	i32 p=anchor*RD;
-	i32 sa=this->RankL ->GetValue (anchor);
+	integer RD=this->RD ;
+	integer anchor=i/RD;
+	integer p=anchor*RD;
+	integer sa=this->RankL ->GetValue (anchor);
 	while(p<i)
 	{
 		sa=Phi0->GetValue(sa);
@@ -448,12 +448,12 @@ i32 CSA::Inverse(i32 i)
 	return sa;
 }
 
-void CSA::Decompress(i32 i, i32 len,unsigned char *p)
+void CSA::Decompress(integer i, integer len,unsigned char *p)
 {
-	i32 * phi=Phi0->GetPhiArray();
-	i32 k=0;
+	integer * phi=Phi0->GetPhiArray();
+	integer k=0;
 	i=this->Inverse (i);
-	for(i32 j=0;j<len;j++)
+	for(integer j=0;j<len;j++)
 	{
 		k=this->Phi_list (i);
 		p[j]=this->Character (k);
@@ -461,11 +461,11 @@ void CSA::Decompress(i32 i, i32 len,unsigned char *p)
 	}
 }
 
-i32 CSA::Phi_list(i32 i)
+integer CSA::Phi_list(integer i)
 {
-	i32 l=0;
-	i32 r=this->alphabetsize ;
-	i32 m=0;
+	integer l=0;
+	integer r=this->alphabetsize ;
+	integer m=0;
 	while(l<r)
 	{
 		m=(l+r)/2;
@@ -477,14 +477,14 @@ i32 CSA::Phi_list(i32 i)
 	return r-1;
 }
 
-i32 CSA::Character(i32 i)
+integer CSA::Character(integer i)
 {
 	return incode[i];
 }
 
-i32 CSA::blog(i32 x)
+integer CSA::blog(integer x)
 {
-	i32 ans=0;
+	integer ans=0;
 	while(x>0)
 	{
 		ans++;
@@ -493,15 +493,15 @@ i32 CSA::blog(i32 x)
 	return ans;
 }
 
-void CSA::Locating(const char *Pattern, i32 &num, i32 *&pos)
+void CSA::Locating(const char *Pattern, integer &num, integer *&pos)
 {
-	i32 L=0;
-	i32 R=0;
+	integer L=0;
+	integer R=0;
 	this->Search2(Pattern,L,R);
 	num=R-L+1;
 	if(L>R)
 		return ;
-	pos=new i32[num];
+	pos=new integer[num];
 //	if(num>50)
 //		Enumerative2(L,R,pos);
 //	else
@@ -510,23 +510,23 @@ void CSA::Locating(const char *Pattern, i32 &num, i32 *&pos)
 
 }
 
-void CSA::Enumerative2(i32 L,i32  R, i32 *&pos)
+void CSA::Enumerative2(integer L,integer  R, integer *&pos)
 {
-	i32 D=this->D;
+	integer D=this->D;
 	InArray *SAL=this->SAL ;
-	i32 * distance=new i32[R-L+1];
-	i32 *pred=new i32[R-L+1];
-	i32 f=0;
-	i32 step=0;
-	i32 q=0;
-	i32 s=0;
-	i32 i=0;
-	for(i32 i=0;i<R-L+1;i++)
+	integer * distance=new integer[R-L+1];
+	integer *pred=new integer[R-L+1];
+	integer f=0;
+	integer step=0;
+	integer q=0;
+	integer s=0;
+	integer i=0;
+	for(integer i=0;i<R-L+1;i++)
 	{
 		pos[i]=0;
 		pred[i]=-1;
 	}
-	for(i32 j=L;j<=R;j++)
+	for(integer j=L;j<=R;j++)
 	{
 		f=0;
 		i=j;
@@ -549,8 +549,8 @@ void CSA::Enumerative2(i32 L,i32  R, i32 *&pos)
 			pos[j-L]=SAL->GetValue(i)-step;
 		}
 	}
-	i32 fu=0;
-	for(i32 j=L;j<=R;j++)
+	integer fu=0;
+	for(integer j=L;j<=R;j++)
 	{
 		if(pos[j-L]!=0)
 		{
@@ -570,11 +570,11 @@ void CSA::Enumerative2(i32 L,i32  R, i32 *&pos)
 	delete [] pred;
 	delete [] distance;
 }
-void CSA::Enumerative1(i32 L,i32 R,i32 *&pos)
+void CSA::Enumerative1(integer L,integer R,integer *&pos)
 {
 
 
-	i32 i;
+	integer i;
 	for(i=L;i<=R;i++)
 	{
 		pos[i-L]=lookup (i);
