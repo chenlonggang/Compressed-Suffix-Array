@@ -144,7 +144,7 @@ void showpos(int * pos,int num)
 			command=getchar();
      		cout<<endl<<'\r';
 			system("stty cooked");
-			if(command==27)//按下空格，返回
+			if(command==27)
 			{
 				cout<<endl;
 				return ;
