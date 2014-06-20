@@ -25,13 +25,16 @@ class Phi
 		Phi(parmaters *csa);
 		Phi();
 		~Phi();
+		
 		integer *GetPhiArray();
 		integer GetValue(integer i);
 		integer RightBoundary(integer r,integer L,integer R);
 		integer LeftBoundary(integer l,integer L,integer R);
 		integer Size();
+		
 		integer write(savekit & s);
 		integer load(loadkit &s);
+	
 	private:
 		ABS_Phi *phi;
 		integer type;
