@@ -40,8 +40,6 @@ GAM_Phi::GAM_Phi(parmaters *csa)
 	delete [] phivalue;
 }
 
-
-
 GAM_Phi::~GAM_Phi(void)
 {
 	delete [] superoffset;
@@ -313,11 +311,8 @@ integer  GAM_Phi::Decodegamma(integer & position, integer &x)
 	return 2*a+1;
 }
 
-
 integer GAM_Phi::ZerosRun(integer &position) 
 {
-	
-	
 	integer y=0;
 	integer D=this->tablewidth ;
 	integer x=this->GetBits(position,D);
@@ -331,8 +326,6 @@ integer GAM_Phi::ZerosRun(integer &position)
 	}
 	position=position+y;
 	return w;
-	
-
 }
 u64 GAM_Phi::GetBits (integer position,integer num)
 {	

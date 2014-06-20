@@ -53,12 +53,12 @@ class GAM_Phi:public ABS_Phi
 		integer n;
 		integer * phivalue;
 		integer blogsize(integer x);
-		void SamplingAndCoding(parmaters * csa);//"接头处"用gap+n编码
+		void SamplingAndCoding(parmaters * csa);
 		void Test();
 		void Append(integer x);
 		integer Decodegamma(integer& position,integer & x);
 		void InitionalTables();
-		integer ZerosRun(integer &position );//从position开始，获取0连续出现的次数.
-		u64 GetBits(integer position ,integer x);//从position开始，读取x位数据
+		integer ZerosRun(integer &position );
+		u64 GetBits(integer position ,integer x);
 };
 #endif

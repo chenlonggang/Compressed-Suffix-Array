@@ -31,7 +31,5 @@ class ABS_Phi
 		virtual integer GetMemorySize()=0;
 		virtual integer write(savekit & s)=0;
 		virtual integer load(loadkit &s)=0;
-
-		
 };
 #endif

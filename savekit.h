@@ -26,7 +26,7 @@ class savekit
 		integer writei64(i64 value);
 		integer writeu64(u64 value);
 		integer writeinteger(integer value);
-	        integer writeu32(u32 value);
+	    integer writeu32(u32 value);
 		integer writei16(i16 value);
 		integer writeu16(u16 value);
 
@@ -37,9 +37,7 @@ class savekit
 		integer writei16array(i16 * value,integer len);
 		integer writeu16array(u16 * value,integer len);
 	    void close();
-
 	private:
-
 		FILE *w;
 };
 #endif

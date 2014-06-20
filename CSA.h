@@ -26,8 +26,6 @@ using namespace std;
 class CSA
 {
 public:
-	//参数n表示大小,SA表示后缀数组，sourcefile表示原文件，
-	//用来记录运行时间，参数L表示Psi的采样步长，D表示SA的采样步长
 	CSA(){};
 	CSA(const char * sourcefile,integer L=128,integer D=32,integer phitype=0);
 	bool Existential(const char * Pattern);
@@ -53,7 +51,7 @@ private:
 	void Enumerative2(integer l,integer r,integer *&pos);
 	
 	integer Inverse(integer i);
-	integer Phi_list(integer i);//返回排名为i的后缀属于哪个list，这样借助于incode数组就可以恢复出排名为i的后缀的首字母了。
+	integer Phi_list(integer i);
 	integer Character(integer i);
 	
 	integer lookup(integer i);
@@ -69,7 +67,7 @@ private:
 	InArray * RankL;
 	integer n; 
 	integer * code;
-	integer * incode;//记录编码为i的字符的ASSIC码
+	integer * incode;
 	integer alphabetsize;
 	integer * start;
 	uchar lastchar;

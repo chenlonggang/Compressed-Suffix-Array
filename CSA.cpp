@@ -18,7 +18,6 @@ the Free Software Foundation; either version 2 or later of the License.
 using namespace std;
 #define SearchKind 2
 
-
 integer CSA::Save(const char * indexfile)
 {
 	savekit s(indexfile);
@@ -31,13 +30,10 @@ integer CSA::Save(const char * indexfile)
 	s.writeinteger(L);
 	s.writeinteger(D);
 	s.writeinteger(RD);
-
 	//sal
 	SAL->write(s);
-
-	//ranl
+ 	//ranl
 	RankL->write(s);
-
 	//code
 	s.writeinteger(256);
 	s.writeintegerarray(code,256);

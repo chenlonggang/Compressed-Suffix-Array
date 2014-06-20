@@ -21,12 +21,15 @@ public:
 	InArray();
 	InArray(integer data_num,integer data_width);
 	~InArray(void);
+	
 	integer GetValue(integer index);
 	void SetValue(integer index,integer value);
+	
 	integer GetNum();
 	integer GetDataWidth();
 	integer GetMemorySize();
     integer GetValue2(integer index);
+	
 	integer write(savekit & s);
 	integer load(loadkit & s);
 private:

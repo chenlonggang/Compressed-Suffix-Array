@@ -23,7 +23,7 @@ class Phi
 {
 	public:
 		Phi(parmaters *csa);
-		Phi();//返回一个Phi的空壳
+		Phi();
 		~Phi();
 		integer *GetPhiArray();
 		integer GetValue(integer i);
@@ -35,5 +35,4 @@ class Phi
 	private:
 		ABS_Phi *phi;
 		integer type;
-
 };

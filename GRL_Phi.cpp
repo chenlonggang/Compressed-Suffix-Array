@@ -27,8 +27,6 @@ GRL_Phi::GRL_Phi(parmaters * csa)
 
 }
 
-
-
 GRL_Phi::~GRL_Phi(void)
 {
 	delete [] superoffset;
@@ -177,10 +175,10 @@ integer GRL_Phi::GetValue(integer index)
 void GRL_Phi::SamplingAndCoding(parmaters *csa)
 {
 
-	samples=new InArray(n/b+1,blogsize(n));  //±£Žæ¶þŒ¶Ä¿ÂŒµÄ²ÉÑùÖµ¡£
+	samples=new InArray(n/b+1,blogsize(n)); 
 
 	this->lenofsuperoffset=n/a+1;
-	superoffset=new integer[lenofsuperoffset];  //±£ŽæÒ»Œ¶Ä¿ÂŒµÄÆ«ÒÆÖµ¡£
+	superoffset=new integer[lenofsuperoffset];
 	
 	integer i,j;
 

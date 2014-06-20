@@ -23,7 +23,6 @@ InArray::~InArray(void)
 InArray::InArray()
 {
 }
-//构造函数,表示有len个“整数”需要存储，每个整数的位宽为size。
 InArray::InArray(integer len, integer size) 
 {
 	if(len<0||size<=0)

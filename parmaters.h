@@ -7,6 +7,7 @@ typedef struct
 	integer n;
 	integer SL;
 	integer L;
+	
 	integer * start;
 	uchar lastchar;
 	integer *& SA;

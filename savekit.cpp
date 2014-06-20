@@ -16,11 +16,13 @@ void savekit::close()
 		fclose(w);
 	w=NULL;
 }
+
 savekit::~savekit()
 {
 	if(w!=NULL)
 		fclose(w);
 }
+
 savekit::savekit(const char * file)
 {
 	this->w=fopen(file,"wb");
@@ -37,29 +39,33 @@ integer savekit::writei64(i64 value)
 	return 1;
 }
  
+
 integer savekit::writeu64(u64 value)
 {
 	fwrite(&value,sizeof(u64),1,w);
 	return 1;
 }
- integer savekit::writeinteger( integer value)
+
+integer savekit::writeinteger( integer value)
 {
 	fwrite(&value,sizeof( integer),1,w);
 	return 1;
 }
- integer savekit::writeu32(u32 value)
+
+integer savekit::writeu32(u32 value)
 {
 	fwrite(&value,sizeof(u32),1,w);
 	return 1;
 }
 
- integer savekit::writei16(i16 value)
+
+integer savekit::writei16(i16 value)
 {
 	fwrite(&value,sizeof(i16),1,w);
 	return 1;
 }
 
- integer savekit::writeu16(u16 value)
+integer savekit::writeu16(u16 value)
 {
 	fwrite(&value,sizeof(u16),1,w);
 	return 1;
