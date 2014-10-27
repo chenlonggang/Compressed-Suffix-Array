@@ -446,14 +446,15 @@ integer CSA::Inverse(integer i)
 
 void CSA::Decompress(integer i, integer len,unsigned char *p)
 {
-	integer * phi=Phi0->GetPhiArray();
+	//integer * phi=Phi0->GetPhiArray();
 	integer k=0;
 	i=this->Inverse (i);
 	for(integer j=0;j<len;j++)
 	{
 		k=this->Phi_list (i);
 		p[j]=this->Character (k);
-		i=phi[i];
+		//i=phi[i];
+		i=Phi0->GetValue(i);
 	}
 }
 

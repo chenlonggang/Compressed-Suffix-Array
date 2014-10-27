@@ -165,10 +165,11 @@ void GAM_Phi::SamplingAndCoding(parmaters *csa)
 		phivalue[temp [csa->code [c]]++]=i;
 	}
 	phivalue[index]=h;
-    	delete [] csa->SA;
+    delete [] csa->SA;
 	delete [] csa->T;
 	csa->SA=NULL;
 	csa->T=NULL;
+
 	delete [] temp;
 
 	integer pre=0;

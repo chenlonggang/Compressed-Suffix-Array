@@ -11,7 +11,7 @@ csa.a:savekit.o loadkit.o InArray.o Phi.o ABS_Phi.o GAM_Phi.o GRL_Phi.o CSA.o  d
 main.o:main.cpp  CSA.h
 	g++ -c main.cpp 
 clean:
-	rm *.a  *.o ds_ssort/*.a ds_ssort/ds/*.o ds_ssort/*.o
+	rm *.a  *.o ds_ssort/*.a ds_ssort/ds/*.o ds_ssort/*.o my_csa
 ds_ssortr:
 	make -C ./ds_ssort/; cp ./ds_ssort/ds_ssort.a .
 
