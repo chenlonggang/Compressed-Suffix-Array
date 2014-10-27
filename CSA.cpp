@@ -209,8 +209,8 @@ uchar* CSA::Getfile(const char * filename)
 		cout<<"Be sure that the file is available"<<endl;
 		exit(0);
 	}
-	fseek(fp , 0, SEEK_END);       //ÖÃ¶ÁÐ´Ö¸ÕëÎªÎÄ¼þÄ©Î²
-    this->n = ftell(fp);           //·µ»Ø¶ÁÐ´Ö¸ÕëÆ«ÒÆÁ¿
+	fseek(fp , 0, SEEK_END);       //ç½®è¯»å†™æŒ‡é’ˆä¸ºæ–‡ä»¶æœ«å°¾
+    this->n = ftell(fp);           //è¿”å›žè¯»å†™æŒ‡é’ˆåç§»é‡
 	integer overshot=init_ds_ssort(500,2000);
 	uchar * T=new uchar[n+overshot];
 	fseek(fp , 0, SEEK_SET);
@@ -298,8 +298,6 @@ void CSA::Search2(const char *Pattern, integer &L, integer &R)
 	L=Left;
 	R=Right;
 	return ;
-
-
 }
 void CSA::Search(const char *Pattern, integer &L, integer &R)
 {
@@ -325,8 +323,8 @@ void CSA::Search(const char *Pattern, integer &L, integer &R)
 	}
 
 	Left=start[coding];
-	Right=start[coding+1]-1;//startÊý×éµÄ´óÐ¡Îªalphabetsize+1£¬Êµ¼ÊÓÐÓÃµÄÎªalphabetsize¸ö£¬×îºóÒ»¸öÊÇÎªÁË·ÀÖ¹coding+1Ô½½çµÄ£¬
-	                                     //ËùÒÔstart[alphabetsize]£¬¼´startÊý×éµÄ×îºóÒ»¸öÖ°Î»n¡£Ïà¼ûPhi0ÀàµÄ¹¹Ôìº¯Êý¡£
+	Right=start[coding+1]-1;//startæ•°ç»„çš„å¤§å°ä¸ºalphabetsize+1ï¼Œå®žé™…æœ‰ç”¨çš„ä¸ºalphabetsizeä¸ªï¼Œæœ€åŽä¸€ä¸ªæ˜¯ä¸ºäº†é˜²æ­¢coding+1è¶Šç•Œçš„ï¼Œ
+	                                     //æ‰€ä»¥start[alphabetsize]ï¼Œå³startæ•°ç»„çš„æœ€åŽä¸€ä¸ªèŒä½nã€‚ç›¸è§Phi0ç±»çš„æž„é€ å‡½æ•°ã€‚
 	for(i=len-2;i>=0;i--)
 	{
 		c=Pattern[i];
@@ -429,7 +427,7 @@ void CSA::SelfTesting()
 }
 */
 
-//µÃµ½Î»ÖÃiµÄÅÅÃû
+//å¾—åˆ°ä½ç½®içš„æŽ’å
 integer CSA::Inverse(integer i)
 {
 	integer RD=this->RD ;
@@ -446,15 +444,17 @@ integer CSA::Inverse(integer i)
 
 void CSA::Decompress(integer i, integer len,unsigned char *p)
 {
-	integer * phi=Phi0->GetPhiArray();
+	//integer * phi=Phi0->GetPhiArray();
 	integer k=0;
 	i=this->Inverse (i);
 	for(integer j=0;j<len;j++)
 	{
 		k=this->Phi_list (i);
 		p[j]=this->Character (k);
-		i=phi[i];
+		//i=phi[i];
+		i=Phi0->GetValue(i);
 	}
+	//delete [] phi;
 }
 
 integer CSA::Phi_list(integer i)
