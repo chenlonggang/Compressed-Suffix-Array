@@ -35,8 +35,8 @@ public:
 	integer load(loadkit & s);
 private:
 	u32 * data;
-    integer datanum;
+    i64 datanum;
 	i64 datawidth;
-	u32 mask;
+	u64 mask;
 };
 #endif
