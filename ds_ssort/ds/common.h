@@ -40,7 +40,7 @@ typedef unsigned char Bool;
 
 
 /* constant and macro for marking groups*/
-#define SETMASK (1 << 30)
+#define SETMASK (1UL << 63)
 #define CLEARMASK (~(SETMASK))
 #define IS_SORTED_BUCKET(sb) (ftab[sb] & SETMASK)
 #define BUCKET_FIRST(sb) (ftab[sb]&CLEARMASK)

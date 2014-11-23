@@ -6,8 +6,8 @@ CFLAGS= -pedantic -pedantic-errors -O9
 	$(CC) -c $(CFLAGS) $< -o $@
 
 all: index
-index: SAu.o ds/ds.o ds/globals.o ds/shallow.o ds/helped.o ds/deep2.o ds/blind2.o
-	ar rc ds_ssort.a SAu.o ds/ds.o ds/globals.o ds/shallow.o ds/helped.o ds/deep2.o ds/blind2.o
+index: ds/ds.o ds/globals.o ds/shallow.o ds/helped.o ds/deep2.o ds/blind2.o
+	ar rc ds_ssort.a  ds/ds.o ds/globals.o ds/shallow.o ds/helped.o ds/deep2.o ds/blind2.o
 clean:
 	rm -f *~ *.o ; cd ds ; make -f Makefile clean ; cd ..
 cleanall:

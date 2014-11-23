@@ -56,7 +56,7 @@ extern void deep_sort(UInt32 *a, Int32 n, Int32 depth);
      Anchor_num = 2 + (n-1)/Anchor_dist    
    ***************************************************************** */
 static void general_anchor_sort(UInt32 *a,Int32 n,Int32 pos,Int32 rank,Int32 off);
-static Int32 split_group(UInt32 *a, int n, int depth ,int offset,Int32 pivot,int *fist);
+static Int32 split_group(UInt32 *a, Int32 n, Int32 depth ,Int32 offset,Int32 pivot,Int32 *fist);
 static void update_anchors(UInt32 *a, Int32 n);
 static void pseudo_or_deep_sort(UInt32 *a, Int32 n, Int32 depth);
 void helped_sort(UInt32 *a, Int32 n, Int32 depth)
@@ -150,7 +150,9 @@ void helped_sort(UInt32 *a, Int32 n, Int32 depth)
   }
   /* ------ if backward anchor_sort is possible do it! --------- */
   if(best_back_anchor>=0) {
-    UChar *T0, *Ti; int j;
+    UChar *T0, *Ti; 
+	/*int j;*/
+	Int32 j;
 
     assert(max_back_offset>-Anchor_dist && max_back_offset<0);
     /* make sure that the offset is legal for all a[i] */
@@ -176,8 +178,8 @@ void helped_sort(UInt32 *a, Int32 n, Int32 depth)
  fail:
   /* ----- try forward anchor_sort with anchor in the same bucket */
   if(best_forw_anchor_buc>=0 && min_forw_offset_buc<depth-1) {
-    int equal,lower,upper;
-
+    /*int equal,lower,upper;*/
+	Int32 equal,lower,upper;
     assert(min_forw_offset_buc<2*Anchor_dist);
     anchor_pos = a[forw_anchor_index_buc] + min_forw_offset_buc;
     anchor_rank = Anchor_rank[best_forw_anchor_buc];
@@ -495,9 +497,10 @@ static __inline__ void vecswap2(UInt32 *a, UInt32 *b, int n)
     }
 }
 static 
-Int32 split_group(UInt32 *a, int n, int depth,int offset,Int32 pivot,int *first)
+Int32 split_group(UInt32 *a, Int32 n, Int32 depth,Int32 offset,Int32 pivot,Int32 *first)
 {
-  int r, partval;
+  /*int r, partval;*/
+  Int32 r,partval;
   UInt32 *pa, *pb, *pc, *pd, *pa_old, *pd_old;
   Int32 pivot_pos, t;
   UChar *text_depth,*text_limit;

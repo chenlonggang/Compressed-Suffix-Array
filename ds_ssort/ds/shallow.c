@@ -30,9 +30,9 @@ static void shallow_inssort_lcp(UInt32 *a, Int32 n, UChar *text_depth);
 /* ***** entry point for shallow sort routines ***** */
 static void shallow_mkq(UInt32 *a, int n, UChar *text_depth);
 static void shallow_mkq16(UInt32 *a, int n, UChar *text_depth);
-static void shallow_mkq32(UInt32 *a, int n, UChar *text_depth);
+static void shallow_mkq32(UInt32 *a, Int32 n, UChar *text_depth);
 
-void shallow_sort(UInt32 *a, int n, int shallow_limit) 
+void shallow_sort(UInt32 *a, Int32 n, int shallow_limit) 
 { 
   /* init global variables */
   Shallow_limit = shallow_limit;        
@@ -55,7 +55,7 @@ void shallow_sort(UInt32 *a, int n, int shallow_limit)
    auxiliary procedures and macro for bentley-sedgewick's
    multikey quicksort
    ======================================================= */
-static __inline__ void vecswap2(UInt32 *a, UInt32 *b, int n)
+static __inline__ void vecswap2(UInt32 *a, UInt32 *b, Int32 n)
 {   while (n-- > 0) {
         Int32 t = *a;
         *a++ = *b;
@@ -85,7 +85,7 @@ __inline__ UInt32 *med3func(UInt32 *a, UInt32 *b, UInt32 *c, UChar *text_depth)
    that is when we have found that the current set of strings
    have Shallow_limit chars in common
    ******************************************************** */
-__inline__ void vecswap2(UInt32 *a, UInt32 *b, int n);
+__inline__ void vecswap2(UInt32 *a, UInt32 *b, Int32 n);
 static void shallow_mkq(UInt32 *a, int n, UChar *text_depth)
 {
   int d, r, partval;
@@ -180,7 +180,7 @@ __inline__ Int32 *med3func16(Int32 *a, Int32 *b, Int32 *c, UChar *text_depth)
 #define med3_16(a, b, c) med3func16(a, b, c, text_depth)
 #endif
 
-__inline__ void vecswap2(UInt32 *a, UInt32 *b, int n);
+__inline__ void vecswap2(UInt32 *a, UInt32 *b, Int32 n);
 static void shallow_mkq16(UInt32 *a, int n, UChar *text_depth)
 {
   int d, r, partval;
@@ -259,78 +259,81 @@ static void shallow_mkq16(UInt32 *a, int n, UChar *text_depth)
 #define ptr2char32(i) (getword32(*(i) + text_depth))
 #define getword32(s) ((unsigned)( (*(s) << 24) | ((*((s)+1)) << 16) \
                                   | ((*((s)+2)) << 8) | (*((s)+3)) ))
-__inline__ void vecswap2(UInt32 *a, UInt32 *b, int n);
-static void shallow_mkq32(UInt32 *a, int n, UChar *text_depth)
+__inline__ void vecswap2(UInt32 *a, UInt32 *b, Int32 n);
+static void shallow_mkq32(UInt32 *a, Int32 n, UChar *text_depth)
 {
-  UInt32 partval, val;
-  UInt32 *pa, *pb, *pc, *pd, *pl, *pm, *pn;
-  Int32 t, d, r;
-  UChar *next_depth;
+	UInt32 partval, val;
+  	UInt32 *pa, *pb, *pc, *pd, *pl, *pm, *pn;
+  	Int32 t, d, r;
+  	UChar *next_depth;
 
-  /* ---- On small arrays use insertions sort */
-  if (n < Mk_qs_thresh) {
-    shallow_inssort_lcp(a, n, text_depth);
-    return;
-  }
+  	/* ---- On small arrays use insertions sort */
+  	if (n < Mk_qs_thresh) {
+    	shallow_inssort_lcp(a, n, text_depth);
+    	return;
+  	}
 
-  /* ----------- choose pivot -------------- */
- repeat:
-  pl = a;
-  pm = a + (n/2);
-  pn = a + (n-1);
-  if (n > 30) { /* On big arrays, pseudomedian of 9 */
-    d = (n/8);
-    pl = med3(pl, pl+d, pl+2*d);
-    pm = med3(pm-d, pm, pm+d);
-    pn = med3(pn-2*d, pn-d, pn);
-  }
-  pm = med3(pl, pm, pn);
-  swap2(a, pm);
-  partval = ptr2char32(a);
-  pa = pb = a + 1;
-  pc = pd = a + n-1;
-  /* -------- partition ----------------- */
-  for (;;) {
-    while (pb <= pc &&  (val=ptr2char32(pb)) <=  partval) {
-      if (val == partval) { swap2(pa, pb); pa++; }
-      pb++;
-    }
-    while (pb <= pc && (val=ptr2char32(pc)) >= partval) {
-      if (val == partval) { swap2(pc, pd); pd--; }
-      pc--;
-    }
-    if (pb > pc) break;
-    swap2(pb, pc);
-    pb++;
-    pc--;
-  }
+  	/* ----------- choose pivot -------------- */
+ 	repeat:
+  	pl = a;
+  	pm = a + (n/2);
+  	pn = a + (n-1);
+  	if (n > 30) { /* On big arrays, pseudomedian of 9 */
+    	d = (n/8);
+    	pl = med3(pl, pl+d, pl+2*d);
+    	pm = med3(pm-d, pm, pm+d);
+    	pn = med3(pn-2*d, pn-d, pn);
+  	}
+  	pm = med3(pl, pm, pn);
+  	swap2(a, pm);
+  	partval = ptr2char32(a);
+  	pa = pb = a + 1;
+  	pc = pd = a + n-1;
+  	/* -------- partition ----------------- */
+  	for (;;) {
+    	while (pb <= pc &&  (val=ptr2char32(pb)) <=  partval) {
+      		if (val == partval) { 
+				swap2(pa, pb); 
+				pa++; 
+			}
+      		pb++;
+    	}	
+    	while (pb <= pc && (val=ptr2char32(pc)) >= partval) {
+      		if (val == partval) { swap2(pc, pd); pd--; }
+      		pc--;
+    	}
+    	if (pb > pc) break;
+    	swap2(pb, pc);
+    	pb++;
+    	pc--;
+  	}
 #if UNROLL
-  if(pa>pd) {
-    /* all values were equal to partval: make it simpler */
-    if( (next_depth = text_depth+4) >= Shallow_text_limit) {
-      helped_sort(a, n, next_depth-Text);
-      return;
-    }
-    else {
-      text_depth = next_depth;
-      goto repeat;
-    }
-  }
+  	if(pa>pd) {
+    	/* all values were equal to partval: make it simpler */
+    	if( (next_depth = text_depth+4) >= Shallow_text_limit) {
+      		helped_sort(a, n, next_depth-Text);
+      		return;
+    	}
+    	else {
+      		text_depth = next_depth;
+      		goto repeat;
+    	}
+  	}
 #endif
-  /* partition a[] into the values smaller, equal, and larger that partval */
-  pn = a + n;
-  r = min(pa-a, pb-pa);    vecswap2(a,  pb-r, r);
-  r = min(pd-pc, pn-pd-1); vecswap2(pb, pn-r, r);
-  /* --- sort smaller strings ------- */
-  if ((r = pb-pa) > 1)
-    shallow_mkq32(a, r, text_depth);
-  /* --- sort strings starting with partval ----- */
-  if( (next_depth = text_depth+4) < Shallow_text_limit)
-    shallow_mkq32(a + r, pa-pd+n-1, next_depth);
-  else 
-    helped_sort(a + r, pa-pd+n-1, next_depth-Text);
-  if ((r = pd-pc) > 1)
-    shallow_mkq32(a + n-r, r, text_depth);
+  	/* partition a[] into the values smaller, equal, and larger that partval */
+  	pn = a + n;
+  	r = min(pa-a, pb-pa);    vecswap2(a,  pb-r, r);
+  	r = min(pd-pc, pn-pd-1); vecswap2(pb, pn-r, r);
+  	/* --- sort smaller strings ------- */
+  	if ((r = pb-pa) > 1)
+    	shallow_mkq32(a, r, text_depth);
+  	/* --- sort strings starting with partval ----- */
+  	if( (next_depth = text_depth+4) < Shallow_text_limit)
+    	shallow_mkq32(a + r, pa-pd+n-1, next_depth);
+  	else 
+    	helped_sort(a + r, pa-pd+n-1, next_depth-Text);
+  	if ((r = pd-pc) > 1)
+    	shallow_mkq32(a + n-r, r, text_depth);
 }
 
 
@@ -551,14 +554,3 @@ static void shallow_inssort_lcp(UInt32 *a, Int32 n, UChar *text_depth)
       helped_sort(a+i,j-i+1,Shallow_limit); 
   }
 }
-
-
-
-
-
-
-
-
-
-
-
