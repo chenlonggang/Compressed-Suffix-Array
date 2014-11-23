@@ -109,8 +109,9 @@ CSA::CSA(const char * sourcefile,integer L,integer D,integer phitype)
 		T=Getfile(sourcefile);
 		statics(T);
 		uinteger *SA=new uinteger[n];
-
+		//cout<<"before SA"<<endl;
 		ds_ssort(T,SA,n);
+		//cout<<"SA is ok"<<endl;
 		parmaters p={alphabetsize,n,SL,L,start,lastchar,SA,T,code,phitype};
 		CreateSupportStructer(&p);
 
@@ -248,7 +249,9 @@ void CSA::CreateSupportStructer(parmaters *csa)
 		if(csa->SA[i]%step2==0)
 			RankL->SetValue (csa->SA[i]/step2,i);
 	}
+	//cout<<"before phi"<<endl;
 	Phi0=new Phi(csa);
+	//cout<<"phi is OK"<<endl;
 }
 
 void CSA::Search2(const char *Pattern, integer &L, integer &R)

@@ -34,9 +34,12 @@ GAM_Phi::GAM_Phi(parmaters *csa)
 	this->b=csa->L;
 	this->index=0;
 
+//	cout<<"before tables"<<endl;
 	this->InitionalTables();
+//	cout<<"tables is OK"<<endl;
+//	cout<<"before coding"<<endl;
 	this->SamplingAndCoding (csa);
-//	Test();
+//	cout<<"coding is ok"<<endl;
 	delete [] phivalue;
 }
 
@@ -159,9 +162,8 @@ integer GAM_Phi::GetValue(integer index)
 
 void GAM_Phi::SamplingAndCoding(parmaters *csa)
 {
+//	cout<<"before phi array"<<endl;
 	integer i,j;
-
-	
 	phivalue=new integer[n];
 	integer *temp=new integer[csa->alphabetsize +1];
 	for(integer i=0;i<csa->alphabetsize +1;i++)
@@ -181,7 +183,9 @@ void GAM_Phi::SamplingAndCoding(parmaters *csa)
 		phivalue[temp [csa->code [c]]++]=i;
 	}
 	phivalue[index]=h;
-    	delete [] csa->SA;
+
+//	cout<<"phi array is ok"<<endl;
+    delete [] csa->SA;
 	delete [] csa->T;
 	csa->SA=NULL;
 	csa->T=NULL;
@@ -193,6 +197,7 @@ void GAM_Phi::SamplingAndCoding(parmaters *csa)
 	integer len=0;
 	integer x=n/a;
 	 
+//	cout<<"before space"<<endl;
 	integer gap=0;
 	for( i=0;i<x+1;i++){
 		for( j=i*a;j<(i+1)*a&&j<n;j++){
@@ -212,7 +217,8 @@ void GAM_Phi::SamplingAndCoding(parmaters *csa)
 		totallen=totallen+len;
 		len=0;
 	}
-
+//	cout<<"space is computed"<<endl;
+//	cout<<"before coding phi array"<<endl;
 	this->lenofsequence =totallen/32+1;
 	this->sequence =new u32[lenofsequence];
 	for(i=0;i<lenofsequence;i++)
@@ -258,6 +264,7 @@ void GAM_Phi::SamplingAndCoding(parmaters *csa)
 		len1=len1+blogsize(gap)*2-1;
 		Append(gap);
 	}
+//	cout<<"coding phi array is ok"<<endl;
 }
 
 integer GAM_Phi::GetMemorySize()

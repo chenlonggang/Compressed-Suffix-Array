@@ -12,13 +12,13 @@
 /* ----- external variables ---------- */
 extern UChar *Text;                /* start of input string */
 extern UChar *Upper_text_limit;    /* Text+Text_size */
-extern Int32 _ds_Word_size;        /* # of bytes in a word in mkq */
-extern Int32 Mk_qs_thresh;         /* recursion limit for mk quicksort:  */
+extern int  _ds_Word_size;        /* # of bytes in a word in mkq */
+extern int  Mk_qs_thresh;         /* recursion limit for mk quicksort:  */
                                    /* groups smaller than this are sorted  */
                                    /* using insertion sort */
 
 /* ----- "local" global variables */
-extern Int32 Shallow_limit;               /* Max depth for shallow sorting */
+extern int  Shallow_limit;               /* Max depth for shallow sorting */
 UChar *Shallow_text_limit;         /* Text+Shallow_limit */
 
 #define UNROLL 1                   /* if !=0 partially unroll shallow_mkq */
@@ -45,7 +45,7 @@ void shallow_sort(UInt32 *a, int n, int shallow_limit)
   case(4): shallow_mkq32(a, n, Text+2); break;
   default:
     fprintf(stderr,
-	    "Invalid word size for mkqs (%lu) (shallow_sort)\n",_ds_Word_size);
+	    "Invalid word size for mkqs (%d) (shallow_sort)\n",_ds_Word_size);
     exit(1);
   }     
 }
