@@ -10,7 +10,7 @@ typedef struct
 	
 	integer * start;
 	uchar lastchar;
-	uinteger *& SA;
+	integer *& SA;
 	uchar *& T;
 	integer * code;
 	integer phitype;
