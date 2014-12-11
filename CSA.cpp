@@ -13,7 +13,7 @@ the Free Software Foundation; either version 2 or later of the License.
 #include "CSA.h"
 #include<cstdio>
 #include<cmath>
-#include"ds_ssort.h"
+#include"divsufsort.h"
 #include<iostream>
 using namespace std;
 #define SearchKind 2
@@ -109,8 +109,9 @@ CSA::CSA(const char * sourcefile,integer L,integer D,integer phitype)
 		T=Getfile(sourcefile);
 		statics(T);
 		integer *SA=new integer[n];
-
-		ds_ssort(T,SA,n);
+		
+		divsufsort(T,SA,n);
+		
 		parmaters p={alphabetsize,n,SL,L,start,lastchar,SA,T,code,phitype};
 		CreateSupportStructer(&p);
 
@@ -211,8 +212,7 @@ uchar* CSA::Getfile(const char * filename)
 	}
 	fseek(fp , 0, SEEK_END);       //置读写指针为文件末尾
     this->n = ftell(fp);           //返回读写指针偏移量
-	integer overshot=init_ds_ssort(500,2000);
-	uchar * T=new uchar[n+overshot];
+	uchar * T=new uchar[n];
 	fseek(fp , 0, SEEK_SET);
 
 	integer e=0;
