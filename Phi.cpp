@@ -76,3 +76,8 @@ integer * Phi::GetPhiArray()
 {
 	return phi->GetPhiArray();
 }
+
+void Phi::GetPhiPiece(integer index,integer num,integer * phipiece){
+	phi->GetSubPhiArray(index,num,phipiece);
+}
+

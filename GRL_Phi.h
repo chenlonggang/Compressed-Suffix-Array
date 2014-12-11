@@ -27,6 +27,7 @@ class GRL_Phi:public ABS_Phi
 		~GRL_Phi();
 
 		integer * GetPhiArray();
+		void GetSubPhiArray(integer,integer,integer *){};
 		integer GetValue(integer i);
 		integer RightBoundary(integer r,integer L,integer R);
 		integer LeftBoundary(integer l,integer L,integer R);

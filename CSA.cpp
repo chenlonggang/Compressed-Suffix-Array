@@ -116,6 +116,19 @@ CSA::CSA(const char * sourcefile,integer L,integer D,integer phitype){
 		if(T!=NULL)
 			delete [] T;
 		cout<<"CSA  is done"<<endl;
+
+/*
+		integer start=0;
+		integer num=n-0;
+		integer * phiarray=Phi0->GetPhiArray();
+		integer * phipiece=new integer[num];
+		Phi0->GetPhiPiece(start,num,phipiece);
+		for(integer i=0;i<num;i++)
+			if(phiarray[i+start]!=phipiece[i]){
+				cout<<"fuck "<<phiarray[i+start]<<" "<<phipiece[i]<<" "<<i<<" "<<i+start<<endl;
+				break;
+			}
+*/
 }
 
 integer CSA::GetN(){

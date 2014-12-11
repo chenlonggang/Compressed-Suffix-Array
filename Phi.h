@@ -27,6 +27,7 @@ class Phi
 		~Phi();
 		
 		integer *GetPhiArray();
+		void GetPhiPiece(integer index,integer num,integer *phipiece);
 		integer GetValue(integer i);
 		integer RightBoundary(integer r,integer L,integer R);
 		integer LeftBoundary(integer l,integer L,integer R);

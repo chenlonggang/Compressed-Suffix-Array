@@ -93,15 +93,35 @@ integer GAM_Phi::blogsize(integer x)
 	return len;
 }
 
+integer GAM_Phi::GetValue(integer index){
+	integer position=0;
+	return GetValue(index,position);
+}
 
-integer GAM_Phi::GetValue(integer index)
+void  GAM_Phi::GetSubPhiArray(integer index,integer num,integer * phipiece){
+	integer position=0;
+	phipiece[0]=GetValue(index,position);
+	integer d=0;
+	for(integer i=1;i<num;i++){
+		if((i+index)%b==0){
+			phipiece[i]=samples->GetValue((index+i)/b);
+			continue;
+		}
+		Decodegamma(position,d);
+		phipiece[i]=(phipiece[i-1]+d)%n;
+	}
+}
+
+
+
+integer GAM_Phi::GetValue(integer index,integer & position)
 {
 
 	integer base=samples->GetValue (index/b);
 	integer overloop=index%b;
 	integer x=0;
 	integer d=0;
-	integer position=superoffset[index/a]+offsects->GetValue (index/b);
+	position=superoffset[index/a]+offsects->GetValue (index/b);
 	integer i=0;
 	integer p=0;
 	integer num=0;
@@ -125,11 +145,12 @@ integer GAM_Phi::GetValue(integer index)
 			x=(x+this->decoderesult [p])%n;
 		}
 	}
-	if(num==16)
+/*	if(num==16)
 	{
 		x=(x+overloop-i)%n;
 		return (base+x)%n;
 	}
+*/
 	for(;i<overloop;i++)
 	{
 		this->Decodegamma (position,d);
