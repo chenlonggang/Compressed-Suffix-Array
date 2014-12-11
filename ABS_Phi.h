@@ -25,12 +25,12 @@ class ABS_Phi
 	public:
 		virtual ~ABS_Phi(){};
 		virtual integer * GetPhiArray()=0;
+		virtual void GetSubPhiArray(integer,integer,integer *)=0;
 		virtual integer GetValue(integer i)=0;
 		virtual integer RightBoundary(integer r,integer L,integer R)=0;
 		virtual integer LeftBoundary(integer l,integer L,integer R)=0;
 		virtual integer GetMemorySize()=0;
 		virtual integer write(savekit & s)=0;
 		virtual integer load(loadkit &s)=0;
-
 };
 #endif

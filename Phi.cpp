@@ -16,7 +16,6 @@ Phi::Phi()
 	type=0;
 	phi=NULL;
 }
-
 Phi::Phi(parmaters *csa)
 {
 	this->type=csa->phitype;
@@ -77,3 +76,8 @@ integer * Phi::GetPhiArray()
 {
 	return phi->GetPhiArray();
 }
+
+void Phi::GetPhiPiece(integer index,integer num,integer * phipiece){
+	phi->GetSubPhiArray(index,num,phipiece);
+}
+
