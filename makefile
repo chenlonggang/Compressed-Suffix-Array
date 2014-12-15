@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=  -O3 -Wall
-my_csa:div main.o csa.a 
+my_csa:divcmake divmake div  main.o csa.a 
 	g++ main.o csa.a -o my_csa 
 
 csa.a:savekit.o loadkit.o InArray.o Phi.o ABS_Phi.o GAM_Phi.o CSA.o divsufsort.o sssort.o trsort.o utils.o
@@ -12,6 +12,10 @@ main.o:main.cpp  CSA.h
 	g++ -c main.cpp 
 clean:
 	rm *.a  *.o  my_csa
+divcmake:
+	cd ./divsufsort; rm Makefile CMakeCache.txt; cmake -DBUILD_SHARED_LIBS:BOOL=OFF
+divmake:
+	make -C ./divsufsort/;
 div:
 	cp divsufsort/lib/libdivsufsort.a .;ar x libdivsufsort.a
 

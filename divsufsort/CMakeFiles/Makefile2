@@ -44,10 +44,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_SOURCE_DIR = /home/chen/GIT/CSA/divsufsort
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_BINARY_DIR = /home/chen/GIT/CSA/divsufsort
 
 #=============================================================================
 # Target rules for target CMakeFiles/uninstall.dir
@@ -56,15 +56,15 @@ CMAKE_BINARY_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
 CMakeFiles/uninstall.dir/all:
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/depend
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles 
 	@echo "Built target uninstall"
 .PHONY : CMakeFiles/uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 .PHONY : CMakeFiles/uninstall.dir/rule
 
 # Convenience name for target.
@@ -115,12 +115,10 @@ include/preinstall:
 
 # Convenience name for "all" pass in the directory.
 lib/all: lib/CMakeFiles/divsufsort.dir/all
-lib/all: lib/CMakeFiles/divsufsort64.dir/all
 .PHONY : lib/all
 
 # Convenience name for "clean" pass in the directory.
 lib/clean: lib/CMakeFiles/divsufsort.dir/clean
-lib/clean: lib/CMakeFiles/divsufsort64.dir/clean
 .PHONY : lib/clean
 
 # Convenience name for "preinstall" pass in the directory.
@@ -134,7 +132,7 @@ lib/preinstall:
 lib/CMakeFiles/divsufsort.dir/all:
 	$(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/depend
 	$(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles  2 3 4 5
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles  2 3 4 5
 	@echo "Built target divsufsort"
 .PHONY : lib/CMakeFiles/divsufsort.dir/all
 
@@ -144,9 +142,9 @@ all: lib/CMakeFiles/divsufsort.dir/all
 
 # Build rule for subdir invocation for target.
 lib/CMakeFiles/divsufsort.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 lib/CMakeFiles/divsufsort.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 .PHONY : lib/CMakeFiles/divsufsort.dir/rule
 
 # Convenience name for target.
@@ -160,41 +158,6 @@ lib/CMakeFiles/divsufsort.dir/clean:
 
 # clean rule for target.
 clean: lib/CMakeFiles/divsufsort.dir/clean
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target lib/CMakeFiles/divsufsort64.dir
-
-# All Build rule for target.
-lib/CMakeFiles/divsufsort64.dir/all:
-	$(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/depend
-	$(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles  6 7 8 9
-	@echo "Built target divsufsort64"
-.PHONY : lib/CMakeFiles/divsufsort64.dir/all
-
-# Include target in all.
-all: lib/CMakeFiles/divsufsort64.dir/all
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-lib/CMakeFiles/divsufsort64.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 lib/CMakeFiles/divsufsort64.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
-.PHONY : lib/CMakeFiles/divsufsort64.dir/rule
-
-# Convenience name for target.
-divsufsort64: lib/CMakeFiles/divsufsort64.dir/rule
-.PHONY : divsufsort64
-
-# clean rule for target.
-lib/CMakeFiles/divsufsort64.dir/clean:
-	$(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/clean
-.PHONY : lib/CMakeFiles/divsufsort64.dir/clean
-
-# clean rule for target.
-clean: lib/CMakeFiles/divsufsort64.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -227,7 +190,7 @@ examples/preinstall:
 examples/CMakeFiles/bwt.dir/all: lib/CMakeFiles/divsufsort.dir/all
 	$(MAKE) -f examples/CMakeFiles/bwt.dir/build.make examples/CMakeFiles/bwt.dir/depend
 	$(MAKE) -f examples/CMakeFiles/bwt.dir/build.make examples/CMakeFiles/bwt.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles  1
 	@echo "Built target bwt"
 .PHONY : examples/CMakeFiles/bwt.dir/all
 
@@ -237,9 +200,9 @@ all: examples/CMakeFiles/bwt.dir/all
 
 # Build rule for subdir invocation for target.
 examples/CMakeFiles/bwt.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bwt.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 .PHONY : examples/CMakeFiles/bwt.dir/rule
 
 # Convenience name for target.
@@ -262,7 +225,7 @@ clean: examples/CMakeFiles/bwt.dir/clean
 examples/CMakeFiles/mksary.dir/all: lib/CMakeFiles/divsufsort.dir/all
 	$(MAKE) -f examples/CMakeFiles/mksary.dir/build.make examples/CMakeFiles/mksary.dir/depend
 	$(MAKE) -f examples/CMakeFiles/mksary.dir/build.make examples/CMakeFiles/mksary.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles  10
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles  6
 	@echo "Built target mksary"
 .PHONY : examples/CMakeFiles/mksary.dir/all
 
@@ -272,9 +235,9 @@ all: examples/CMakeFiles/mksary.dir/all
 
 # Build rule for subdir invocation for target.
 examples/CMakeFiles/mksary.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/mksary.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 .PHONY : examples/CMakeFiles/mksary.dir/rule
 
 # Convenience name for target.
@@ -297,7 +260,7 @@ clean: examples/CMakeFiles/mksary.dir/clean
 examples/CMakeFiles/sasearch.dir/all: lib/CMakeFiles/divsufsort.dir/all
 	$(MAKE) -f examples/CMakeFiles/sasearch.dir/build.make examples/CMakeFiles/sasearch.dir/depend
 	$(MAKE) -f examples/CMakeFiles/sasearch.dir/build.make examples/CMakeFiles/sasearch.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles  11
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles  7
 	@echo "Built target sasearch"
 .PHONY : examples/CMakeFiles/sasearch.dir/all
 
@@ -307,9 +270,9 @@ all: examples/CMakeFiles/sasearch.dir/all
 
 # Build rule for subdir invocation for target.
 examples/CMakeFiles/sasearch.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/sasearch.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 .PHONY : examples/CMakeFiles/sasearch.dir/rule
 
 # Convenience name for target.
@@ -332,7 +295,7 @@ clean: examples/CMakeFiles/sasearch.dir/clean
 examples/CMakeFiles/suftest.dir/all: lib/CMakeFiles/divsufsort.dir/all
 	$(MAKE) -f examples/CMakeFiles/suftest.dir/build.make examples/CMakeFiles/suftest.dir/depend
 	$(MAKE) -f examples/CMakeFiles/suftest.dir/build.make examples/CMakeFiles/suftest.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles  12
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles  8
 	@echo "Built target suftest"
 .PHONY : examples/CMakeFiles/suftest.dir/all
 
@@ -342,9 +305,9 @@ all: examples/CMakeFiles/suftest.dir/all
 
 # Build rule for subdir invocation for target.
 examples/CMakeFiles/suftest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/suftest.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 .PHONY : examples/CMakeFiles/suftest.dir/rule
 
 # Convenience name for target.
@@ -367,7 +330,7 @@ clean: examples/CMakeFiles/suftest.dir/clean
 examples/CMakeFiles/unbwt.dir/all: lib/CMakeFiles/divsufsort.dir/all
 	$(MAKE) -f examples/CMakeFiles/unbwt.dir/build.make examples/CMakeFiles/unbwt.dir/depend
 	$(MAKE) -f examples/CMakeFiles/unbwt.dir/build.make examples/CMakeFiles/unbwt.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles  13
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles  9
 	@echo "Built target unbwt"
 .PHONY : examples/CMakeFiles/unbwt.dir/all
 
@@ -377,9 +340,9 @@ all: examples/CMakeFiles/unbwt.dir/all
 
 # Build rule for subdir invocation for target.
 examples/CMakeFiles/unbwt.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/unbwt.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 .PHONY : examples/CMakeFiles/unbwt.dir/rule
 
 # Convenience name for target.

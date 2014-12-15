@@ -36,10 +36,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_SOURCE_DIR = /home/chen/GIT/CSA/divsufsort
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_BINARY_DIR = /home/chen/GIT/CSA/divsufsort
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -108,7 +108,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/chen/Desktop/libdivsufsort-2.0.1/CPackSourceConfig.cmake
+	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/chen/GIT/CSA/divsufsort/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -127,9 +127,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles /home/chen/GIT/CSA/divsufsort/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -181,19 +181,6 @@ divsufsort: cmake_check_build_system
 divsufsort/fast:
 	$(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/build
 .PHONY : divsufsort/fast
-
-#=============================================================================
-# Target rules for targets named divsufsort64
-
-# Build rule for target.
-divsufsort64: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 divsufsort64
-.PHONY : divsufsort64
-
-# fast build rule for target.
-divsufsort64/fast:
-	$(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/build
-.PHONY : divsufsort64/fast
 
 #=============================================================================
 # Target rules for targets named bwt
@@ -276,7 +263,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... uninstall"
 	@echo "... divsufsort"
-	@echo "... divsufsort64"
 	@echo "... bwt"
 	@echo "... mksary"
 	@echo "... sasearch"

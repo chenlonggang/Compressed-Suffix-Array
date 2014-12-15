@@ -4,20 +4,24 @@
 lib/CMakeFiles/divsufsort.dir/divsufsort.o: lib/divsufsort.c
 lib/CMakeFiles/divsufsort.dir/divsufsort.o: lib/../include/config.h
 lib/CMakeFiles/divsufsort.dir/divsufsort.o: lib/../include/divsufsort.h
+lib/CMakeFiles/divsufsort.dir/divsufsort.o: lib/../include/divsufsort64.h
 lib/CMakeFiles/divsufsort.dir/divsufsort.o: lib/../include/divsufsort_private.h
 
 lib/CMakeFiles/divsufsort.dir/sssort.o: lib/sssort.c
 lib/CMakeFiles/divsufsort.dir/sssort.o: lib/../include/config.h
 lib/CMakeFiles/divsufsort.dir/sssort.o: lib/../include/divsufsort.h
+lib/CMakeFiles/divsufsort.dir/sssort.o: lib/../include/divsufsort64.h
 lib/CMakeFiles/divsufsort.dir/sssort.o: lib/../include/divsufsort_private.h
 
 lib/CMakeFiles/divsufsort.dir/trsort.o: lib/trsort.c
 lib/CMakeFiles/divsufsort.dir/trsort.o: lib/../include/config.h
 lib/CMakeFiles/divsufsort.dir/trsort.o: lib/../include/divsufsort.h
+lib/CMakeFiles/divsufsort.dir/trsort.o: lib/../include/divsufsort64.h
 lib/CMakeFiles/divsufsort.dir/trsort.o: lib/../include/divsufsort_private.h
 
 lib/CMakeFiles/divsufsort.dir/utils.o: lib/utils.c
 lib/CMakeFiles/divsufsort.dir/utils.o: lib/../include/config.h
 lib/CMakeFiles/divsufsort.dir/utils.o: lib/../include/divsufsort.h
+lib/CMakeFiles/divsufsort.dir/utils.o: lib/../include/divsufsort64.h
 lib/CMakeFiles/divsufsort.dir/utils.o: lib/../include/divsufsort_private.h
 

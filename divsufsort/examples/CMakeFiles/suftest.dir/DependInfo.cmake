@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
-  "/home/chen/Desktop/libdivsufsort-2.0.1/examples/suftest.c" "/home/chen/Desktop/libdivsufsort-2.0.1/examples/CMakeFiles/suftest.dir/suftest.o"
+  "/home/chen/GIT/CSA/divsufsort/examples/suftest.c" "/home/chen/GIT/CSA/divsufsort/examples/CMakeFiles/suftest.dir/suftest.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 
@@ -21,5 +21,5 @@ SET(CMAKE_TARGET_DEFINITIONS
 
 # Targets to which this target links.
 SET(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/chen/Desktop/libdivsufsort-2.0.1/lib/CMakeFiles/divsufsort.dir/DependInfo.cmake"
+  "/home/chen/GIT/CSA/divsufsort/lib/CMakeFiles/divsufsort.dir/DependInfo.cmake"
   )

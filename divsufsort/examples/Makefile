@@ -36,10 +36,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_SOURCE_DIR = /home/chen/GIT/CSA/divsufsort
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_BINARY_DIR = /home/chen/GIT/CSA/divsufsort
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -98,7 +98,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && /usr/bin/cpack --config ./CPackConfig.cmake
+	cd /home/chen/GIT/CSA/divsufsort && /usr/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -108,7 +108,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/chen/Desktop/libdivsufsort-2.0.1/CPackSourceConfig.cmake
+	cd /home/chen/GIT/CSA/divsufsort && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/chen/GIT/CSA/divsufsort/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -127,14 +127,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles /home/chen/Desktop/libdivsufsort-2.0.1/examples/CMakeFiles/progress.marks
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 examples/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	cd /home/chen/GIT/CSA/divsufsort && $(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles /home/chen/GIT/CSA/divsufsort/examples/CMakeFiles/progress.marks
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 examples/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 examples/clean
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 examples/clean
 .PHONY : clean
 
 # The main clean target
@@ -143,22 +143,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/chen/GIT/CSA/divsufsort && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 examples/CMakeFiles/bwt.dir/rule:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bwt.dir/rule
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bwt.dir/rule
 .PHONY : examples/CMakeFiles/bwt.dir/rule
 
 # Convenience name for target.
@@ -167,12 +167,12 @@ bwt: examples/CMakeFiles/bwt.dir/rule
 
 # fast build rule for target.
 bwt/fast:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/bwt.dir/build.make examples/CMakeFiles/bwt.dir/build
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/bwt.dir/build.make examples/CMakeFiles/bwt.dir/build
 .PHONY : bwt/fast
 
 # Convenience name for target.
 examples/CMakeFiles/mksary.dir/rule:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/mksary.dir/rule
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/mksary.dir/rule
 .PHONY : examples/CMakeFiles/mksary.dir/rule
 
 # Convenience name for target.
@@ -181,12 +181,12 @@ mksary: examples/CMakeFiles/mksary.dir/rule
 
 # fast build rule for target.
 mksary/fast:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/mksary.dir/build.make examples/CMakeFiles/mksary.dir/build
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/mksary.dir/build.make examples/CMakeFiles/mksary.dir/build
 .PHONY : mksary/fast
 
 # Convenience name for target.
 examples/CMakeFiles/sasearch.dir/rule:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/sasearch.dir/rule
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/sasearch.dir/rule
 .PHONY : examples/CMakeFiles/sasearch.dir/rule
 
 # Convenience name for target.
@@ -195,12 +195,12 @@ sasearch: examples/CMakeFiles/sasearch.dir/rule
 
 # fast build rule for target.
 sasearch/fast:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/sasearch.dir/build.make examples/CMakeFiles/sasearch.dir/build
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/sasearch.dir/build.make examples/CMakeFiles/sasearch.dir/build
 .PHONY : sasearch/fast
 
 # Convenience name for target.
 examples/CMakeFiles/suftest.dir/rule:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/suftest.dir/rule
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/suftest.dir/rule
 .PHONY : examples/CMakeFiles/suftest.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ suftest: examples/CMakeFiles/suftest.dir/rule
 
 # fast build rule for target.
 suftest/fast:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/suftest.dir/build.make examples/CMakeFiles/suftest.dir/build
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/suftest.dir/build.make examples/CMakeFiles/suftest.dir/build
 .PHONY : suftest/fast
 
 # Convenience name for target.
 examples/CMakeFiles/unbwt.dir/rule:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/unbwt.dir/rule
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/unbwt.dir/rule
 .PHONY : examples/CMakeFiles/unbwt.dir/rule
 
 # Convenience name for target.
@@ -223,82 +223,82 @@ unbwt: examples/CMakeFiles/unbwt.dir/rule
 
 # fast build rule for target.
 unbwt/fast:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/unbwt.dir/build.make examples/CMakeFiles/unbwt.dir/build
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/unbwt.dir/build.make examples/CMakeFiles/unbwt.dir/build
 .PHONY : unbwt/fast
 
 # target to build an object file
 bwt.o:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/bwt.dir/build.make examples/CMakeFiles/bwt.dir/bwt.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/bwt.dir/build.make examples/CMakeFiles/bwt.dir/bwt.o
 .PHONY : bwt.o
 
 # target to preprocess a source file
 bwt.i:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/bwt.dir/build.make examples/CMakeFiles/bwt.dir/bwt.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/bwt.dir/build.make examples/CMakeFiles/bwt.dir/bwt.i
 .PHONY : bwt.i
 
 # target to generate assembly for a file
 bwt.s:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/bwt.dir/build.make examples/CMakeFiles/bwt.dir/bwt.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/bwt.dir/build.make examples/CMakeFiles/bwt.dir/bwt.s
 .PHONY : bwt.s
 
 # target to build an object file
 mksary.o:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/mksary.dir/build.make examples/CMakeFiles/mksary.dir/mksary.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/mksary.dir/build.make examples/CMakeFiles/mksary.dir/mksary.o
 .PHONY : mksary.o
 
 # target to preprocess a source file
 mksary.i:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/mksary.dir/build.make examples/CMakeFiles/mksary.dir/mksary.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/mksary.dir/build.make examples/CMakeFiles/mksary.dir/mksary.i
 .PHONY : mksary.i
 
 # target to generate assembly for a file
 mksary.s:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/mksary.dir/build.make examples/CMakeFiles/mksary.dir/mksary.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/mksary.dir/build.make examples/CMakeFiles/mksary.dir/mksary.s
 .PHONY : mksary.s
 
 # target to build an object file
 sasearch.o:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/sasearch.dir/build.make examples/CMakeFiles/sasearch.dir/sasearch.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/sasearch.dir/build.make examples/CMakeFiles/sasearch.dir/sasearch.o
 .PHONY : sasearch.o
 
 # target to preprocess a source file
 sasearch.i:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/sasearch.dir/build.make examples/CMakeFiles/sasearch.dir/sasearch.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/sasearch.dir/build.make examples/CMakeFiles/sasearch.dir/sasearch.i
 .PHONY : sasearch.i
 
 # target to generate assembly for a file
 sasearch.s:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/sasearch.dir/build.make examples/CMakeFiles/sasearch.dir/sasearch.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/sasearch.dir/build.make examples/CMakeFiles/sasearch.dir/sasearch.s
 .PHONY : sasearch.s
 
 # target to build an object file
 suftest.o:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/suftest.dir/build.make examples/CMakeFiles/suftest.dir/suftest.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/suftest.dir/build.make examples/CMakeFiles/suftest.dir/suftest.o
 .PHONY : suftest.o
 
 # target to preprocess a source file
 suftest.i:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/suftest.dir/build.make examples/CMakeFiles/suftest.dir/suftest.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/suftest.dir/build.make examples/CMakeFiles/suftest.dir/suftest.i
 .PHONY : suftest.i
 
 # target to generate assembly for a file
 suftest.s:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/suftest.dir/build.make examples/CMakeFiles/suftest.dir/suftest.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/suftest.dir/build.make examples/CMakeFiles/suftest.dir/suftest.s
 .PHONY : suftest.s
 
 # target to build an object file
 unbwt.o:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/unbwt.dir/build.make examples/CMakeFiles/unbwt.dir/unbwt.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/unbwt.dir/build.make examples/CMakeFiles/unbwt.dir/unbwt.o
 .PHONY : unbwt.o
 
 # target to preprocess a source file
 unbwt.i:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/unbwt.dir/build.make examples/CMakeFiles/unbwt.dir/unbwt.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/unbwt.dir/build.make examples/CMakeFiles/unbwt.dir/unbwt.i
 .PHONY : unbwt.i
 
 # target to generate assembly for a file
 unbwt.s:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f examples/CMakeFiles/unbwt.dir/build.make examples/CMakeFiles/unbwt.dir/unbwt.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f examples/CMakeFiles/unbwt.dir/build.make examples/CMakeFiles/unbwt.dir/unbwt.s
 .PHONY : unbwt.s
 
 # Help Target
@@ -346,6 +346,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/chen/GIT/CSA/divsufsort && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
