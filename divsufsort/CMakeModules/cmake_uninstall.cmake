@@ -1,8 +1,8 @@
-IF(NOT EXISTS "/home/chen/Desktop/libdivsufsort-2.0.1/install_manifest.txt")
-  MESSAGE(FATAL_ERROR "Cannot find install manifest: \"/home/chen/Desktop/libdivsufsort-2.0.1/install_manifest.txt\"")
-ENDIF(NOT EXISTS "/home/chen/Desktop/libdivsufsort-2.0.1/install_manifest.txt")
+IF(NOT EXISTS "/home/chen/GIT/CSA/divsufsort/install_manifest.txt")
+  MESSAGE(FATAL_ERROR "Cannot find install manifest: \"/home/chen/GIT/CSA/divsufsort/install_manifest.txt\"")
+ENDIF(NOT EXISTS "/home/chen/GIT/CSA/divsufsort/install_manifest.txt")
 
-FILE(READ "/home/chen/Desktop/libdivsufsort-2.0.1/install_manifest.txt" files)
+FILE(READ "/home/chen/GIT/CSA/divsufsort/install_manifest.txt" files)
 STRING(REGEX REPLACE "\n" ";" files "${files}")
 
 SET(NUM 0)
@@ -33,4 +33,4 @@ FOREACH(file ${files})
   MATH(EXPR NUM "1 + ${NUM}")
 ENDFOREACH(file)
 
-FILE(REMOVE "/home/chen/Desktop/libdivsufsort-2.0.1/install_manifest.txt")
+FILE(REMOVE "/home/chen/GIT/CSA/divsufsort/install_manifest.txt")

@@ -1,4 +1,4 @@
-# Install script for directory: /home/chen/Desktop/libdivsufsort-2.0.1/examples
+# Install script for directory: /home/chen/GIT/CSA/divsufsort/examples
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

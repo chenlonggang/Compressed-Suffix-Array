@@ -36,10 +36,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_SOURCE_DIR = /home/chen/GIT/CSA/divsufsort
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_BINARY_DIR = /home/chen/GIT/CSA/divsufsort
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -98,7 +98,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && /usr/bin/cpack --config ./CPackConfig.cmake
+	cd /home/chen/GIT/CSA/divsufsort && /usr/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -108,7 +108,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/chen/Desktop/libdivsufsort-2.0.1/CPackSourceConfig.cmake
+	cd /home/chen/GIT/CSA/divsufsort && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/chen/GIT/CSA/divsufsort/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -127,14 +127,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles /home/chen/Desktop/libdivsufsort-2.0.1/lib/CMakeFiles/progress.marks
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 lib/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles 0
+	cd /home/chen/GIT/CSA/divsufsort && $(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles /home/chen/GIT/CSA/divsufsort/lib/CMakeFiles/progress.marks
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 lib/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chen/GIT/CSA/divsufsort/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 lib/clean
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 lib/clean
 .PHONY : clean
 
 # The main clean target
@@ -143,22 +143,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 lib/preinstall
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 lib/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 lib/preinstall
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 lib/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/chen/GIT/CSA/divsufsort && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 lib/CMakeFiles/divsufsort.dir/rule:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 lib/CMakeFiles/divsufsort.dir/rule
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 lib/CMakeFiles/divsufsort.dir/rule
 .PHONY : lib/CMakeFiles/divsufsort.dir/rule
 
 # Convenience name for target.
@@ -167,12 +167,12 @@ divsufsort: lib/CMakeFiles/divsufsort.dir/rule
 
 # fast build rule for target.
 divsufsort/fast:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/build
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/build
 .PHONY : divsufsort/fast
 
 # Convenience name for target.
 lib/CMakeFiles/divsufsort64.dir/rule:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f CMakeFiles/Makefile2 lib/CMakeFiles/divsufsort64.dir/rule
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f CMakeFiles/Makefile2 lib/CMakeFiles/divsufsort64.dir/rule
 .PHONY : lib/CMakeFiles/divsufsort64.dir/rule
 
 # Convenience name for target.
@@ -181,79 +181,79 @@ divsufsort64: lib/CMakeFiles/divsufsort64.dir/rule
 
 # fast build rule for target.
 divsufsort64/fast:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/build
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/build
 .PHONY : divsufsort64/fast
 
 # target to build an object file
 divsufsort.o:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/divsufsort.o
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/divsufsort.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/divsufsort.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/divsufsort.o
 .PHONY : divsufsort.o
 
 # target to preprocess a source file
 divsufsort.i:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/divsufsort.i
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/divsufsort.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/divsufsort.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/divsufsort.i
 .PHONY : divsufsort.i
 
 # target to generate assembly for a file
 divsufsort.s:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/divsufsort.s
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/divsufsort.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/divsufsort.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/divsufsort.s
 .PHONY : divsufsort.s
 
 # target to build an object file
 sssort.o:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/sssort.o
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/sssort.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/sssort.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/sssort.o
 .PHONY : sssort.o
 
 # target to preprocess a source file
 sssort.i:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/sssort.i
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/sssort.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/sssort.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/sssort.i
 .PHONY : sssort.i
 
 # target to generate assembly for a file
 sssort.s:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/sssort.s
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/sssort.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/sssort.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/sssort.s
 .PHONY : sssort.s
 
 # target to build an object file
 trsort.o:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/trsort.o
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/trsort.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/trsort.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/trsort.o
 .PHONY : trsort.o
 
 # target to preprocess a source file
 trsort.i:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/trsort.i
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/trsort.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/trsort.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/trsort.i
 .PHONY : trsort.i
 
 # target to generate assembly for a file
 trsort.s:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/trsort.s
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/trsort.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/trsort.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/trsort.s
 .PHONY : trsort.s
 
 # target to build an object file
 utils.o:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/utils.o
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/utils.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/utils.o
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/utils.o
 .PHONY : utils.o
 
 # target to preprocess a source file
 utils.i:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/utils.i
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/utils.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/utils.i
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/utils.i
 .PHONY : utils.i
 
 # target to generate assembly for a file
 utils.s:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/utils.s
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/utils.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort.dir/build.make lib/CMakeFiles/divsufsort.dir/utils.s
+	cd /home/chen/GIT/CSA/divsufsort && $(MAKE) -f lib/CMakeFiles/divsufsort64.dir/build.make lib/CMakeFiles/divsufsort64.dir/utils.s
 .PHONY : utils.s
 
 # Help Target
@@ -295,6 +295,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/chen/GIT/CSA/divsufsort && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_SOURCE_DIR = /home/chen/GIT/CSA/divsufsort
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_BINARY_DIR = /home/chen/GIT/CSA/divsufsort
 
 # Include any dependencies generated for this target.
 include lib/CMakeFiles/divsufsort64.dir/depend.make
@@ -48,17 +48,17 @@ include lib/CMakeFiles/divsufsort64.dir/flags.make
 
 lib/CMakeFiles/divsufsort64.dir/divsufsort.o: lib/CMakeFiles/divsufsort64.dir/flags.make
 lib/CMakeFiles/divsufsort64.dir/divsufsort.o: lib/divsufsort.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object lib/CMakeFiles/divsufsort64.dir/divsufsort.o"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -o CMakeFiles/divsufsort64.dir/divsufsort.o   -c /home/chen/Desktop/libdivsufsort-2.0.1/lib/divsufsort.c
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -o CMakeFiles/divsufsort64.dir/divsufsort.o   -c /home/chen/GIT/CSA/divsufsort/lib/divsufsort.c
 
 lib/CMakeFiles/divsufsort64.dir/divsufsort.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/divsufsort64.dir/divsufsort.i"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -E /home/chen/Desktop/libdivsufsort-2.0.1/lib/divsufsort.c > CMakeFiles/divsufsort64.dir/divsufsort.i
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -E /home/chen/GIT/CSA/divsufsort/lib/divsufsort.c > CMakeFiles/divsufsort64.dir/divsufsort.i
 
 lib/CMakeFiles/divsufsort64.dir/divsufsort.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/divsufsort64.dir/divsufsort.s"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -S /home/chen/Desktop/libdivsufsort-2.0.1/lib/divsufsort.c -o CMakeFiles/divsufsort64.dir/divsufsort.s
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -S /home/chen/GIT/CSA/divsufsort/lib/divsufsort.c -o CMakeFiles/divsufsort64.dir/divsufsort.s
 
 lib/CMakeFiles/divsufsort64.dir/divsufsort.o.requires:
 .PHONY : lib/CMakeFiles/divsufsort64.dir/divsufsort.o.requires
@@ -71,17 +71,17 @@ lib/CMakeFiles/divsufsort64.dir/divsufsort.o.provides.build: lib/CMakeFiles/divs
 
 lib/CMakeFiles/divsufsort64.dir/sssort.o: lib/CMakeFiles/divsufsort64.dir/flags.make
 lib/CMakeFiles/divsufsort64.dir/sssort.o: lib/sssort.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object lib/CMakeFiles/divsufsort64.dir/sssort.o"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -o CMakeFiles/divsufsort64.dir/sssort.o   -c /home/chen/Desktop/libdivsufsort-2.0.1/lib/sssort.c
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -o CMakeFiles/divsufsort64.dir/sssort.o   -c /home/chen/GIT/CSA/divsufsort/lib/sssort.c
 
 lib/CMakeFiles/divsufsort64.dir/sssort.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/divsufsort64.dir/sssort.i"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -E /home/chen/Desktop/libdivsufsort-2.0.1/lib/sssort.c > CMakeFiles/divsufsort64.dir/sssort.i
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -E /home/chen/GIT/CSA/divsufsort/lib/sssort.c > CMakeFiles/divsufsort64.dir/sssort.i
 
 lib/CMakeFiles/divsufsort64.dir/sssort.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/divsufsort64.dir/sssort.s"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -S /home/chen/Desktop/libdivsufsort-2.0.1/lib/sssort.c -o CMakeFiles/divsufsort64.dir/sssort.s
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -S /home/chen/GIT/CSA/divsufsort/lib/sssort.c -o CMakeFiles/divsufsort64.dir/sssort.s
 
 lib/CMakeFiles/divsufsort64.dir/sssort.o.requires:
 .PHONY : lib/CMakeFiles/divsufsort64.dir/sssort.o.requires
@@ -94,17 +94,17 @@ lib/CMakeFiles/divsufsort64.dir/sssort.o.provides.build: lib/CMakeFiles/divsufso
 
 lib/CMakeFiles/divsufsort64.dir/trsort.o: lib/CMakeFiles/divsufsort64.dir/flags.make
 lib/CMakeFiles/divsufsort64.dir/trsort.o: lib/trsort.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object lib/CMakeFiles/divsufsort64.dir/trsort.o"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -o CMakeFiles/divsufsort64.dir/trsort.o   -c /home/chen/Desktop/libdivsufsort-2.0.1/lib/trsort.c
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -o CMakeFiles/divsufsort64.dir/trsort.o   -c /home/chen/GIT/CSA/divsufsort/lib/trsort.c
 
 lib/CMakeFiles/divsufsort64.dir/trsort.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/divsufsort64.dir/trsort.i"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -E /home/chen/Desktop/libdivsufsort-2.0.1/lib/trsort.c > CMakeFiles/divsufsort64.dir/trsort.i
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -E /home/chen/GIT/CSA/divsufsort/lib/trsort.c > CMakeFiles/divsufsort64.dir/trsort.i
 
 lib/CMakeFiles/divsufsort64.dir/trsort.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/divsufsort64.dir/trsort.s"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -S /home/chen/Desktop/libdivsufsort-2.0.1/lib/trsort.c -o CMakeFiles/divsufsort64.dir/trsort.s
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -S /home/chen/GIT/CSA/divsufsort/lib/trsort.c -o CMakeFiles/divsufsort64.dir/trsort.s
 
 lib/CMakeFiles/divsufsort64.dir/trsort.o.requires:
 .PHONY : lib/CMakeFiles/divsufsort64.dir/trsort.o.requires
@@ -117,17 +117,17 @@ lib/CMakeFiles/divsufsort64.dir/trsort.o.provides.build: lib/CMakeFiles/divsufso
 
 lib/CMakeFiles/divsufsort64.dir/utils.o: lib/CMakeFiles/divsufsort64.dir/flags.make
 lib/CMakeFiles/divsufsort64.dir/utils.o: lib/utils.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/chen/GIT/CSA/divsufsort/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object lib/CMakeFiles/divsufsort64.dir/utils.o"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -o CMakeFiles/divsufsort64.dir/utils.o   -c /home/chen/Desktop/libdivsufsort-2.0.1/lib/utils.c
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -o CMakeFiles/divsufsort64.dir/utils.o   -c /home/chen/GIT/CSA/divsufsort/lib/utils.c
 
 lib/CMakeFiles/divsufsort64.dir/utils.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/divsufsort64.dir/utils.i"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -E /home/chen/Desktop/libdivsufsort-2.0.1/lib/utils.c > CMakeFiles/divsufsort64.dir/utils.i
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -E /home/chen/GIT/CSA/divsufsort/lib/utils.c > CMakeFiles/divsufsort64.dir/utils.i
 
 lib/CMakeFiles/divsufsort64.dir/utils.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/divsufsort64.dir/utils.s"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -S /home/chen/Desktop/libdivsufsort-2.0.1/lib/utils.c -o CMakeFiles/divsufsort64.dir/utils.s
+	cd /home/chen/GIT/CSA/divsufsort/lib && /usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -DBUILD_DIVSUFSORT64 -S /home/chen/GIT/CSA/divsufsort/lib/utils.c -o CMakeFiles/divsufsort64.dir/utils.s
 
 lib/CMakeFiles/divsufsort64.dir/utils.o.requires:
 .PHONY : lib/CMakeFiles/divsufsort64.dir/utils.o.requires
@@ -155,8 +155,8 @@ lib/libdivsufsort64.a: lib/CMakeFiles/divsufsort64.dir/utils.o
 lib/libdivsufsort64.a: lib/CMakeFiles/divsufsort64.dir/build.make
 lib/libdivsufsort64.a: lib/CMakeFiles/divsufsort64.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking C static library libdivsufsort64.a"
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && $(CMAKE_COMMAND) -P CMakeFiles/divsufsort64.dir/cmake_clean_target.cmake
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/divsufsort64.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/chen/GIT/CSA/divsufsort/lib && $(CMAKE_COMMAND) -P CMakeFiles/divsufsort64.dir/cmake_clean_target.cmake
+	cd /home/chen/GIT/CSA/divsufsort/lib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/divsufsort64.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 lib/CMakeFiles/divsufsort64.dir/build: lib/libdivsufsort64.a
@@ -169,10 +169,10 @@ lib/CMakeFiles/divsufsort64.dir/requires: lib/CMakeFiles/divsufsort64.dir/utils.
 .PHONY : lib/CMakeFiles/divsufsort64.dir/requires
 
 lib/CMakeFiles/divsufsort64.dir/clean:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1/lib && $(CMAKE_COMMAND) -P CMakeFiles/divsufsort64.dir/cmake_clean.cmake
+	cd /home/chen/GIT/CSA/divsufsort/lib && $(CMAKE_COMMAND) -P CMakeFiles/divsufsort64.dir/cmake_clean.cmake
 .PHONY : lib/CMakeFiles/divsufsort64.dir/clean
 
 lib/CMakeFiles/divsufsort64.dir/depend:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/chen/Desktop/libdivsufsort-2.0.1 /home/chen/Desktop/libdivsufsort-2.0.1/lib /home/chen/Desktop/libdivsufsort-2.0.1 /home/chen/Desktop/libdivsufsort-2.0.1/lib /home/chen/Desktop/libdivsufsort-2.0.1/lib/CMakeFiles/divsufsort64.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/chen/GIT/CSA/divsufsort && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/chen/GIT/CSA/divsufsort /home/chen/GIT/CSA/divsufsort/lib /home/chen/GIT/CSA/divsufsort /home/chen/GIT/CSA/divsufsort/lib /home/chen/GIT/CSA/divsufsort/lib/CMakeFiles/divsufsort64.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : lib/CMakeFiles/divsufsort64.dir/depend
 

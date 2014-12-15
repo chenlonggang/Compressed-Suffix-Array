@@ -1,4 +1,4 @@
-# Install script for directory: /home/chen/Desktop/libdivsufsort-2.0.1
+# Install script for directory: /home/chen/GIT/CSA/divsufsort
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,10 +34,10 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/chen/Desktop/libdivsufsort-2.0.1/pkgconfig/cmake_install.cmake")
-  INCLUDE("/home/chen/Desktop/libdivsufsort-2.0.1/include/cmake_install.cmake")
-  INCLUDE("/home/chen/Desktop/libdivsufsort-2.0.1/lib/cmake_install.cmake")
-  INCLUDE("/home/chen/Desktop/libdivsufsort-2.0.1/examples/cmake_install.cmake")
+  INCLUDE("/home/chen/GIT/CSA/divsufsort/pkgconfig/cmake_install.cmake")
+  INCLUDE("/home/chen/GIT/CSA/divsufsort/include/cmake_install.cmake")
+  INCLUDE("/home/chen/GIT/CSA/divsufsort/lib/cmake_install.cmake")
+  INCLUDE("/home/chen/GIT/CSA/divsufsort/examples/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -47,7 +47,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/chen/Desktop/libdivsufsort-2.0.1/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/chen/GIT/CSA/divsufsort/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/chen/Desktop/libdivsufsort-2.0.1/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/chen/GIT/CSA/divsufsort/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

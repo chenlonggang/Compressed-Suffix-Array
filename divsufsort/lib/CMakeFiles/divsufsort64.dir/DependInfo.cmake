@@ -4,10 +4,10 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
-  "/home/chen/Desktop/libdivsufsort-2.0.1/lib/divsufsort.c" "/home/chen/Desktop/libdivsufsort-2.0.1/lib/CMakeFiles/divsufsort64.dir/divsufsort.o"
-  "/home/chen/Desktop/libdivsufsort-2.0.1/lib/sssort.c" "/home/chen/Desktop/libdivsufsort-2.0.1/lib/CMakeFiles/divsufsort64.dir/sssort.o"
-  "/home/chen/Desktop/libdivsufsort-2.0.1/lib/trsort.c" "/home/chen/Desktop/libdivsufsort-2.0.1/lib/CMakeFiles/divsufsort64.dir/trsort.o"
-  "/home/chen/Desktop/libdivsufsort-2.0.1/lib/utils.c" "/home/chen/Desktop/libdivsufsort-2.0.1/lib/CMakeFiles/divsufsort64.dir/utils.o"
+  "/home/chen/GIT/CSA/divsufsort/lib/divsufsort.c" "/home/chen/GIT/CSA/divsufsort/lib/CMakeFiles/divsufsort64.dir/divsufsort.o"
+  "/home/chen/GIT/CSA/divsufsort/lib/sssort.c" "/home/chen/GIT/CSA/divsufsort/lib/CMakeFiles/divsufsort64.dir/sssort.o"
+  "/home/chen/GIT/CSA/divsufsort/lib/trsort.c" "/home/chen/GIT/CSA/divsufsort/lib/CMakeFiles/divsufsort64.dir/trsort.o"
+  "/home/chen/GIT/CSA/divsufsort/lib/utils.c" "/home/chen/GIT/CSA/divsufsort/lib/CMakeFiles/divsufsort64.dir/utils.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 

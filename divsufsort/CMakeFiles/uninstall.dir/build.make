@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_SOURCE_DIR = /home/chen/GIT/CSA/divsufsort
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
+CMAKE_BINARY_DIR = /home/chen/GIT/CSA/divsufsort
 
 # Utility rule file for uninstall.
 
@@ -43,7 +43,7 @@ CMAKE_BINARY_DIR = /home/chen/Desktop/libdivsufsort-2.0.1
 include CMakeFiles/uninstall.dir/progress.make
 
 CMakeFiles/uninstall:
-	/usr/bin/cmake -P /home/chen/Desktop/libdivsufsort-2.0.1/CMakeModules/cmake_uninstall.cmake
+	/usr/bin/cmake -P /home/chen/GIT/CSA/divsufsort/CMakeModules/cmake_uninstall.cmake
 
 uninstall: CMakeFiles/uninstall
 uninstall: CMakeFiles/uninstall.dir/build.make
@@ -58,6 +58,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/chen/Desktop/libdivsufsort-2.0.1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/chen/Desktop/libdivsufsort-2.0.1 /home/chen/Desktop/libdivsufsort-2.0.1 /home/chen/Desktop/libdivsufsort-2.0.1 /home/chen/Desktop/libdivsufsort-2.0.1 /home/chen/Desktop/libdivsufsort-2.0.1/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/chen/GIT/CSA/divsufsort && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/chen/GIT/CSA/divsufsort /home/chen/GIT/CSA/divsufsort /home/chen/GIT/CSA/divsufsort /home/chen/GIT/CSA/divsufsort /home/chen/GIT/CSA/divsufsort/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/uninstall.dir/depend
 
