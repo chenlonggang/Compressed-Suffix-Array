@@ -183,7 +183,7 @@ void usage()
 	cout<<"--------------------------------------------------------------------------------------"<<endl;
 	cout<<"The flowing commands are supported "<<endl;
 	cout<<"	help XX: show the details for the command XX"<<endl;
-	cout<<"	build XX [-rl|-RL]: build the index of file XX"<<endl;
+	cout<<"	build XX: build the index of file XX"<<endl;
 	cout<<"	load  XX: load the index file XX"<<endl;
 	cout<<"	save XX: write the csa to a index file XX"<<endl;
 	cout<<"	count XX: count the pattern XX's occs" <<endl;
@@ -195,9 +195,8 @@ void usage()
 }
 void helpbuild()
 {
-	cout<<"build XX [-rl|-RL]"<<endl;
+	cout<<"build XX"<<endl;
 	cout<<"	XX:the source file,it's you responsibility to provide a correct path"<<endl;
-	cout<<"	If -rl or -RL is provided,runlength will be used"<<endl;
 }
 void helpcount()
 {

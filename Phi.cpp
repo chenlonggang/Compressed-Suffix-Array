@@ -22,7 +22,8 @@ Phi::Phi(parmaters *csa)
 	switch(this->type)
 	{   
 		case 0: phi=new GAM_Phi(csa);break;
-		case 1: phi=new GRL_Phi(csa);break;
+		//case 1: phi=new GRL_Phi(csa);break;
+		case 1:phi= new GAM_Phi(csa);break;
 		default:phi=new GAM_Phi(csa);break;
 	}
 }
@@ -59,7 +60,8 @@ integer Phi::load(loadkit &s)
 	switch(this->type)
 	{
 		case 0: phi=new GAM_Phi();break;
-		case 1: phi=new GRL_Phi();break;
+		//case 1: phi=new GRL_Phi();break;
+		case 1: phi=new GAM_Phi();break;
 		default:phi=new GAM_Phi();break;
 	}
 	return phi->load(s);
