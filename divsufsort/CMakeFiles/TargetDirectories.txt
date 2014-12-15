@@ -1,8 +1,0 @@
-/home/chen/GIT/CSA/divsufsort/examples/CMakeFiles/bwt.dir
-/home/chen/GIT/CSA/divsufsort/lib/CMakeFiles/divsufsort.dir
-/home/chen/GIT/CSA/divsufsort/lib/CMakeFiles/divsufsort64.dir
-/home/chen/GIT/CSA/divsufsort/examples/CMakeFiles/mksary.dir
-/home/chen/GIT/CSA/divsufsort/examples/CMakeFiles/sasearch.dir
-/home/chen/GIT/CSA/divsufsort/examples/CMakeFiles/suftest.dir
-/home/chen/GIT/CSA/divsufsort/examples/CMakeFiles/unbwt.dir
-/home/chen/GIT/CSA/divsufsort/CMakeFiles/uninstall.dir
