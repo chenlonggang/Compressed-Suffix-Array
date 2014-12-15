@@ -1,1 +1,0 @@
-/usr/bin/gcc   -Wall -O3 -DNDEBUG -fomit-frame-pointer    CMakeFiles/bwt.dir/bwt.o  -o bwt -rdynamic -L/home/chen/GIT/CSA/divsufsort/examples/../lib ../lib/libdivsufsort.a -Wl,-rpath,/home/chen/GIT/CSA/divsufsort/examples/../lib 
