@@ -57,7 +57,7 @@ private:
 	integer lookup(integer i);
 	void Search(const char * Pattern,integer & L, integer &R);
 	void Search2(const char * Pattern,integer &L,integer &R);
-	
+	//void Search3(const char * Pattern,integer &L,integer &R);
 	uchar * Getfile(const char * filename);
 	void statics(uchar *T);
 	integer blog(integer x);

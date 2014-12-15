@@ -1,0 +1,8 @@
+/home/chen/code/csa/data/bible
+/home/chen/code/csa/data/DNA.100MB
+/home/chen/code/csa/data/proteins.100MB
+/home/chen/code/csa/data/english.100MB
+/home/chen/code/csa/data/sources.100MB
+/home/chen/code/csa/data/xml.100MB
+/home/chen/code/csa/data/influenza.100MB
+/home/chen/code/csa/data/kernel.100MB

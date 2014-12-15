@@ -115,7 +115,7 @@ CSA::CSA(const char * sourcefile,integer L,integer D,integer phitype){
 			delete [] SA;
 		if(T!=NULL)
 			delete [] T;
-		cout<<"CSA  is done"<<endl;
+//		cout<<"CSA  is done"<<endl;
 
 /*
 		integer start=0;
@@ -163,8 +163,8 @@ void CSA::Counting(const char *Pattern,integer &num){
 	integer L=0;
 	integer R=0;
 
-	Search2(Pattern,L,R);
-	cout<<L<<" "<<R<<endl;
+	Search(Pattern,L,R);
+//	cout<<L<<" "<<R<<endl;
 	num=R-L+1;
 }
 
@@ -245,7 +245,59 @@ void CSA::CreateSupportStructer(parmaters *csa){
 	}
 	Phi0=new Phi(csa);
 }
-
+/*
+void CSA::Search3(const char * Pattern,integer &L, integer &R){
+	
+	integer len=strlen(Pattern);
+	if(len==0){
+		L=0;
+		R=0;
+		return;
+	}
+	uchar c=Pattern[0];
+	integer coding=code[c];
+	if(coding<0){
+		L=1;
+		R=0;
+		return ;
+	}
+	
+	integer Left=start[coding];
+	integer Right=start[coding+1]-1;
+	integer l0=0;
+	integer r0=0;
+	integer l=0;
+	integer r=0;
+	
+	integer i=0;
+	for(i=1;i<len;i++){
+		c=Pattern[i];
+		coding=code[c];
+		if(coding<0){
+			Left=1;
+			Right=0;
+			break;
+		}
+		l0=start[coding];
+		r0=start[coding+1]-1;
+		l=Left;
+		r=Right;
+		Right=Phi0->RightBoundary(r0,l,r);
+		Left= Phi0->LeftBoundary(l0,l,r);
+		if(Left>Right){
+			//cout<<Left<<" "<<Right<<endl;
+			Left=1;
+			Right=0;
+			//cout<<Left<<" "<<Right<<endl;
+			break;
+		}
+	}
+	//cout<<i<<endl;
+	L=Left;
+	R=Right;
+	return ;
+}
+*/
 void CSA::Search2(const char *Pattern, integer &L, integer &R){
 	integer len=strlen(Pattern);
 	if(len==0){
@@ -255,7 +307,7 @@ void CSA::Search2(const char *Pattern, integer &L, integer &R){
 	}
 	unsigned char c=Pattern[len-1];
 	integer coding=code[c];
-	if(coding>alphabetsize-1||coding<0){
+	if(coding <0||coding>alphabetsize-1){
 		L=1;
 		R=0;
 		return ;
