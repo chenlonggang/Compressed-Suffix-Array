@@ -45,7 +45,7 @@
 		char  sequence[len+1]={0};
 		int start=0;
 		int len =20;
-		csa.Extracting(start,len,sequence);
+		csa.Decompress(start,len,sequence);
 		cout<<"T[start...start+len-1] is "<<sequence<<endl;
 
 		csa.Save("index.csa");//serialize the fm object to file index.csa
