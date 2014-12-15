@@ -390,6 +390,8 @@ integer GAM_Phi::RightBoundary(integer pr,integer l,integer r)
 		else
 			rb=m-1;
 	}
+	if(b<0)
+		return 0;
 	x=this->samples->GetValue(b);
 	ans=l-1;
 	if(r>(b+1)*L-1)
@@ -506,7 +508,7 @@ integer GAM_Phi::LeftBoundary(integer pl,integer l,integer r)
 		else
 			lb=m+1;
 	}
-	if(b==0)
+	if(b<=0)
 		return 0;
 	x=this->samples->GetValue(b-1);
 	if(r>b*L-1)
