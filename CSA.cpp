@@ -1,4 +1,4 @@
-/*============================================
+/*============i================================
 # Filename: CSA.cpp
 # Ver 1.0 2014-06-09
 # Copyright (C) 2014 ChenLonggang (chenlonggang.love@163.com)
@@ -18,8 +18,7 @@ the Free Software Foundation; either version 2 or later of the License.
 using namespace std;
 #define SearchKind 2
 
-integer CSA::Save(const char * indexfile)
-{
+integer CSA::save(const char * indexfile){
 	savekit s(indexfile);
 
 	s.writeu64(198809102510);
@@ -43,15 +42,13 @@ integer CSA::Save(const char * indexfile)
 	//incode
 	s.writeinteger(alphabetsize);
 	s.writeintegerarray(incode,alphabetsize);
-
 	//phi0
 	Phi0->write(s);
 	s.close();
 	return 0;
 }
 
-integer CSA::Load(const char * indexfile)
-{
+integer CSA::load(const char * indexfile){
 	loadkit s(indexfile);
 	u64 magicnum;
 	s.loadu64(magicnum);
@@ -94,46 +91,58 @@ integer CSA::Load(const char * indexfile)
 	return 0;
 }
 
-CSA::CSA(const char * sourcefile,integer L,integer D,integer phitype)
-{
-		this->SL=L*18;
-		this->L =L;
-		this->D =D;
-		this->RD=D*16;
-		this->code =new integer[256];
-		for(integer i=0;i<256;i++)
-			code[i]=0;
+CSA::CSA(const char * sourcefile,integer L,integer D,integer phitype){
+	this->SL=L*18;
+	this->L =L;
+	this->D =D;
+	this->RD=D*16;
+	this->code =new integer[256];
+	for(integer i=0;i<256;i++)
+		code[i]=0;
 
-		this->alphabetsize =0;
-		uchar *T=NULL;
-		T=Getfile(sourcefile);
-		statics(T);
-		integer *SA=new integer[n];
-		//cout<<"before SA"<<endl;
-		divsufsort64(T,SA,n);
-		//cout<<"SA is ok"<<endl;
-		parmaters p={alphabetsize,n,SL,L,start,lastchar,SA,T,code,phitype};
-		CreateSupportStructer(&p);
+	this->alphabetsize =0;
+	uchar *T=NULL;
+	T=Getfile(sourcefile);
+	statics(T);
+	integer *SA=new integer[n];
+	//cout<<"before SA"<<endl;
+	divsufsort64(T,SA,n);
+	//cout<<"SA is ok"<<endl;
+	parmaters p={alphabetsize,n,SL,L,start,lastchar,SA,T,code,phitype};
+	CreateSupportStructer(&p);
 
-		if(SA!=NULL)
-			delete [] SA;
-		if(T!=NULL)
-			delete [] T;
-		cout<<"CSA  is done"<<endl;
+	if(SA!=NULL)
+		delete [] SA;
+	if(T!=NULL)
+		delete [] T;
+	cout<<"CSA  is done"<<endl;
 }
 
-integer CSA::GetN()
-{
+integer CSA::getN(){
 	return n;
 }
 
-integer CSA::Getalphabetsize()
-{
+integer CSA::getAlphabetsize(){
 	return this->alphabetsize;
 }
 
-CSA::~CSA(void)
-{
+integer CSA::sizeInByte(){
+	return Phi0->Size()+SAL->GetMemorySize()+RankL->GetMemorySize();
+}
+
+integer CSA::sizeInByteForCount(){
+	return Phi0->Size();
+}
+
+double CSA::compressRatio(){
+	return sizeInByte()/(getN()*1.0);
+}
+
+double CSA::compressRatioForCount(){
+	return sizeInByteForCount()/(getN()*1.0);
+}
+
+CSA::~CSA(void){
 	delete SAL;
 	delete RankL;
 	delete [] start;
@@ -142,9 +151,7 @@ CSA::~CSA(void)
 	delete [] incode;
 }
 
-
-bool CSA::Existential(const char *Pattern)
-{
+bool CSA::existential(const char *Pattern){
 	integer L=0;
 	integer R=0;
 	Search2(Pattern,L,R);
@@ -155,18 +162,15 @@ bool CSA::Existential(const char *Pattern)
 		return false;
 }
 
-void CSA::Counting(const char *Pattern,integer &num)
-{
+void CSA::counting(const char *Pattern,integer &num){
 	integer L=0;
 	integer R=0;
-
 	Search2(Pattern,L,R);
-	cout<<L<<" "<<R<<endl;
+	//cout<<L<<" "<<R<<endl;
 	num=R-L+1;
 }
 
-void CSA::statics(uchar * T)
-{
+void CSA::statics(uchar * T){
 	for(integer i=0;i<n;i++)
 		code[T[i]]++;
 
@@ -179,8 +183,7 @@ void CSA::statics(uchar * T)
 	integer k=1;
 	integer pre=0;
 	for(integer i=0;i<256;i++)
-		if(code[i]!=0)
-		{
+		if(code[i]!=0){
 			start[k]=pre+code[i];
 			pre=start[k];
 			k++;
@@ -188,8 +191,7 @@ void CSA::statics(uchar * T)
 	this->incode =new integer[this->alphabetsize];
 	k=0;
 	for(integer i=0;i<256;i++)
-		if(code[i]!=0)
-		{
+		if(code[i]!=0){
 			code[i]=k;
 			incode[k]=i;
 			k++;
@@ -197,21 +199,18 @@ void CSA::statics(uchar * T)
 		else
 			code[i]=-1;
 	lastchar=T[n-1];
-
 }
 
 
-uchar* CSA::Getfile(const char * filename)
-{
+uchar* CSA::Getfile(const char * filename){
 
 	FILE *fp=fopen(filename,"r+");
-	if(fp==NULL)
-	{
+	if(fp==NULL){
 		cout<<"Be sure that the file is available"<<endl;
 		exit(0);
 	}
-	fseek(fp , 0, SEEK_END);       //置读写指针为文件末尾
-    this->n = ftell(fp);           //返回读写指针偏移量
+	fseek(fp , 0, SEEK_END); 
+    this->n = ftell(fp);
 	uchar * T=new uchar[n];
 	fseek(fp , 0, SEEK_SET);
 
@@ -224,14 +223,8 @@ uchar* CSA::Getfile(const char * filename)
 	fclose(fp);
 	return T;
 }
-double CSA::Size()
-{
-	return (SAL->GetMemorySize ()+Phi0->Size()+RankL->GetMemorySize ())/(1.0*n);
-}
 
-
-void CSA::CreateSupportStructer(parmaters *csa)
-{
+void CSA::CreateSupportStructer(parmaters *csa){
 	integer i=0;
 	integer j=0;
 	integer step1=D;
@@ -239,33 +232,24 @@ void CSA::CreateSupportStructer(parmaters *csa)
 	SAL=new InArray(n/step1+1,blog(n));
 	RankL=new InArray(n/step2+1,blog(n));
 	for(i=0,j=0;i<n;i=i+step1,j++)
-	{
 		SAL->SetValue (j,csa->SA[i]);
-	}
 
 	for(i=0;i<n;i++)
-	{
 		if(csa->SA[i]%step2==0)
 			RankL->SetValue (csa->SA[i]/step2,i);
-	}
-	//cout<<"before phi"<<endl;
 	Phi0=new Phi(csa);
-	//cout<<"phi is OK"<<endl;
 }
 
-void CSA::Search2(const char *Pattern, integer &L, integer &R)
-{
+void CSA::Search2(const char *Pattern, integer &L, integer &R){
 	integer len=strlen(Pattern);
-	if(len==0)
-	{
+	if(len==0){
 		L=1;
 		R=0;
 		return;
 	}
 	unsigned char c=Pattern[len-1];
 	integer coding=code[c];
-	if(coding>alphabetsize-1||coding<0)
-	{
+	if(coding<0||coding>alphabetsize-1){
 		L=1;
 		R=0;
 		return ;
@@ -275,12 +259,10 @@ void CSA::Search2(const char *Pattern, integer &L, integer &R)
 	integer l0=0;
 	integer r0=0;
 
-	for(integer i=len-2;i>=0;i--)
-	{
+	for(integer i=len-2;i>=0;i--){
 		c=Pattern[i];
 		coding=code[c];
-		if(coding<0)
-		{
+		if(coding<0){
 			Left=1;
 			Right=0;
 			break;
@@ -290,8 +272,7 @@ void CSA::Search2(const char *Pattern, integer &L, integer &R)
 		
 		Right=Phi0->RightBoundary(Right,l0,r0);
 		Left=Phi0->LeftBoundary(Left,l0,r0);
-		if(Left>Right)
-		{
+		if(Left>Right){
 			Left=1;
 			Right=0;
 			break;
@@ -300,11 +281,9 @@ void CSA::Search2(const char *Pattern, integer &L, integer &R)
 	L=Left;
 	R=Right;
 	return ;
-
-
 }
-void CSA::Search(const char *Pattern, integer &L, integer &R)
-{
+
+void CSA::Search(const char *Pattern, integer &L, integer &R){
 	integer templeft;
 	integer tempright;
 	integer jj;
@@ -319,22 +298,18 @@ void CSA::Search(const char *Pattern, integer &L, integer &R)
 	integer len=strlen(Pattern);
 	unsigned char c=Pattern[len-1];
 	integer coding=code[c];
-	if(coding>alphabetsize-1)
-	{
+	if(coding>alphabetsize-1){
 		L=1;
 		R=0;
 		return ;
 	}
 
 	Left=start[coding];
-	Right=start[coding+1]-1;//start数组的大小为alphabetsize+1，实际有用的为alphabetsize个，最后一个是为了防止coding+1越界的，
-	                                     //所以start[alphabetsize]，即start数组的最后一个职位n。相见Phi0类的构造函数。
-	for(i=len-2;i>=0;i--)
-	{
+	Right=start[coding+1]-1;
+	for(i=len-2;i>=0;i--){
 		c=Pattern[i];
 		coding =code[c];
-		if(coding>alphabetsize-1)
-		{
+		if(coding<0||coding>alphabetsize-1){
 			L=1;
 			R=0;
 			return ;
@@ -343,18 +318,15 @@ void CSA::Search(const char *Pattern, integer &L, integer &R)
 		right=start[coding+1]-1;
 		if(coding==code[lastchar])
 			left=left+1;
-		if(left>right || Phi0->GetValue (left)>Right || Phi0->GetValue (right)<Left)
-		{
+		if(left>right || Phi0->GetValue (left)>Right || Phi0->GetValue (right)<Left){
  			L=1;
 			R=0;
 			return ;
 		}
-		else
-		{
+		else{
 			mleft=left;
 			mright=right;
-			while(mright-mleft>1)
-			{
+			while(mright-mleft>1){
 				middle=(mleft+mright)/2;
 				jj=Phi0->GetValue (middle);
 				if(jj<Left)
@@ -369,8 +341,7 @@ void CSA::Search(const char *Pattern, integer &L, integer &R)
 				templeft=mright;
 			mleft=left;
 			mright=right;
-			while(mright-mleft>1)
-			{
+			while(mright-mleft>1){
 				middle=(mleft+mright)/2;
 				jj=Phi0->GetValue (middle);
 				if(jj>Right)
@@ -385,8 +356,7 @@ void CSA::Search(const char *Pattern, integer &L, integer &R)
 				tempright=mleft;
 			Left=templeft;
 			Right=tempright;
-		    if(Left>Right)
-			{
+		    if(Left>Right){
 				L=1;
 				R=0;
 				return;
@@ -399,12 +369,10 @@ void CSA::Search(const char *Pattern, integer &L, integer &R)
 		L=Left,R=Right;
 }
 
-integer CSA::lookup(integer i)
-{
+integer CSA::lookup(integer i){
 	integer D=this->D;
 	integer step=0;
-	while(i%D!=0)
-	{
+	while(i%D!=0){
 		i=Phi0->GetValue(i);
 		step++;
 	}
@@ -432,8 +400,7 @@ void CSA::SelfTesting()
 */
 
 //得到位置i的排名
-integer CSA::Inverse(integer i)
-{
+integer CSA::Inverse(integer i){
 	integer RD=this->RD ;
 	integer anchor=i/RD;
 	integer p=anchor*RD;
@@ -446,27 +413,28 @@ integer CSA::Inverse(integer i)
 	return sa;
 }
 
-void CSA::Decompress(integer i, integer len,unsigned char *p)
-{
-	//integer * phi=Phi0->GetPhiArray();
+uchar * CSA::extracting(integer i, integer len){
+	if(i+len>n){
+		cout<<"overshoot the length of the Doc"<<endl;
+		return NULL;
+	}
+	uchar *p=new uchar[len+1];
+	p[len]='\0';
 	integer k=0;
 	i=this->Inverse (i);
-	for(integer j=0;j<len;j++)
-	{
+	for(integer j=0;j<len;j++){
 		k=this->Phi_list (i);
 		p[j]=this->Character (k);
-		//i=phi[i];
 		i=Phi0->GetValue(i);
 	}
+	return p;
 }
 
-integer CSA::Phi_list(integer i)
-{
+integer CSA::Phi_list(integer i){
 	integer l=0;
 	integer r=this->alphabetsize ;
 	integer m=0;
-	while(l<r)
-	{
+	while(l<r){
 		m=(l+r)/2;
 		if(start[m]<=i)
 			l=m+1;
@@ -476,41 +444,32 @@ integer CSA::Phi_list(integer i)
 	return r-1;
 }
 
-integer CSA::Character(integer i)
-{
+integer CSA::Character(integer i){
 	return incode[i];
 }
 
-integer CSA::blog(integer x)
-{
+integer CSA::blog(integer x){
 	integer ans=0;
-	while(x>0)
-	{
+	while(x>0){
 		ans++;
 		x=x>>1;
 	}
 	return ans;
 }
 
-void CSA::Locating(const char *Pattern, integer &num, integer *&pos)
-{
+integer * CSA::locating(const char *Pattern, integer &num){
 	integer L=0;
 	integer R=0;
 	this->Search2(Pattern,L,R);
 	num=R-L+1;
 	if(L>R)
-		return ;
-	pos=new integer[num];
-//	if(num>50)
-//		Enumerative2(L,R,pos);
-//	else
-		Enumerative1(L,R,pos);
-
-
+		return NULL;
+	integer *pos=new integer[num];
+	Enumerative1(L,R,pos);
+	return pos;
 }
 
-void CSA::Enumerative2(integer L,integer  R, integer *&pos)
-{
+void CSA::Enumerative2(integer L,integer  R, integer *&pos){
 	integer D=this->D;
 	InArray *SAL=this->SAL ;
 	integer * distance=new integer[R-L+1];
@@ -520,42 +479,34 @@ void CSA::Enumerative2(integer L,integer  R, integer *&pos)
 	integer q=0;
 	integer s=0;
 	integer i=0;
-	for(integer i=0;i<R-L+1;i++)
-	{
+	for(integer i=0;i<R-L+1;i++){
 		pos[i]=0;
 		pred[i]=-1;
 	}
-	for(integer j=L;j<=R;j++)
-	{
+	for(integer j=L;j<=R;j++){
 		f=0;
 		i=j;
 		step=0;
-		while(i%D!=0)
-		{
+		while(i%D!=0){
 			i=this->Phi0->GetValue(i);
 			step++;
-			if(L<=i&&i<=R)
-			{
+			if(L<=i&&i<=R){
 				distance[j-L]=step;
 				pred[i-L]=j;
 				f=1;
 				break;
 			}
 		}
-		if(f==0)
-		{
+		if(f==0){
 			i=i/D;
 			pos[j-L]=SAL->GetValue(i)-step;
 		}
 	}
 	integer fu=0;
-	for(integer j=L;j<=R;j++)
-	{
-		if(pos[j-L]!=0)
-		{
+	for(integer j=L;j<=R;j++){
+		if(pos[j-L]!=0){
 			q=j;
-			while(pred[q-L]!=-1)
-			{
+			while(pred[q-L]!=-1){
 				fu++;
 				s=pos[q-L];
 				i=pred[q-L];
@@ -569,14 +520,9 @@ void CSA::Enumerative2(integer L,integer  R, integer *&pos)
 	delete [] pred;
 	delete [] distance;
 }
-void CSA::Enumerative1(integer L,integer R,integer *&pos)
-{
 
-
+void CSA::Enumerative1(integer L,integer R,integer *&pos){
 	integer i;
 	for(i=L;i<=R;i++)
-	{
 		pos[i-L]=lookup (i);
-	}
-
 }

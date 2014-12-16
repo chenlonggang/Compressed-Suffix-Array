@@ -29,19 +29,22 @@ public:
 	
 	CSA(){};
 	CSA(const char * sourcefile,integer L=128,integer D=32,integer phitype=0);
-	bool Existential(const char * Pattern);
-	void Counting(const char * Pattern,integer &num);
-	void Locating(const char * Pattern,integer &num,integer *&pos);
-	
-	integer Save(const char * indexfile);
-	integer Load(const char * indexfile);
-	
-	double Size();
-	void Decompress(integer i,integer len,unsigned char *p);
-	~CSA(void);
+	~CSA();
 
-	integer Getalphabetsize();
-	integer GetN();
+	bool existential(const char * Pattern);
+	void counting(const char * Pattern,integer &num);
+	integer * locating(const char * Pattern,integer &num);
+	uchar * extracting(integer start,integer len);
+	
+	integer save(const char * indexfile);
+	integer load(const char * indexfile);
+
+	integer getAlphabetsize();
+	integer getN();
+	integer sizeInByte();
+	integer sizeInByteForCount();
+	double compressRatio();
+	double compressRatioForCount();
 private:
 	CSA(const CSA &);
 	CSA& operator=(const CSA & right);

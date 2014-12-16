@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
 			long int  num=0;
 			if(csa!=NULL)
 			{
-				csa->Counting(result[1].data(),num);
+				csa->counting(result[1].data(),num);
 				cout<<"occs: "<<num<<endl;
 			}
 			else
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 			long int num=0;
 			if(csa!=NULL)
 			{
-				csa->Locating(result[1].data(),num,pos);
+				long * pos=csa->locating(result[1].data(),num);
 				showpos(pos,num);
 				delete [] pos;
 			}
@@ -97,16 +97,16 @@ int main(int argc, char* argv[])
 			if(csa!=NULL)
 				delete csa;
 			csa=new CSA();
-			csa->Load(result[1].data());
+			csa->load(result[1].data());
 		}
 		else if(result[0]=="save")
 		{
-			csa->Save(result[1].data());
+			csa->save(result[1].data());
 		}
 		else if(result[0]=="size")
 		{
 			if(csa!=NULL)
-				cout<<csa->Size()<<endl;
+				cout<<csa->compressRatioForCount()*8<<endl;
 			else
 				cout<<"build a csa first"<<endl;
 		}
