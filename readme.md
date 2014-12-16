@@ -46,9 +46,9 @@
 		unsigned char *sequence=csa.extracting(start,len);
 		cout<<"T[start...start+len-1] is "<<sequence<<endl;
 
-		csa.Save("index.csa");//serialize the fm object to file index.csa
+		csa.save("index.csa");//serialize the fm object to file index.csa
 		CSA csa2;
-		csa2->Load("index.csa");//restore the fm object from file index.csa
+		csa2->load("index.csa");//restore the fm object from file index.csa
 
 		return 0;
 	}
