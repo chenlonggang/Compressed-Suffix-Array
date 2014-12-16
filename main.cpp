@@ -15,24 +15,6 @@ void splitcommand(string command,string result[]);
 void showpos( long int * pos,long int num);
 int main(int argc, char* argv[])
 {
-/*
-	ifstream source("path.txt");
-	char sourcefile[100];
-	int filesnum=atoi(argv[1]);
-	for(int i=0;i<filesnum;i++)
-	{
-		source.getline(sourcefile,200);
-		CSA csa(sourcefile);
-		int n=csa.GetN();
-		unsigned char *t=new unsigned char[n];
-		time_t t1=clock();
-		csa.Decompress(0,n,t);
-		time_t t2=clock();
-		cout<<"filename:"<<sourcefile<<endl;
-		cout<<"	decompress time: "<<(t2-t1)<<" "<<(t2-t1)/1000000.0<<endl;
-		delete [] t;
-	}
-*/
 	usage();
 	string command;
 	string  result[3];
