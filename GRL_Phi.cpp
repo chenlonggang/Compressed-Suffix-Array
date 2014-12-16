@@ -4,9 +4,11 @@
 #include<fstream>
 #include<iostream>
 using namespace std;
+
 GRL_Phi::GRL_Phi()
 {
 }
+
 GRL_Phi::GRL_Phi(parmaters * csa)
 {
 	this->tablewidth=16;
@@ -24,7 +26,6 @@ GRL_Phi::GRL_Phi(parmaters * csa)
 	this->SamplingAndCoding (csa);
 	//Test();
 	delete [] phivalue;
-
 }
 
 GRL_Phi::~GRL_Phi(void)
@@ -39,20 +40,42 @@ GRL_Phi::~GRL_Phi(void)
 	delete [] decodebitsnum;
 	delete [] decoderesult;
 }
+
 void  GRL_Phi::Append (integer x)
 {
 	u64 y=x;
 	integer zeronums=blogsize(y)-1;
 	index=index+zeronums;
 	integer valuewidth=zeronums+1;
+	
+	integer anchor_start=(index>>5);
+	integer anchor_end=(index+valuewidth)>>5;
+	if(anchor_end-anchor_start<2){
+		i32 overloop =((anchor_start+2)<<5)-index-valuewidth;
+		y=(y<<overloop);
+		sequence[anchor_start]=(sequence[anchor_start]|(y>>32));
+		sequence[anchor_start+1]=(sequence[anchor_start+1]|(y&0xffffffff));
+		index=index+valuewidth;
+	}
+	else{
+		i32 s1=(anchor_start+1)*32-index;
+		i32 s2=valuewidth-32-s1;
+		sequence[anchor_start]=(sequence[anchor_start]|(y>>(valuewidth-s1)));
+		sequence[anchor_start+1]=(sequence[anchor_start+1]|((y>>s2)&(0xffffffff)));
+		sequence[anchor_start+2]=(sequence[anchor_start+2]|
+				(((((1ULL<<s2)-1)&y)<<(32-s2))&(0xffffffff)));
+		index=index+valuewidth;
+	}
+	/*
 	integer anchor=(index>>5);
 	integer overloop=((anchor+2)<<5)-index-valuewidth;
 	y=(y<<overloop);
 	sequence[anchor]=(sequence[anchor]|(y>>32));
 	sequence[anchor+1]=(sequence[anchor+1]|(y&0xffffffff));
 	index=index+valuewidth;
-
+	*/
 }
+
 void GRL_Phi::Test ()
 {
 	integer i=0;
@@ -71,6 +94,7 @@ void GRL_Phi::Test ()
 	}
 	
 }
+
 integer GRL_Phi::blogsize(integer x) 
 {
 	
@@ -82,7 +106,6 @@ integer GRL_Phi::blogsize(integer x)
 	}
 	return len;
 }
-
 
 integer GRL_Phi::GetValue(integer index)
 {
@@ -168,10 +191,8 @@ integer GRL_Phi::GetValue(integer index)
 		}
 	}
 	return (base+x)%n;
-	
-
-
 }
+
 void GRL_Phi::SamplingAndCoding(parmaters *csa)
 {
 
@@ -364,10 +385,10 @@ void GRL_Phi::SamplingAndCoding(parmaters *csa)
 	 }
 }
 
-
 integer GRL_Phi::GetMemorySize()
 {
-	return samples->GetMemorySize ()+this->offsects ->GetMemorySize ()+this->lenofsequence *4+this->lenofsuperoffset *4;
+	return samples->GetMemorySize ()+this->offsects ->GetMemorySize ()+
+		this->lenofsequence *4+this->lenofsuperoffset *4;
 }
 
 integer GRL_Phi::GetOneBit(integer i) 
@@ -397,34 +418,27 @@ void GRL_Phi::InitionalTables()
 	integer x=0;
 	integer d=0;
 	integer preb=0;
-	for(u32 i=0;i<tablesize;i++)
-	{
+	for(u32 i=0;i<tablesize;i++){
 		B[0]=(i<<16);
 		b=0;
 		num=0;
 		x=0;
 		d=0;
-		while(1)
-		{
+		while(1){
 			this->Decodegamma(b, d);
 			if(b>tablewidth)
 				break;
-			if(d<=this->b*2)
-			{
-				if(d%2==0)
-				{
+			if(d<=this->b*2){
+				if(d%2==0){
 					x=x+d/2;
 					num=num+d/2;
-
 				}
-				else
-				{
+				else{
 					x=x+(d+3)/2;
 					num++;
 				}
 			}
-			else
-			{
+			else{
 				x=x+d+1-this->b;
 				num++;
 			}
@@ -447,14 +461,11 @@ integer  GRL_Phi::Decodegamma(integer & position, integer &x)
 
 integer GRL_Phi::ZerosRun(integer &position) 
 {
-	
-	
 	integer y=0;
 	integer D=this->tablewidth ;
 	integer x=this->GetBits(position,D);
 	integer w=y=this->zerostable [x];
-	while(y==D)
-	{
+	while(y==D){
 		position=position+D;
 		x=this->GetBits (position,D);
 		y=this->zerostable [x];
@@ -466,15 +477,31 @@ integer GRL_Phi::ZerosRun(integer &position)
 
 u64 GRL_Phi::GetBits (integer position,integer num)
 {
-	
+	/*
 	u32 anchor=position>>5;
 	u64 temp1=sequence[anchor];
 	u32 temp2=sequence[anchor+1];
 	temp1=(temp1<<32)+temp2;
 	integer overloop=((anchor+2)<<5)-position-num;
 	return (temp1>>overloop)&((1<<num)-1);
-   
-
+	*/
+	integer anchor_start=position>>5;
+	integer anchor_end=(position+num)>>5;
+	if(anchor_end-anchor_start<2){
+		u64 temp1=sequence[anchor_start];
+		u32 temp2=sequence[anchor_start+1];
+		temp1=(temp1<<32)+temp2;
+		integer overloop=((anchor_start+2)<<5)-position-num;
+		return (temp1>>overloop)&((1<<num)-1);
+	}
+	else{
+		u64 temp1=sequence[anchor_start+0];
+		u64 temp2=sequence[anchor_start+1];
+		u64 temp3=sequence[anchor_start+2];
+		i32 s1=(anchor_start+1)*32-index;
+		i32 s2=num-32-s1;
+		return ((temp1<<(32+s2))+(temp2<<s2)+(temp3>>(32-s2)))&((1ULL<<num)-1);
+	}
 }
 
 integer GRL_Phi::RightBoundary(integer pr,integer l,integer r)
@@ -487,23 +514,19 @@ integer GRL_Phi::RightBoundary(integer pr,integer l,integer r)
 	integer b=lb-1;
 	integer m=0;
 	integer x=0;
-	while(lb<=rb)
-	{
+	while(lb<=rb){
 		m=(lb+rb)>>1;
 		x=this->samples->GetValue(m);
-		if(x==pr)
-		{
+		if(x==pr){
 			b=m;
 			break;
 		}
-		if(x<pr)
-		{
+		if(x<pr){
 			b=m;
 			lb=m+1;
 		}
 		else
 			rb=m-1;
-	
 	}
 	
 	x=this->samples->GetValue(b);
@@ -514,34 +537,27 @@ integer GRL_Phi::RightBoundary(integer pr,integer l,integer r)
 	integer d=0;
 	integer position=this->superoffset[m/SL]+this->offsects->GetValue(m/L);
 	
-	while(m<l)
-	{
+	while(m<l){
 		this->Decodegamma(position,d);
-		if(d<=this->b*2)
-		{
-			if(d%2==0)
-			{
-				if(m+d/2>=l)
-				{
+		if(d<=this->b*2){
+			if(d%2==0){
+				if(m+d/2>=l){
 					x=mod(x+d/2-(m+d/2-l));
 					position=position-(m+d/2-l);
 					m=l;
 					break;
 				}
-				else
-				{
+				else{
 					x=x+d/2;
 					m=m+d/2;
 				}
 			}
-			else
-			{
+			else{
 				x=(x+(d+3)/2)%n;
 				m++;
 			}
 		}
-		else
-		{
+		else{
 			x=x+(d+1-this->b)%n;
 			m++;
 		}
@@ -551,72 +567,55 @@ integer GRL_Phi::RightBoundary(integer pr,integer l,integer r)
 	integer num=0;
 	integer bits=0;
 	bool loop =false;
-	while(x<=pr && m<r)
-	{ 
+	while(x<=pr && m<r){ 
 		loop =true;
 		p=this->GetBits(position,16);
 		num=this->decodevaluenum[p];
-		if(num==0)
-		{
+		if(num==0){
 			bits=this->Decodegamma(position,d);
-			if(d<this->b*2)
-			{
-				if(d%2==0)
-				{
+			if(d<this->b*2){
+				if(d%2==0){
 					m=m+d/2;
 					x=x+d/2;
 				}
-				else
-				{
+				else{
 					m=m+1;
 					x=x+(d+3)/2;
 				}
 			}
-			else
-			{
+			else{
 				m++;
 				x=x+d+1-this->b;
 			}
 		}
-		else
-		{
+		else{
 			m=m+num;
 			position=position+this->decodebitsnum[p];
 			x=mod(x+this->decoderesult[p]);
 		}
 	}
 
-
-
-	if(loop)
-	{
-		if(num!=0)
-		{
+	if(loop){
+		if(num!=0){
 			x=mod(x-this->decoderesult[p]);
 			position=position-this->decodebitsnum[p];
 			m=m-num;
 		}
-		else
-		{
-			if(d<this->b*2)
-			{
-				if(d%2==0)
-				{
+		else{
+			if(d<this->b*2){
+				if(d%2==0){
 					m=m-d/2;
 					x=mod(x-d/2);
 				}
-				else
-				{
+				else{
 					m=m-1;
 					x=mod(x-(d+3)/2);
 				}
 			}
-			else
-			{
+			else{
 				m=m-1;
 				x=mod(x-(d+1-this->b));
 			}
-
 			position=position-bits;
 		}
 	}
@@ -638,14 +637,11 @@ integer GRL_Phi::RightBoundary(integer pr,integer l,integer r)
 
 
 	num=1;
-	while(1)
-	{
-		if(x>pr)
-		{
+	while(1){
+		if(x>pr){
 			if(num==1)
 				break;
-			else
-			{
+			else{
 				ans=m+d/2-(x-pr+1);
 				break;
 			}
@@ -655,21 +651,17 @@ integer GRL_Phi::RightBoundary(integer pr,integer l,integer r)
 		if(m>r)
 			break;
 		Decodegamma(position,d);
-		if(d<this->b*2)
-		{
-			if(d%2==0)
-			{
+		if(d<this->b*2){
+			if(d%2==0){
 				num=d/2;
 				x=mod(x+d/2);
 			}
-			else
-			{
+			else{
 				num=1;
 				x=x+(d+3)/2;
 			}
 		}
-		else
-		{
+		else{
 			num=1;
 			x=mod(x+d+1-this->b);
 		}
@@ -689,17 +681,14 @@ integer GRL_Phi::LeftBoundary(integer pl,integer l,integer r)
 	integer x=0;
 
 	
-	while(lb<=rb)
-	{
+	while(lb<=rb){
 		m=(lb+rb)>>1;
 		x=this->samples->GetValue(m);
-		if(x==pl)
-		{
+		if(x==pl){
 			b=m;
 			break;
 		}
-		if(x>pl)
-		{
+		if(x>pl){
 			b=m;
 			rb=m-1;
 		}
@@ -716,106 +705,81 @@ integer GRL_Phi::LeftBoundary(integer pl,integer l,integer r)
 	integer position=this->superoffset[m/SL]+this->offsects->GetValue(m/L);
 	integer d=0;
 
-
-	while(m<l)
-	{
+	while(m<l){
 		this->Decodegamma(position,d);
-		if(d<=this->b*2)
-		{
-			if(d%2==0)
-			{
-				if(m+d/2>=l)
-				{
+		if(d<=this->b*2){
+			if(d%2==0){
+				if(m+d/2>=l){
 					x=(x+d/2-(m+d/2-l))%n;
 					position=position-(m+d/2-l);
 					m=l;
 					break;
 				}
-				else
-				{
+				else{
 					x=x+d/2;
 					m=m+d/2;
 				}
 			}
-			else
-			{
+			else{
 				x=(x+(d+3)/2)%n;
 				m++;
 			}
 		}
-		else
-		{
+		else{
 			x=x+(d+1-this->b)%n;
 			m++;
 		}
-
 	}
 	integer p=0;
 	integer num=0;
 	integer bits=0;
 	bool loop=false;
-	while(x<pl && m<r)
-	{
+	while(x<pl && m<r){
 		loop =true;
 		p=this->GetBits(position,16);
 		num=this->decodevaluenum[p];
-		if(num!=0)
-		{
+		if(num!=0){
 			m=m+num;
 			position=position+this->decodebitsnum[p];
 			x=(x+this->decoderesult[p])%n;
-
 		}
-		else
-		{
+		else{
 			bits=this->Decodegamma(position,d);
-			if(d<this->b*2)
-			{
-				if(d%2==0)
-				{
+			if(d<this->b*2){
+				if(d%2==0){
 					m=m+d/2;
 					x=x+d/2;
 				}
-				else
-				{
+				else{
 					m=m+1;
 					x=x+(d+3)/2;
 				}
 			}
-			else
-			{
+			else{
 				m++;
 				x=x+d-this->b+1;
 			}
-
 		}
 	}
 
-	if(loop)
-	{
-		if(num!=0)
-		{
+	if(loop){
+		if(num!=0){
 			x=mod(x-this->decoderesult[p]);
 			position=position-this->decodebitsnum[p];
 			m=m-num;
 		}
-		else
-		{
-			if(d<this->b*2)
-			{
-				if(d%2==0)
-				{
+		else{
+			if(d<this->b*2){
+				if(d%2==0){
 					m=m-d/2;
 					x=mod(x-d/2);
 				}
-				else
-				{
+				else{
 					m=m-1;
 					x=mod(x-(d+3)/2);
 				}
 			}
-			else
-			{
+			else{
 				m=m-1;
 				mod(x-(d+1-this->b));
 			}
@@ -824,17 +788,13 @@ integer GRL_Phi::LeftBoundary(integer pl,integer l,integer r)
 	}
 	
 	num=1;
-	while(1)
-	{
-		if(x>=pl)
-		{
-			if(num==1)
-			{
+	while(1){
+		if(x>=pl){
+			if(num==1){
 				ans=m;
 				break;
 			}
-			else
-			{
+			else{
 				ans=m+num-(x-pl);
 				break;
 			}
@@ -844,28 +804,24 @@ integer GRL_Phi::LeftBoundary(integer pl,integer l,integer r)
 			break;
 		Decodegamma(position,d);
 		
-		if(d<this->b*2)
-		{
-			if(d%2==0)
-			{
+		if(d<this->b*2){
+			if(d%2==0){
 				num=d/2;
 				x=mod(x+d/2);
 			}
-			else
-			{
+			else{
 				num=1;
 				x=x+(d+3)/2;
 			}
 		}
-		else
-		{
+		else{
 			num=1;
 			x=mod(x+d+1-this->b);
 		}
 	}
-		
 	return ans;
 }
+
 integer GRL_Phi::mod(integer x)
 {
 	if(x<0)
@@ -873,6 +829,7 @@ integer GRL_Phi::mod(integer x)
 	else
 		return x%n;
 }
+
 integer GRL_Phi::write(savekit & s)
 {
 	s.writeinteger(n);
@@ -897,6 +854,7 @@ integer GRL_Phi::write(savekit & s)
 
 	return 1;
 }
+
 integer GRL_Phi::load(loadkit &s)
 {
 	s.loadinteger(this->n);
@@ -938,29 +896,23 @@ integer * GRL_Phi::GetPhiArray()
 	integer d=0;
 	index=0;
 	integer times=n/b+1;
-	for(integer i=0;i<times;i++)
-	{
+	for(integer i=0;i<times;i++){
 		pre=phi[i*b]=samples->GetValue(i);
-		for(integer j=0;j<(i+1)*b && j<n;)
-		{
+		for(integer j=0;j<(i+1)*b && j<n;){
 			this->Decodegamma(index,d);
-			if(d<=b*2)
-			{
-				if(d%2==0)
-				{
+			if(d<=b*2){
+				if(d%2==0){
 					for(integer k=0;k<d/2;k++)
 						phi[i*b+j+k]=(pre+1+k)%n;
 					j=j+d/2;
 					pre=(pre+d/2)%n;
 				}
-				else
-				{
+				else{
 					phi[i*b+j]=pre=(pre+(d+3)/2)%n;
 					j++;
 				}
 			}
-			else
-			{
+			else{
 				phi[i*b+j]=pre=(pre+d+1-b)%n;
 				j++;
 			}
@@ -968,13 +920,3 @@ integer * GRL_Phi::GetPhiArray()
 	}
 	return phi;
 }
-
-
-
-
-
-
-
-
-
-

@@ -21,12 +21,12 @@ the Free Software Foundation; either version 2 or later of the License.
 class GAM_Phi:public ABS_Phi
 {
 	public:
+		
 		GAM_Phi(parmaters * csa);
 		GAM_Phi();
 		~GAM_Phi();
 
 		integer * GetPhiArray();
-		void GetSubPhiArray(integer index,integer num,integer * phipiece);
 		integer GetValue(integer i);
 		integer RightBoundary(integer r,integer L,integer R);
 		integer LeftBoundary(integer l,integer L,integer R);
@@ -61,6 +61,5 @@ class GAM_Phi:public ABS_Phi
 		void InitionalTables();
 		integer ZerosRun(integer &position );
 		u64 GetBits(integer position ,integer x);
-		integer GetValue(integer i,integer & position);
 };
 #endif
