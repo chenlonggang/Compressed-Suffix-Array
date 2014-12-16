@@ -18,7 +18,7 @@ the Free Software Foundation; either version 2 or later of the License.
 using namespace std;
 #define SearchKind 2
 
-integer CSA::Save(const char * indexfile){
+integer CSA::save(const char * indexfile){
 	savekit s(indexfile);
 
 	s.writeu64(198809102510);
@@ -49,7 +49,7 @@ integer CSA::Save(const char * indexfile){
 	return 0;
 }
 
-integer CSA::Load(const char * indexfile){
+integer CSA::load(const char * indexfile){
 	loadkit s(indexfile);
 	u64 magicnum;
 	s.loadu64(magicnum);
@@ -102,7 +102,7 @@ CSA::CSA(const char * sourcefile,integer L,integer D,integer phitype){
 
 		this->alphabetsize =0;
 		uchar *T=NULL;
-		T=Getfile(sourcefile);
+		T=GetFile(sourcefile);
 		statics(T);
 		integer *SA=new integer[n];
 		
@@ -131,11 +131,11 @@ CSA::CSA(const char * sourcefile,integer L,integer D,integer phitype){
 */
 }
 
-integer CSA::GetN(){
+integer CSA::getN(){
 	return n;
 }
 
-integer CSA::Getalphabetsize(){
+integer CSA::getAlphabetsize(){
 	return this->alphabetsize;
 }
 
@@ -148,7 +148,7 @@ CSA::~CSA(void){
 	delete [] incode;
 }
 
-bool CSA::Existential(const char *Pattern){
+bool CSA::existential(const char *Pattern){
 	integer L=0;
 	integer R=0;
 	Search2(Pattern,L,R);
@@ -159,7 +159,7 @@ bool CSA::Existential(const char *Pattern){
 		return false;
 }
 
-void CSA::Counting(const char *Pattern,integer &num){
+void CSA::counting(const char *Pattern,integer &num){
 	integer L=0;
 	integer R=0;
 
@@ -202,7 +202,7 @@ void CSA::statics(uchar * T){
 
 }
 
-uchar* CSA::Getfile(const char * filename){
+uchar* CSA::GetFile(const char * filename){
 	FILE *fp=fopen(filename,"r+");
 	if(fp==NULL)
 	{
@@ -224,8 +224,20 @@ uchar* CSA::Getfile(const char * filename){
 	return T;
 }
 
-double CSA::Size(){
-	return (SAL->GetMemorySize ()+Phi0->Size()+RankL->GetMemorySize ())/(1.0*n);
+integer CSA::sizeInByte(){
+	return (SAL->GetMemorySize ()+Phi0->Size()+RankL->GetMemorySize ());
+}
+
+integer CSA::sizeInByteForCount(){
+	return Phi0->Size();
+}
+
+double CSA::compressRatio(){
+	return sizeInByte()/(1.0*n);
+}
+
+double CSA::compressRatioForCount(){
+	return sizeInByteForCount()/(1.0*n);
 }
 
 void CSA::CreateSupportStructer(parmaters *csa){
@@ -245,59 +257,7 @@ void CSA::CreateSupportStructer(parmaters *csa){
 	}
 	Phi0=new Phi(csa);
 }
-/*
-void CSA::Search3(const char * Pattern,integer &L, integer &R){
-	
-	integer len=strlen(Pattern);
-	if(len==0){
-		L=0;
-		R=0;
-		return;
-	}
-	uchar c=Pattern[0];
-	integer coding=code[c];
-	if(coding<0){
-		L=1;
-		R=0;
-		return ;
-	}
-	
-	integer Left=start[coding];
-	integer Right=start[coding+1]-1;
-	integer l0=0;
-	integer r0=0;
-	integer l=0;
-	integer r=0;
-	
-	integer i=0;
-	for(i=1;i<len;i++){
-		c=Pattern[i];
-		coding=code[c];
-		if(coding<0){
-			Left=1;
-			Right=0;
-			break;
-		}
-		l0=start[coding];
-		r0=start[coding+1]-1;
-		l=Left;
-		r=Right;
-		Right=Phi0->RightBoundary(r0,l,r);
-		Left= Phi0->LeftBoundary(l0,l,r);
-		if(Left>Right){
-			//cout<<Left<<" "<<Right<<endl;
-			Left=1;
-			Right=0;
-			//cout<<Left<<" "<<Right<<endl;
-			break;
-		}
-	}
-	//cout<<i<<endl;
-	L=Left;
-	R=Right;
-	return ;
-}
-*/
+
 void CSA::Search2(const char *Pattern, integer &L, integer &R){
 	integer len=strlen(Pattern);
 	if(len==0){
@@ -363,8 +323,7 @@ void CSA::Search(const char *Pattern, integer &L, integer &R){
 	}
 
 	Left=start[coding];
-	Right=start[coding+1]-1;//start数组的大小为alphabetsize+1，实际有用的为alphabetsize个，最后一个是为了防止coding+1越界的，
-	                                     //所以start[alphabetsize]，即start数组的最后一个职位n。相见Phi0类的构造函数。
+	Right=start[coding+1]-1;
 	for(i=len-2;i>=0;i--){
 		c=Pattern[i];
 		coding =code[c];
@@ -471,17 +430,21 @@ integer CSA::Inverse(integer i){
 	return sa;
 }
 
-void CSA::Decompress(integer i, integer len,unsigned char *p){
-	//integer * phi=Phi0->GetPhiArray();
+uchar * CSA::extracting(integer i, integer len){
+	if(i+len>n){
+		cout<<"overshoot the length of the Doc."<<endl;
+		return NULL;
+	}
+	uchar *p=new uchar[len+1];
+	p[len]='\0';
 	integer k=0;
 	i=this->Inverse (i);
 	for(integer j=0;j<len;j++){
 		k=this->Phi_list (i);
 		p[j]=this->Character (k);
-		//i=phi[i];
 		i=Phi0->GetValue(i);
 	}
-	//delete [] phi;
+	return p;
 }
 
 integer CSA::Phi_list(integer i){
@@ -511,15 +474,16 @@ integer CSA::blog(integer x){
 	return ans;
 }
 
-void CSA::Locating(const char *Pattern, integer &num, integer *&pos){
+integer * CSA::locating(const char *Pattern, integer &num){
 	integer L=0;
 	integer R=0;
 	this->Search2(Pattern,L,R);
 	num=R-L+1;
 	if(L>R)
-		return ;
-	pos=new integer[num];
+		return NULL ;
+	integer *pos=new integer[num];
 	Enumerative1(L,R,pos);
+	return pos;
 }
 
 void CSA::Enumerative2(integer L,integer  R, integer *&pos){

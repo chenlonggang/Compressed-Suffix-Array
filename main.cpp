@@ -15,24 +15,6 @@ void splitcommand(string command,string result[]);
 void showpos( int * pos,int num);
 int main(int argc, char* argv[])
 {
-/*
-	ifstream source("path.txt");
-	char sourcefile[100];
-	int filesnum=atoi(argv[1]);
-	for(int i=0;i<filesnum;i++)
-	{
-		source.getline(sourcefile,200);
-		CSA csa(sourcefile);
-		int n=csa.GetN();
-		unsigned char *t=new unsigned char[n];
-		time_t t1=clock();
-		csa.Decompress(0,n,t);
-		time_t t2=clock();
-		cout<<"filename:"<<sourcefile<<endl;
-		cout<<"	decompress time: "<<(t2-t1)<<" "<<(t2-t1)/1000000.0<<endl;
-		delete [] t;
-	}
-*/
 	usage();
 	string command;
 	string  result[3];
@@ -65,7 +47,7 @@ int main(int argc, char* argv[])
 			int  num=0;
 			if(csa!=NULL)
 			{
-				csa->Counting(result[1].data(),num);
+				csa->counting(result[1].data(),num);
 				cout<<"occs: "<<num<<endl;
 			}
 			else
@@ -79,7 +61,7 @@ int main(int argc, char* argv[])
 			int num=0;
 			if(csa!=NULL)
 			{
-				csa->Locating(result[1].data(),num,pos);
+				pos=csa->locating(result[1].data(),num);
 				showpos(pos,num);
 				delete [] pos;
 			}
@@ -97,16 +79,16 @@ int main(int argc, char* argv[])
 			if(csa!=NULL)
 				delete csa;
 			csa=new CSA();
-			csa->Load(result[1].data());
+			csa->load(result[1].data());
 		}
 		else if(result[0]=="save")
 		{
-			csa->Save(result[1].data());
+			csa->save(result[1].data());
 		}
 		else if(result[0]=="size")
 		{
 			if(csa!=NULL)
-				cout<<csa->Size()<<endl;
+				cout<<csa->compressRatioForCount()*8<<endl;
 			else
 				cout<<"build a csa first"<<endl;
 		}
