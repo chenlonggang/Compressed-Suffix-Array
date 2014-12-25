@@ -26,6 +26,7 @@ using namespace std;
 class CSA
 {
 public:
+	
 	CSA(){};
 	CSA(const char * sourcefile,integer L=128,integer D=32,integer phitype=0);
 	~CSA();
@@ -33,7 +34,7 @@ public:
 	bool existential(const char * Pattern);
 	void counting(const char * Pattern,integer &num);
 	integer * locating(const char * Pattern,integer &num);
-	uchar* extracting(integer start,integer len);
+	uchar * extracting(integer start,integer len);
 	
 	integer save(const char * indexfile);
 	integer load(const char * indexfile);
@@ -60,7 +61,7 @@ private:
 	integer lookup(integer i);
 	void Search(const char * Pattern,integer & L, integer &R);
 	void Search2(const char * Pattern,integer &L,integer &R);
-	//void Search3(const char * Pattern,integer &L,integer &R);
+	
 	uchar * GetFile(const char * filename);
 	void statics(uchar *T);
 	integer blog(integer x);
