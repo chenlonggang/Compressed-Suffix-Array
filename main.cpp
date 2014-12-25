@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 {
 	usage();
 	string command;
-	string  result[3];
+	string  result[2];
 	char filename[100]={'\0'};
 	char indexname[100]={'\0'};
 	CSA *csa=NULL;
@@ -25,7 +25,6 @@ int main(int argc, char* argv[])
 	{
 		result[0]="";
 		result[1]="";
-		result[2]="";
 		command="";
 		cout<<">";
 		getline(cin,command);
@@ -37,10 +36,7 @@ int main(int argc, char* argv[])
 			if(csa!=NULL)
 				delete csa;
 			csa=NULL;
-			if((result[2]=="-rl")||(result[2]=="-RL"))
-				csa=new CSA(result[1].data(),128,32,1);
-			else
-				csa=new CSA(result[1].data());
+			csa=new CSA(result[1].data());
 		}
 		else if(result[0]=="count")
 		{
@@ -108,7 +104,6 @@ int main(int argc, char* argv[])
 		else
 			usage();
 	}
-
 	return 0;
 }
 
@@ -136,30 +131,24 @@ void showpos(int * pos,int num)
 }
 
 
-
-
 void splitcommand(string command,string result[])
 {
 
 	int i=0;
-	int j=0;
 	int start=0;
-//	command=command+" ";
 	int len=command.length();
 	result[0]=command;
 	for(i=0;i<len;i++)
 	{
 		if(command.at(i)!=' ')
 			continue;
-		else
-		{
-			result[j]=command.substr(start,i-start);
-			start=i+1;
-			j++;
-		}
+		result[0]=command.substr(0,i);
+		start=i+1;
+		break;
 	}
-	result[j]=command.substr(start,len);
+	result[1]=command.substr(start,len);
 }
+
 void usage()
 {
 	cout<<"--------------------------------------------------------------------------------------"<<endl;
@@ -171,7 +160,6 @@ void usage()
 	cout<<"	count XX: count the pattern XX's occs" <<endl;
 	cout<<"	locate YY: enum eyery  position of the pattern"<<endl;
 	cout<<"	size: the size of the csa"<<endl;
-	cout<<"	del : delete the current csa"<<endl;
 	cout<<"	quit: say goodbye"<<endl;
 
 }
