@@ -219,7 +219,7 @@ void GAM_Phi::SamplingAndCoding(parmaters *csa)
 	}
 //	cout<<"space is computed"<<endl;
 //	cout<<"before coding phi array"<<endl;
-	this->lenofsequence =totallen/32+1;
+	this->lenofsequence =totallen/32+3;
 	this->sequence =new u32[lenofsequence];
 	for(i=0;i<lenofsequence;i++)
 		sequence[i]=0;
